@@ -1,0 +1,34 @@
+# {{PROJEKTNAME}}
+
+## Projekt
+{{BESCHREIBUNG}}
+
+## Tech-Stack
+{{TECH_STACK}}
+
+## Blueprint
+Dieses Projekt nutzt das Agentic Engineering Blueprint.
+Lies zuerst: [AGENTIC-BLUEPRINT.md](AGENTIC-BLUEPRINT.md)
+
+## Aktuelle Phase
+> Aktualisiere diesen Block wenn du die Phase wechselst.
+
+Aktive Phase: **Phase {{PHASE_NR}}: {{PHASE_NAME}}**
+Aktiver Chunk: **Chunk {{CHUNK_NR}}**
+Plan: [Plan.md]({{PLAN_PFAD}})
+
+## Context-Regeln
+- Lade NUR die Dateien die der aktuelle Chunk benoetigt
+- Max 30% des Kontextfensters mit Kontext fuellen
+- Ab 70% Fuellstand: neuer Thread
+- Dependencies referenzieren unter `open-source/repos/` wenn verfuegbar
+
+## Sicherheit
+- Keine Packages installieren die juenger als 14 Tage sind
+- Keine hartcodierten Secrets/Credentials
+- Kein Merge ohne menschliches Approval
+
+## Dependency Source Code
+{{#DEPENDENCIES}}
+- `open-source/repos/github.com/{{ORG}}/{{REPO}}/` — {{ZWECK}}
+{{/DEPENDENCIES}}

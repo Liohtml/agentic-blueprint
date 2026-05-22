@@ -1,0 +1,50 @@
+# Feature-Plan: {{FEATURE_NAME}}
+
+**Erstellt:** {{DATUM}}
+**Status:** {{draft | approved | in_progress | completed}}
+**Anforderung:** {{LINK_ZU_PHASE_0_OUTPUT}}
+
+---
+
+## Scope
+{{SCOPE_BESCHREIBUNG}}
+
+## Erfolgskriterien
+{{#KRITERIEN}}
+- {{KRITERIUM}}
+{{/KRITERIEN}}
+
+## Shared Contracts
+> Types und Interfaces die vor dem Building definiert werden und waehrend Phase 2 read-only sind.
+
+{{CONTRACTS_LISTE}}
+
+---
+
+## Chunks
+
+### Chunk 1: {{TITEL}}
+**Dateien:** {{DATEILISTE}}
+**Agent:** {{AGENT}}
+**Abhaengig von:** {{ABHAENGIGKEIT}}
+**Parallelisierbar:** {{JA_NEIN}}
+**Done-Kriterium:** {{KRITERIUM}}
+
+### Chunk 2: {{TITEL}}
+**Dateien:** {{DATEILISTE}}
+**Agent:** {{AGENT}}
+**Abhaengig von:** {{ABHAENGIGKEIT}}
+**Parallelisierbar:** {{JA_NEIN}}
+**Done-Kriterium:** {{KRITERIUM}}
+
+<!-- Weitere Chunks nach Bedarf. Max 8. -->
+
+---
+
+## Abhaengigkeits-Graph
+
+```
+Chunk 1 ──► Chunk 3
+Chunk 2 ──► Chunk 3  (parallel mit Chunk 1)
+Chunk 3 ──► Chunk 4
+```
