@@ -1,0 +1,11 @@
+# Dependency source code (fetched via npx open-source)
+open-source/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
