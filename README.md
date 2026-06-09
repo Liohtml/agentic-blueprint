@@ -158,6 +158,7 @@ your-project/
 |   |   |-- claude-code.md        #   Primary engineering agent
 |   |   |-- antigravity.md        #   Secondary agent (3 configurable profiles)
 |   |   |-- coordination.md       #   Multi-agent protocol
+|   |   |-- agent-teams.md        #   Live teammates in tmux split-panes (setup + runbook)
 |   |
 |   |-- loops/                    # Feedback loop specs
 |   |   |-- build-test-loop.md
@@ -175,6 +176,20 @@ your-project/
 |       |-- decision-trees.md     #   When to use which agent/phase/loop
 |       |-- changelog.md          #   Blueprint version history
 |       |-- retro-template.md     #   Post-feature retrospective
+|
+|-- observer/                     # Agent Observer — live dashboard for running agent teams
+    |-- DATA-NOTES.md             #   Verified real shapes of ~/.claude files (data contract)
+    |-- README.md                 #   Run instructions + architecture
+    |-- package.json              #   `npm run observe` (build + serve :4317), `npm run dev`
+    |-- src/
+    |   |-- types.ts              #   Shared TypeScript contract (frozen after scaffold)
+    |   |-- collector/            #   teamParser, taskParser, inboxParser, transcriptParser,
+    |   |                         #     pricing, metrics, aggregator, watcher
+    |   |-- server.ts             #   Node http + SSE backend (no Express)
+    |   |-- bin/observe.ts        #   CLI: observe [--team] [--port]
+    |-- web/                      #   Vite + React + Tailwind + uPlot frontend
+    |   |-- src/                  #   App, AgentGrid/AgentCard, charts (token/cost/tasks/messages)
+    |-- fixtures/                 #   Anonymized test fixtures for vitest
 ```
 
 ---

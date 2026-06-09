@@ -55,6 +55,11 @@ Detail: [antigravity.md](blueprint/agents/antigravity.md)
 Multi-Agent Protokoll, Kollisions-Vermeidung, Uebergabe-Artefakte.
 Detail: [coordination.md](blueprint/agents/coordination.md)
 
+### Agent Teams (Live-Zusammenarbeit)
+Echte Teammates in tmux-Split-Panes (statt Subagents/Workflow): Setup, Runbook,
+Modell-Tiering, Kosten, Cleanup. Inklusive **Agent Observer** Live-Dashboard.
+Detail: [agent-teams.md](blueprint/agents/agent-teams.md)
+
 ---
 
 ## Context Engineering Kurzregeln
