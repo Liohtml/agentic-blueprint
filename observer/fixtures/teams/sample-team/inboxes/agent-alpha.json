@@ -1,0 +1,20 @@
+[
+  {
+    "from": "agent-beta",
+    "text": "agent-alpha — Agreed, let's proceed with the implementation plan as discussed.",
+    "summary": "Plan accepted: proceeding with implementation.",
+    "timestamp": "2026-06-09T13:26:25.826Z",
+    "color": "yellow",
+    "type": "message",
+    "read": false
+  },
+  {
+    "from": "agent-gamma",
+    "text": "agent-alpha — Review complete. Everything looks good on my end.",
+    "summary": "Review complete: no issues found.",
+    "timestamp": "2026-06-09T14:05:10.000Z",
+    "color": "blue",
+    "type": "message",
+    "read": true
+  }
+]
