@@ -9,12 +9,8 @@
  *   cacheCreate: 359 868
  *   cacheRead: 3 678 142
  *
- * Expected costs at table rates (15 / 75 / 18.75 / 1.50 per MTok):
- *   input      =  55 785 × 15.00  / 1e6 = 0.836 775
- *   output     =  74 981 × 75.00  / 1e6 = 5.623 575
- *   cacheWrite = 359 868 × 18.75  / 1e6 = 6.747 525
- *   cacheRead  = 3 678 142 × 1.50 / 1e6 = 5.517 213
- *   total                               ≈ 18.725 088
+ * Expected costs are derived from PRICING_TABLE at runtime (see
+ * EXPECTED_* constants below), so price updates don't break this file.
  */
 
 import { describe, it, expect, beforeEach } from 'vitest';
@@ -80,12 +76,20 @@ describe('getPricing', () => {
     warnedModels.clear();
   });
 
+  it('returns fable pricing for claude-fable-5', () => {
+    const entry = getPricing('claude-fable-5');
+    expect(entry.inputPerMTok).toBe(10.00);
+    expect(entry.outputPerMTok).toBe(50.00);
+    expect(entry.cacheWritePerMTok).toBe(12.50);
+    expect(entry.cacheReadPerMTok).toBe(1.00);
+  });
+
   it('returns opus pricing for claude-opus-4-8', () => {
     const entry = getPricing('claude-opus-4-8');
-    expect(entry.inputPerMTok).toBe(15.00);
-    expect(entry.outputPerMTok).toBe(75.00);
-    expect(entry.cacheWritePerMTok).toBe(18.75);
-    expect(entry.cacheReadPerMTok).toBe(1.50);
+    expect(entry.inputPerMTok).toBe(5.00);
+    expect(entry.outputPerMTok).toBe(25.00);
+    expect(entry.cacheWritePerMTok).toBe(6.25);
+    expect(entry.cacheReadPerMTok).toBe(0.50);
   });
 
   it('handles [1m] suffix transparently', () => {
@@ -102,8 +106,8 @@ describe('getPricing', () => {
 
   it('returns haiku pricing for claude-haiku-4-5', () => {
     const entry = getPricing('claude-haiku-4-5');
-    expect(entry.inputPerMTok).toBe(0.80);
-    expect(entry.outputPerMTok).toBe(4.00);
+    expect(entry.inputPerMTok).toBe(1.00);
+    expect(entry.outputPerMTok).toBe(5.00);
   });
 
   it('returns default (sonnet-class) fallback for unknown model', () => {

@@ -41,11 +41,17 @@ export interface ModelPricing {
  * Sources: Anthropic pricing page (non-authoritative, subject to change).
  */
 export const PRICING_TABLE: Record<string, ModelPricing> = {
+  'claude-fable-5': {
+    inputPerMTok:      10.00,
+    outputPerMTok:     50.00,
+    cacheWritePerMTok: 12.50,  // 1.25× input
+    cacheReadPerMTok:   1.00,  // 0.10× input
+  },
   'claude-opus-4-8': {
-    inputPerMTok:      15.00,
-    outputPerMTok:     75.00,
-    cacheWritePerMTok: 18.75,  // 1.25× input
-    cacheReadPerMTok:   1.50,  // 0.10× input
+    inputPerMTok:       5.00,
+    outputPerMTok:     25.00,
+    cacheWritePerMTok:  6.25,  // 1.25× input
+    cacheReadPerMTok:   0.50,  // 0.10× input
   },
   'claude-sonnet-4-6': {
     inputPerMTok:       3.00,
@@ -54,10 +60,10 @@ export const PRICING_TABLE: Record<string, ModelPricing> = {
     cacheReadPerMTok:   0.30,  // 0.10× input
   },
   'claude-haiku-4-5': {
-    inputPerMTok:       0.80,
-    outputPerMTok:      4.00,
-    cacheWritePerMTok:  1.00,  // 1.25× input
-    cacheReadPerMTok:   0.08,  // 0.10× input
+    inputPerMTok:       1.00,
+    outputPerMTok:      5.00,
+    cacheWritePerMTok:  1.25,  // 1.25× input
+    cacheReadPerMTok:   0.10,  // 0.10× input
   },
 };
 

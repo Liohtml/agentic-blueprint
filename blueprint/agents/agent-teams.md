@@ -102,16 +102,27 @@ Empfohlenes Vorgehen für den Lead (deckt sich mit unseren [Phasen](../phases/01
 ## Modell-Tiering (Kostenkontrolle)
 
 Teammates werden beim Spawnen pro Rolle getiert — teures Modell nur für die kniffligen
-Teile, Standard-Modell für den Rest:
+Teile, Standard-Modell für den Rest. Seit Fable 5 (06/2026) sind es vier Stufen:
+
+| Modell | Preis (in/out pro MTok) | Wann einsetzen |
+|---|---|---|
+| **Fable 5** (`fable`) | $10 / $50 | Lead/Koordinator, Mission-Chunks, architektur-kritische Migrationen, finales Review. 2× Opus-Preis — gezielt, nicht flächig. |
+| **Opus** (`opus`) | $5 / $25 | Harte Logik: Parser, Algorithmen, Aggregation mit Korrektheits-Risiko |
+| **Sonnet** (`sonnet`) | $3 / $15 | Standard: Scaffold, UI, CRUD, Tests, Docs |
+| **Haiku** (`haiku`) | $1 / $5 | Explore-/Recherche-Subagents, mechanische Massen-Edits |
 
 ```
+Agent(team_name: "<team>", name: "lead",   model: "fable",  ...)   # Mission-Koordination
 Agent(team_name: "<team>", name: "parser", model: "opus",   ...)   # harte Logik
 Agent(team_name: "<team>", name: "ui",     model: "sonnet", ...)   # Standard
+Agent(team_name: "<team>", name: "scout",  model: "haiku",  ...)   # Explore/Recherche
 ```
 
-Faustregel: **Opus** für Parser/Aggregation/Algorithmik mit Korrektheits-Risiko,
-**Sonnet** für Scaffold, UI, CRUD, Tests. (Beim Observer: T5 Transcript-Parser und
-T7 Aggregator auf Opus, alle übrigen acht auf Sonnet.)
+Faustregel: **Fable** nur für den Lead und Tasks, deren Scheitern den ganzen Run kostet;
+**Opus** für Parser/Aggregation/Algorithmik mit Korrektheits-Risiko, **Sonnet** für
+Scaffold, UI, CRUD, Tests, **Haiku** für read-only Vorarbeit. (Beim Observer: T5
+Transcript-Parser und T7 Aggregator auf Opus, alle übrigen acht auf Sonnet — heute
+würde der Lead auf Fable laufen.)
 
 ## Kosten-Hinweise
 

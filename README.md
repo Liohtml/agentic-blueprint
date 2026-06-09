@@ -122,7 +122,8 @@ claude
 
 Fill in [`blueprint/templates/team-prompt.md`](blueprint/templates/team-prompt.md)
 and paste it into Claude. The template covers every rule the team needs: shared contract
-first, strict file-ownership, model-tiering (Opus for hard logic, Sonnet for the rest),
+first, strict file-ownership, model-tiering (Fable 5 for the lead and mission-critical
+work, Opus for hard logic, Sonnet for the rest, Haiku for scouting),
 task-graph with `blocks`/`blockedBy`, build-test-loop max 5 iterations, no self-review,
 and no merge without your Go.
 

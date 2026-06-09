@@ -1,5 +1,26 @@
 # Blueprint Changelog
 
+## v1.2 — 2026-06-09
+
+Fable-5-Neubewertung (Welle 1 der Roadmap).
+
+### Neu
+- **Fable-5-Evaluation** (`docs/2026-06-09-fable-5-evaluation.md`): vollstaendige
+  Neubewertung aller Blueprint-Bestandteile gegen das Fable-5-Release (behalten /
+  lockern / herabstufen / integrieren) plus 3-Wellen-Roadmap.
+- **4-Stufen-Modell-Tiering** (Fable 5 / Opus / Sonnet / Haiku) in
+  `agent-teams.md`, `team-prompt.md` und neuem Entscheidungsbaum in
+  `decision-trees.md`. Fable 5 fuer Lead + Mission-Chunks, Haiku fuer Explore.
+
+### Korrigiert
+- **Observer-Pricing** (`observer/src/collector/pricing.ts`): Opus 4.8 auf $5/$25
+  korrigiert (stand faelschlich auf $15/$75), Haiku 4.5 auf $1/$5, Fable 5
+  ($10/$50) ergaenzt.
+
+### Geplant (Welle 2/3, siehe Evaluation)
+- Mission-Mode in Phase 2, Task Budgets in Loop-Specs, Kontext-Regeln entschaerfen,
+  Prompt-Sprache-Audit, Outcome-graded Loops (Managed Agents), Memory fuer Retros.
+
 ## v1.1 — 2026-06-09
 
 Agent Teams + Live-Observability.

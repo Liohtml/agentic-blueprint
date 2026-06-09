@@ -1,5 +1,26 @@
 # Entscheidungsbaeume
 
+## Welches Modell fuer welchen Task? (seit Fable 5, 06/2026)
+
+```
+Task erhalten
+    |
+    v
+Long-Horizon Mission (Migration, mehrstuendiger autonomer Run,
+Architektur-Entscheidungen, Team-Lead-Rolle)?
+    ├── JA → Fable 5 (effort high/xhigh, vollstaendige Spec im ersten Turn)
+    |
+    └── NEIN: Harte Logik mit Korrektheits-Risiko (Parser, Algorithmik, Aggregation)?
+            ├── JA → Opus 4.8
+            |
+            └── NEIN: Read-only Recherche / Explore / mechanischer Massen-Edit?
+                    ├── JA → Haiku 4.5
+                    └── NEIN → Sonnet 4.6 (Standard)
+```
+
+Kosten-Anker (in/out pro MTok): Fable $10/$50 · Opus $5/$25 · Sonnet $3/$15 · Haiku $1/$5.
+Fable kostet 2× Opus — der Mehrwert liegt in Long-Horizon-Autonomie, nicht in jedem Einzeltask.
+
 ## Wann welchen Agent einsetzen?
 
 ```

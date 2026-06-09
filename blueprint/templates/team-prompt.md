@@ -57,12 +57,16 @@ Details: [coordination.md](../agents/coordination.md).
 
 | Modell | Wann einsetzen |
 |---|---|
+| **Fable 5** | Lead/Koordinator, Mission-Chunks, architektur-kritische Tasks (2× Opus-Preis — gezielt einsetzen) |
 | **Opus** | Harte Logik, Parser, Algorithmen, Aggregation mit Korrektheits-Risiko |
 | **Sonnet** | Scaffold, UI, CRUD, Tests, Docs, alles Übrige |
+| **Haiku** | Explore-/Recherche-Subagents, mechanische Massen-Edits |
 
 ```
+Agent(team_name: "<TEAM>", name: "<LEAD-AGENT>", model: "fable",  …)
 Agent(team_name: "<TEAM>", name: "<HARD-AGENT>", model: "opus",   …)
 Agent(team_name: "<TEAM>", name: "<REST-AGENT>", model: "sonnet", …)
+Agent(team_name: "<TEAM>", name: "<SCOUT-AGENT>", model: "haiku", …)
 ```
 
 Spawne **bedarfsgesteuert**: T1 zuerst allein, erst nach T1-Grün den Rest.
