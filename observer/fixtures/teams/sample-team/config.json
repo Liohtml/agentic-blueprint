@@ -1,0 +1,19 @@
+{
+  "name": "sample-team",
+  "description": "Anonymised fixture for unit tests",
+  "createdAt": 1749000000000,
+  "leadAgentId": "team-lead@sample-team",
+  "leadSessionId": "a1b2c3d4-0000-0000-0000-000000000001",
+  "members": [
+    {
+      "agentId": "team-lead@sample-team",
+      "name": "team-lead",
+      "agentType": "team-lead",
+      "model": "claude-opus-4-8[1m]",
+      "joinedAt": 1749000000000,
+      "tmuxPaneId": "",
+      "cwd": "/home/user/sample-project",
+      "subscriptions": []
+    }
+  ]
+}
