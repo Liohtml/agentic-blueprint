@@ -6,6 +6,7 @@
 
 <p align="center">
   <a href="#quick-start">Quick Start</a> &bull;
+  <a href="#clone--go--agent-teams">Clone & Go</a> &bull;
   <a href="#how-it-works">How It Works</a> &bull;
   <a href="#project-structure">Structure</a> &bull;
   <a href="#credits">Credits</a> &bull;
@@ -77,6 +78,62 @@ Begin every feature with:
 > "Read `AGENTIC-BLUEPRINT.md`. I want to build [feature]. Start with Phase 0."
 
 The agent follows the phases automatically.
+
+---
+
+## Clone & Go — Agent Teams
+
+Spin up a full Claude Code agent team from a fresh clone in under five minutes.
+
+**Voraussetzungen:** [tmux](https://github.com/tmux/tmux/wiki) ≥ 3.x · Claude Code CLI
+
+### 1. Clone & bootstrap
+
+```bash
+git clone https://github.com/Liohtml/agentic-blueprint.git
+cd agentic-blueprint
+./scripts/bootstrap.sh
+```
+
+`bootstrap.sh` installs the Observer dependencies and verifies your environment.
+
+### 2. Enable agent teams
+
+```bash
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+# Add to ~/.zshrc to make it permanent
+```
+
+### 3. Start tmux + Claude
+
+```bash
+tmux new -s teamwork
+claude
+```
+
+Each teammate gets its own split-pane — you see them all working simultaneously.
+
+### 4. Launch your team
+
+Paste a filled [`blueprint/templates/team-prompt.md`](blueprint/templates/team-prompt.md)
+into Claude. The template covers every rule the team needs: shared contract first, strict
+file-ownership, model-tiering (Opus for hard logic, Sonnet for the rest), task-graph with
+`blocks`/`blockedBy`, build-test-loop max 5 iterations, no self-review, and no merge
+without your Go.
+
+### 5. Watch them live (second pane)
+
+```bash
+# In a new tmux pane (Ctrl-b %)
+./scripts/observe.sh --team <TEAM-NAME>
+# → opens the Agent Observer dashboard at http://localhost:4317
+```
+
+The **[Agent Observer](observer/README.md)** streams live token counts, costs, tool
+activity, and task progress for every pane — built with these exact same team rules.
+
+> See [`blueprint/agents/agent-teams.md`](blueprint/agents/agent-teams.md) for the full
+> setup runbook and coordination protocol.
 
 ---
 

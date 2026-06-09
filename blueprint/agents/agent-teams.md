@@ -16,6 +16,29 @@
 Ein Agent Team ist eine `1:1`-Entsprechung von **Team = Task-Liste**. Der Lead erstellt
 das Team, legt Tasks mit Abhängigkeiten an, spawnt Teammates und koordiniert per Nachricht.
 
+## Fresh Clone — Schnellstart
+
+Auf einem frischen Rechner reichen drei Schritte:
+
+```bash
+./scripts/bootstrap.sh                   # Abhängigkeiten + Umgebungs-Check
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+tmux new -s teamwork && claude
+```
+
+Dann fülle das **[Team-Prompt-Template](../templates/team-prompt.md)** aus und paste es in
+Claude — es enthält alle Pflicht-Regeln (Contract-first, Datei-Eigentum, Modell-Tiering,
+Task-Graph, Build-Test-Loop, kein Self-Review, kein Merge ohne Human-Go) als vorgefertigte
+Abschnitte mit `<PLATZHALTERN>`.
+
+Ein laufendes Team beobachten (zweites Pane):
+
+```bash
+./scripts/observe.sh --team <TEAM-NAME>
+```
+
+---
+
 ## Voraussetzungen
 
 1. **Feature-Flag aktivieren** (sonst keine Team-Tools):
