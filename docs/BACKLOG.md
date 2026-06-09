@@ -17,8 +17,6 @@
   LEARNINGS.md template (project memory), team-sizing heuristics in agent-teams.md
   (3-5 teammates, 5-6 tasks each). Partly reserved as good-first-issues — don't
   implement what is published as a community starter task.
-- [ ] **SPEC.md.template + SDD mapping page** — connect the 6 phases to the
-  spec-driven-development four-phase loop (GitHub Spec Kit, Kiro, OpenSpec converge on it).
 - [ ] **Observer: effort/task-budget display** — verify transcript data shapes per the
   DATA-NOTES process first, then extend parser/UI (from the Fable 5 evaluation, wave 3).
 - [ ] **End-to-end worked example** — a small real project showing a full 6-phase run
@@ -32,6 +30,11 @@
 
 ## Done
 
+- [x] **2026-06-09 (cycle 2):** SPEC.md.template + docs/spec-driven-development.md
+  (Blueprint ↔ SDD mapping, SPEC → PLAN → rubric chain), phase 0/1 cross-links,
+  glossary entries (Acceptance Criteria, SPEC, SDD). Devil's-advocate review applied:
+  no phantom gate, non-circular when-to-spec heuristic, honest Spec Kit description,
+  Phase 3 correctly placed inside Implement, PLAN terminology aligned (Success Criteria).
 - [x] **2026-06-09 (cycle 1, v1.4):** English-first release. Research agent (15 sourced
   ideas) + devil's advocate (10 findings, 2 blockers) + 3 implementation agents:
   "first 10 minutes" quickstart, GETTING-STARTED (non-technical + developer tracks),

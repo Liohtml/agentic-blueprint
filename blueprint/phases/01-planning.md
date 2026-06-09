@@ -8,7 +8,7 @@ Turn the problem statement into a concrete, chunk-based implementation plan.
 - **Agent:** Generates the plan, proposes Chunks
 
 ## Input
-- Problem statement with scope and success criteria from Phase 0
+- Problem statement with scope and success criteria from Phase 0, ideally formalized as a [SPEC](../templates/SPEC.md.template) whose Acceptance Criteria become this plan's Success Criteria
 
 ## Process
 

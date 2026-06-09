@@ -39,6 +39,7 @@ Be critical. Question assumptions.
 
 ## Output
 Documented problem statement with scope and success criteria. Can be informal or in an issue/ticket.
+If the feature will clearly need multiple work units (more than ~3 files, more than 2 acceptance criteria, or more than a day of work), consider formalizing this output with the [SPEC template](../templates/SPEC.md.template) — see [spec-driven-development.md](../../docs/spec-driven-development.md) for when it pays off and when an issue suffices.
 
 ## Next
 [Phase 1: Planning](01-planning.md)
