@@ -1,45 +1,61 @@
 # Backlog — Continuous Improvement Loop
 
-> Arbeitsdokument des Orchestrator-Loops. Jeder Zyklus: 1-3 Items aus „Offen" ziehen →
-> Research + Devil's-Advocate-Review → umsetzen → testen → pushen → hier aktualisieren.
-> Strategische Richtungsfragen werden dem Maintainer vorgelegt, nicht geraten.
+> Working document of the orchestrator loop. Each cycle: pull 1-3 items from "Open" →
+> research + devil's-advocate review → implement → test → push → update this file.
+> Strategic direction questions go to the maintainer — they are never guessed.
 
-## Offen (priorisiert)
+## Open (prioritized)
 
-- [ ] **Onboarding-Pfad für Nicht-Techniker** — vom „Ich habe noch nie ein Terminal benutzt"
-  zum ersten Erfolgserlebnis. Erwartet aus Zyklus 1 (Research + DA laufen).
-- [ ] **README professionalisieren** — klare Zielgruppen-Pfade (Einsteiger / Experte),
-  ehrliche Anforderungen, Social Proof. Erwartet aus Zyklus 1.
-- [ ] **Contributor-Funnel** — CONTRIBUTING.md, good-first-issues, Issue-/PR-Templates,
-  Maintainer-Erwartungen. Erwartet aus Zyklus 1.
-- [ ] **Observer: Effort-/Task-Budget-Anzeige** — erst Transcript-Datenformen nach
-  DATA-NOTES-Prozess verifizieren, dann Parser/UI erweitern (aus Fable-5-Evaluation, Welle 3).
-- [ ] **CLAUDE.md.template / AGENTS.md.template gegen v1.3 prüfen** — Mission-Mode,
-  4-Stufen-Tiering und neue Kontext-Regeln müssen sich in den generierten Dateien spiegeln.
-- [ ] **Worked Example end-to-end** — ein kleines, echtes Beispielprojekt das den kompletten
-  6-Phasen-Durchlauf zeigt (nicht nur den Observer als Referenz).
+- [ ] **Create the good-first-issues on GitHub** — drafts live in
+  `docs/community/good-first-issues.md`; needs maintainer go (outward-facing).
+- [ ] **Enable GitHub Discussions** (Show and Tell / Q&A / Ideas) and mark the repo as a
+  **Template Repository** — both are repo settings only the maintainer can flip.
+- [ ] **Demo GIF for the README** — animated Observer/agent-team banner (the single
+  biggest README conversion lever per the AFFiNE playbook). Needs a recorded session.
+- [ ] **New blueprint templates from research cycle 1:** RUBRIC.md.template (outcome-graded
+  loops, +10pp task success per Anthropic), HANDOFF.md.template (relay pattern),
+  LEARNINGS.md template (project memory), team-sizing heuristics in agent-teams.md
+  (3-5 teammates, 5-6 tasks each). Partly reserved as good-first-issues — don't
+  implement what is published as a community starter task.
+- [ ] **SPEC.md.template + SDD mapping page** — connect the 6 phases to the
+  spec-driven-development four-phase loop (GitHub Spec Kit, Kiro, OpenSpec converge on it).
+- [ ] **Observer: effort/task-budget display** — verify transcript data shapes per the
+  DATA-NOTES process first, then extend parser/UI (from the Fable 5 evaluation, wave 3).
+- [ ] **Check CLAUDE.md.template / AGENTS.md.template against v1.3** — mission mode,
+  4-tier model strategy and the new context rules must be reflected in generated files.
+- [ ] **End-to-end worked example** — a small real project showing a full 6-phase run
+  (not just the Observer as a reference).
+- [ ] **German translation** — once English content stabilizes, offer DE as a translation
+  (maintainer decision 2026-06-09: English is the primary language).
 
-## In Arbeit (Zyklus 1 — 2026-06-09)
+## In progress (cycle 1 — 2026-06-09)
 
-- [ ] Research-Agent: Agentic-Coding-Innovationen, Onboarding-Patterns, Contributor-Strategien
-- [ ] Devil's Advocate: Kritik aus Sicht Nicht-Techniker / Senior Engineer / Contributor
+- [x] Research agent: agentic-coding innovations, onboarding patterns, contributor strategies
+- [x] Devil's advocate: critique from non-technical / senior engineer / contributor perspectives
+- [ ] Implementation wave (3 agents, strict file ownership):
+  - README & onboarding (README.md, observer/README.md, docs/GETTING-STARTED.md, docs/glossary.md)
+  - Contributor funnel (CONTRIBUTING.md, .github/, docs/community/good-first-issues.md)
+  - Blueprint translation to English + dead-link fixes + canonical pricing source (AGENTIC-BLUEPRINT.md, blueprint/**)
 
-## Erledigt
+## Done
 
-- [x] **2026-06-09 (Zyklus 0):** Fable-5-Evaluation + Roadmap-Wellen 1-3 — 4-Stufen-Tiering,
-  Mission-Mode, Task Budgets, Cloud Execution Profile, Observer-Pricing-Fix, Kontext-Regeln
-  modernisiert. Siehe `docs/2026-06-09-fable-5-evaluation.md` und PR #7.
+- [x] **2026-06-09 (cycle 0):** Fable 5 evaluation + roadmap waves 1-3 — 4-tier model
+  strategy, mission mode, task budgets, cloud execution profile, observer pricing fix,
+  modernized context rules. See `docs/2026-06-09-fable-5-evaluation.md` and PR #7.
 
-## Entscheidungs-Log (Maintainer-Feedback)
+## Decision log (maintainer feedback)
 
-| Datum | Frage | Entscheidung |
+| Date | Question | Decision |
 |---|---|---|
-| 2026-06-09 | Kontinuierlicher Verbesserungs-Loop mit Engineering-Team + Devil's Advocate, Orchestrator-Modell | ✅ Maintainer-Vision, Loop gestartet (30-Min-Zyklen) |
+| 2026-06-09 | Continuous improvement loop with engineering team + devil's advocate, orchestrator model | ✅ Maintainer vision, loop started (30-min cycles) |
+| 2026-06-09 | Primary repo language | ✅ English (German optional as a translation later) |
+| 2026-06-09 | Delete sources/ + docs/superpowers/ (DA recommendation) | ❌ Keep everything — don't advertise it, but don't delete |
+| 2026-06-09 | Positioning | ✅ Honest "Built for Claude Code"; core principles may be noted as transferable |
 
-## Loop-Regeln (Kurzfassung)
+## Loop rules (short version)
 
-1. Kein Item ohne Devil's-Advocate-Review umsetzen.
-2. Strikte Datei-Eigentümerschaft pro Implementierungs-Agent.
-3. Observer-Tests müssen grün sein vor jedem Push (`cd observer && npx vitest run`).
-4. Kleine, saubere Commits. Kein Merge, kein Force-Push — Merge bleibt beim Maintainer.
-5. Scope-/Brand-/Strukturfragen → Maintainer fragen.
+1. No item gets implemented without surviving devil's-advocate review.
+2. Strict file ownership per implementation agent — no two agents on the same file.
+3. Observer tests must be green before every push (`cd observer && npx vitest run`).
+4. Small, clean commits. No merge, no force-push — merging stays with the maintainer.
+5. Scope / branding / structural questions → ask the maintainer.
