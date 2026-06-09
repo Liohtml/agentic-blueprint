@@ -85,7 +85,7 @@ The agent follows the phases automatically.
 
 Spin up a full Claude Code agent team from a fresh clone in under five minutes.
 
-**Voraussetzungen:** [tmux](https://github.com/tmux/tmux/wiki) ≥ 3.x · Claude Code CLI
+**Voraussetzungen:** [tmux](https://github.com/tmux/tmux/wiki) ≥ 3.x · Node.js · git · Claude Code CLI
 
 ### 1. Clone & bootstrap
 
@@ -95,42 +95,48 @@ cd agentic-blueprint
 ./scripts/bootstrap.sh
 ```
 
-`bootstrap.sh` installs the Observer dependencies and verifies your environment.
+`bootstrap.sh` installs the Observer dependencies and verifies your environment
+(checks for tmux, node, and git — missing tools get a friendly install hint).
 
-### 2. Enable agent teams
+### 2. Enable the agent-teams flag
 
 ```bash
 export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
-# Add to ~/.zshrc to make it permanent
+# Make it permanent:
+echo 'export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1' >> ~/.zshrc
 ```
 
-### 3. Start tmux + Claude
+### 3. Start a tmux session
 
 ```bash
-tmux new -s teamwork
-claude
+tmux new -s agent-teams
 ```
 
 Each teammate gets its own split-pane — you see them all working simultaneously.
 
-### 4. Launch your team
-
-Paste a filled [`blueprint/templates/team-prompt.md`](blueprint/templates/team-prompt.md)
-into Claude. The template covers every rule the team needs: shared contract first, strict
-file-ownership, model-tiering (Opus for hard logic, Sonnet for the rest), task-graph with
-`blocks`/`blockedBy`, build-test-loop max 5 iterations, no self-review, and no merge
-without your Go.
-
-### 5. Watch them live (second pane)
+### 4. Launch Claude and paste your team prompt
 
 ```bash
-# In a new tmux pane (Ctrl-b %)
-./scripts/observe.sh --team <TEAM-NAME>
-# → opens the Agent Observer dashboard at http://localhost:4317
+claude
 ```
 
-The **[Agent Observer](observer/README.md)** streams live token counts, costs, tool
-activity, and task progress for every pane — built with these exact same team rules.
+Fill in [`blueprint/templates/team-prompt.md`](blueprint/templates/team-prompt.md)
+and paste it into Claude. The template covers every rule the team needs: shared contract
+first, strict file-ownership, model-tiering (Opus for hard logic, Sonnet for the rest),
+task-graph with `blocks`/`blockedBy`, build-test-loop max 5 iterations, no self-review,
+and no merge without your Go.
+
+### 5. Watch the team live (second pane)
+
+```bash
+# Open a new pane: Ctrl-b "
+./scripts/observe.sh --team <name>
+# Optional: ./scripts/observe.sh --team <name> --port 4000
+```
+
+Open **http://localhost:4000** — the **[Agent Observer](observer/README.md)** streams live
+token counts, costs, tool activity, and task progress for every pane — built with these
+exact same team rules.
 
 > See [`blueprint/agents/agent-teams.md`](blueprint/agents/agent-teams.md) for the full
 > setup runbook and coordination protocol.
