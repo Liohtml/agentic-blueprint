@@ -29,6 +29,18 @@ LOOP:
 ## Max Iterationen
 7
 
+> Mit Fable 5 als Build-Agent sind one-shot Fixes der Normalfall. Laeuft der Loop
+> trotzdem >3 Iterationen, liegt das Problem fast sicher in der Spezifikation oder
+> einem Architektur-Konflikt — frueher eskalieren statt weiterloopen.
+
+## Token-Budget (optional, API)
+
+Ergaenzend zum harten Iterations-Limit kann pro Loop-Durchlauf ein **Task Budget**
+gesetzt werden: `output_config: {task_budget: {type: "tokens", total: N}}`
+(Beta-Header `task-budgets-2026-03-13`, Minimum 20 000). Das Modell sieht einen
+laufenden Token-Countdown und priorisiert/beendet selbststaendig. Weiche Grenze —
+das Iterations-Limit bleibt der harte Abbruch.
+
 ## Bei Erfolg
 Weiter zu Phase 5 (Merge & Validate)
 

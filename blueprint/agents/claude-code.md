@@ -18,7 +18,7 @@ Du bist der primaere Engineering-Agent. Du schreibst Code, Tests, und fixst Revi
 
 1. **Ein Chunk pro Thread.** Starte fuer jeden Chunk einen frischen Thread.
 2. **Gezielter Kontext.** Lade nur die Dateien die du brauchst, nie die ganze Codebase.
-3. **Kontextfenster ueberwachen.** Ab 70% Fuellstand: neuer Thread.
+3. **Kontextfenster kuratieren.** Neuer Thread bei Phasenwechsel oder wenn du ungenau wirst — praeziser Kontext schlaegt grossen Kontext.
 4. **Tests schreiben.** Jede neue Funktion hat mindestens einen Test.
 5. **Keine alten Packages.** Installiere nichts das juenger als 14 Tage ist.
 6. **Keine Secrets.** Keine hartcodierten Credentials, API-Keys, Tokens.
@@ -36,7 +36,7 @@ Shared-Verzeichnisse sind in Phase 2 read-only.
 ## Dependency-Referenzierung
 
 Wenn du eine Library/Framework nutzen musst:
-1. Pruefe ob der Code unter `open-source/repos/` verfuegbar ist
-2. Wenn ja: referenziere die tatsaechliche Implementation
-3. Wenn nein: schlage vor `npx open-source <repo-url>` auszufuehren
-4. Nutze IMMER den tatsaechlichen Source Code, nicht dein Training
+1. Lies die Implementation direkt: grep/read in `node_modules` bzw. dem Vendor-Verzeichnis,
+   oder web_fetch der Repo-Quellen
+2. Fallback: Code unter `open-source/repos/` referenzieren bzw. `npx open-source <repo-url>` vorschlagen
+3. Nutze den tatsaechlichen Source Code, nicht dein Training

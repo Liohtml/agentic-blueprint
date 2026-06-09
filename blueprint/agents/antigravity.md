@@ -26,7 +26,13 @@ Pruefe `blueprint/config.md` fuer das aktive Profil.
 
 ---
 
-## Profil B: Review/QA-Agent
+## Profil B: Review/QA-Agent (Legacy)
+
+> **Seit v1.3 nicht mehr empfohlen:** Reviews laufen ueber den `/code-review` Skill
+> plus einen zweiten Claude-Agent mit frischem Kontext (siehe
+> [decision-trees.md](../meta/decision-trees.md)). Dieses Profil bleibt fuer Setups
+> ohne Claude Code dokumentiert. Das Review-Format unten gilt weiterhin als
+> Output-Standard fuer jeden Review-Agent.
 
 ### Zustaendigkeiten
 - PRs bewerten und strukturiertes Feedback geben

@@ -94,11 +94,11 @@ Aktuelle Modellpalette und Preise (pro MTok, in/out):
 
 ## 4 · Taktische Roadmap
 
-| Welle | Wann | Inhalt |
+| Welle | Status | Inhalt |
 |---|---|---|
-| **1 — Quick Wins** | heute (dieser Branch) | Observer-Pricing fixen (+ Fable 5), Tiering-Tabellen in `agent-teams.md` + `team-prompt.md`, Modell-Entscheidungsbaum, Changelog v1.2, dieses Dokument |
-| **2 — Mission-Mode** | diese Woche | `02-building.md` um Mission-Chunks erweitern, Kontext-Regeln in `AGENTIC-BLUEPRINT.md` entschärfen, Task Budgets in die Loop-Specs, Prompt-Sprache-Audit der Templates, `npx open-source` zu Fallback degradieren |
-| **3 — Strategisch** | nächste Iteration | Managed-Agents/Outcome-Profil als alternativer Ausführungspfad, Memory-Store für Retros, Observer um Effort/Task-Budget-Anzeige erweitern |
+| **1 — Quick Wins** | ✅ umgesetzt (dieser Branch) | Observer-Pricing fixen (+ Fable 5), Tiering-Tabellen in `agent-teams.md` + `team-prompt.md`, Modell-Entscheidungsbaum, Changelog v1.2, dieses Dokument |
+| **2 — Mission-Mode** | ✅ umgesetzt (dieser Branch, v1.3) | Mission-Mode in `02-building.md` + Modus-Wahl in Phase 1 + Entscheidungsbaum, Kontext-Regeln in `AGENTIC-BLUEPRINT.md` entschärft, Task Budgets in allen drei Loop-Specs, `npx open-source` zu Fallback degradiert, Review-Baum auf `/code-review` + zweiten Agent modernisiert, Retro um Kosten-Metriken + Learnings-Persistenz erweitert. Prompt-Sprache-Audit: keine aggressive Trigger-Sprache gefunden — keine Änderung nötig. |
+| **3 — Strategisch** | teilweise umgesetzt | ✅ Cloud Execution Profile (`blueprint/agents/managed-agents.md`) — Outcome-Rubriken als serverseitiges Pendant zum Review-Fix-Loop. ✅ Memory-Persistenz als Retro-Pflichtschritt. Offen: Observer um Effort/Task-Budget-Anzeige erweitern (braucht verifizierte Transcript-Datenformen, siehe `observer/DATA-NOTES.md`-Prozess). |
 
 **Positionierung:** Die Frontier-Modelle kommodifizieren das *Bauen*. Was nicht
 kommodifiziert wird: Spezifikationsqualität, Vertrauens-Gates, Kosten-Steuerung und

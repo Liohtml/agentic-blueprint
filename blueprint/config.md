@@ -13,9 +13,11 @@
 ## Agents
 
 - **Primaer-Agent:** Claude Code
-- **Sekundaer-Agent:** Antigravity
-- **Antigravity-Profil:** <A: UI/Design | B: Review/QA | C: Orchestrator>
-- **Review-Tool:** <Greptile | Zweiter Claude Code Agent | Manuell>
+- **Sekundaer-Agent (optional):** <Antigravity | keiner>
+- **Antigravity-Profil:** <A: UI/Design | C: Orchestrator | nicht genutzt>
+- **Review-Tool:** </code-review Skill + Zweiter Claude Code Agent | Greptile | Manuell>
+- **Modell-Tiering:** Fable 5 (Lead/Mission) · Opus (harte Logik) · Sonnet (Standard) · Haiku (Explore)
+- **Default-Effort:** <xhigh fuer Mission-Chunks | high Standard | low fuer Subagents>
 
 ## Verzeichnis-Zuweisungen
 
@@ -33,9 +35,10 @@
 - **Commit-Style:** <conventional commits | freeform>
 - **Max Chunks pro Plan:** 8
 
-## Dependencies via Open-Source
+## Dependencies via Open-Source (Fallback)
 
-> Welche Repos sollen via npx open-source geladen werden?
+> Default: Dependency-Source direkt via grep/read/web_fetch laden.
+> Diese Liste nur fuer Repos, die der Agent nicht lokal oder per web_fetch erreicht.
 
 - <github-url-1>
 - <github-url-2>

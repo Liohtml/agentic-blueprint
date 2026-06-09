@@ -43,15 +43,18 @@ Ist es eine UI/Design-Aufgabe?
 Aktueller Thread
     |
     v
-Kontextfenster > 70% gefuellt?
+Neue Phase beginnt?
     ├── JA → Neuer Thread
     |
-    └── NEIN: Agent wird ungenau / halluziniert?
+    └── NEIN: Agent wird ungenau / halluziniert / wiederholt sich?
             ├── JA → Neuer Thread
             |
-            └── NEIN: Neue Phase beginnt?
+            └── NEIN: Themenwechsel (neuer Chunk / neue Mission)?
                     ├── JA → Neuer Thread
                     └── NEIN → Weiter im aktuellen Thread
+
+(Harte Prozent-Schwellen sind seit 1M-Kontext + serverseitiger Compaction obsolet —
+Qualitaetssignale des Agents sind der bessere Trigger.)
 ```
 
 ## Wann eskalieren?
@@ -69,6 +72,27 @@ Loop-Limit erreicht?
             └── NEIN: Agent will Shared Contracts aendern?
                     ├── JA → STOPP, Eskalation an Mensch
                     └── NEIN → Agent arbeitet weiter
+```
+
+## Chunk-Mode oder Mission-Mode? (Phase 2)
+
+```
+Plan reviewed (Phase 1 abgeschlossen)
+    |
+    v
+Zusammenhaengender Long-Horizon-Auftrag
+(Migration, Subsystem, Refactor ueber viele Dateien)?
+    ├── NEIN → Chunk-Mode (Default): 3-5 Dateien pro Chunk, Sonnet/Opus-Teammates
+    |
+    └── JA: Spezifikation vollstaendig (Definition of Done binaer pruefbar)?
+            ├── NEIN → Zurueck zu Phase 1 — Spec schaerfen
+            |          (Mission ohne Spec = teures Raten)
+            |
+            └── JA: Zerfaellt die Arbeit in unabhaengige parallele Teile?
+                    ├── JA → Hybrid: Fable-Lead koordiniert das Team,
+                    |        Missions/Chunks als Tasks an getierte Teammates
+                    └── NEIN → Mission-Mode: Fable 5, effort high/xhigh,
+                               ein Prompt, frischer Thread
 ```
 
 ## Wann Chunks parallelisieren?
@@ -91,12 +115,12 @@ Chunk A und Chunk B beruehren verschiedene Dateien?
 Projekt-Setup
     |
     v
-Externes Review-Tool verfuegbar (Greptile)?
-    ├── JA: Budget/Zugang vorhanden?
-    |       ├── JA → Greptile nutzen
-    |       └── NEIN → Zweiter Claude Code Agent
+Claude Code verfuegbar?
+    ├── JA → /code-review Skill als erste Stufe (jeder PR)
+    |        + Zweiter Agent mit frischem Kontext fuer kritische PRs
+    |        (Autor reviewed nie selbst — andere Session/anderes Pane)
     |
-    └── NEIN: Mehrere Agent-Sessions moeglich?
-            ├── JA → Zweiter Claude Code Agent
+    └── NEIN: Externes Review-Tool (z.B. Greptile) verfuegbar?
+            ├── JA → Externes Tool nutzen
             └── NEIN → Manuelles Review durch Mensch
 ```

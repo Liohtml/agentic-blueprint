@@ -25,6 +25,14 @@ LOOP:
 ## Max Iterationen
 5
 
+## Token-Budget (optional, API)
+
+Ergaenzend zum harten Iterations-Limit kann pro Loop-Durchlauf ein **Task Budget**
+gesetzt werden: `output_config: {task_budget: {type: "tokens", total: N}}`
+(Beta-Header `task-budgets-2026-03-13`, Minimum 20 000). Das Modell sieht einen
+laufenden Token-Countdown und priorisiert/beendet selbststaendig. Weiche Grenze —
+das Iterations-Limit bleibt der harte Abbruch.
+
 ## Bei Erfolg
 Weiter zu Phase 3 (Structure Cleanup)
 

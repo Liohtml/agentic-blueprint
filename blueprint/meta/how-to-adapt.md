@@ -16,9 +16,10 @@ Oeffne `blueprint/config.md` und fuell alle Felder aus:
 1. **Projektname und Beschreibung** — was baust du?
 2. **Tech-Stack** — welche Sprachen, Frameworks, Datenbanken?
 3. **Agents** — welche Agents nutzt du? Welches Antigravity-Profil?
-4. **Review-Tool** — Greptile, zweiter Agent, oder manuell?
+4. **Review-Tool** — `/code-review` Skill + zweiter Agent (Default), Greptile, oder manuell?
 5. **Verzeichnis-Zuweisungen** — welcher Agent arbeitet wo?
-6. **Dependencies** — welche Repos sollen via open-source geladen werden?
+6. **Dependencies (Fallback)** — welche Repos sind nicht direkt via grep/read/web_fetch
+   erreichbar und sollen via open-source geladen werden?
 
 ## Schritt 3: CLAUDE.md und AGENTS.md generieren
 
@@ -34,9 +35,10 @@ Mach dasselbe fuer AGENTS.md mit blueprint/templates/AGENTS.md.template.
 
 Review die generierten Dateien und committe sie.
 
-## Schritt 4: Dependencies laden (optional)
+## Schritt 4: Dependencies laden (optional, Fallback)
 
-Fuer jede Dependency die in config.md gelistet ist:
+Default ist direkter Source-Zugriff (grep/read in `node_modules`, web_fetch).
+Nur fuer Repos, die so nicht erreichbar sind und in config.md gelistet wurden:
 
 ```bash
 npx open-source <github-url>

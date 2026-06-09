@@ -39,6 +39,8 @@
 | Review-Fix-Loop Durchschnitt | |
 | Eskalationen an Mensch | |
 | Finale Review-Scores | |
+| Kosten gesamt (USD, aus dem Observer) | |
+| Modell-Mix (Anteil Fable/Opus/Sonnet/Haiku) | |
 
 ## Blueprint-Anpassungen
 
@@ -49,6 +51,16 @@
 - [ ] Gate-Checklisten anpassen: <welches Gate, was hinzufuegen/entfernen>
 - [ ] Agent-Rollen schaerfen: <welcher Agent, was aendern>
 - [ ] Neue Phase/Loop noetig? <beschreiben>
+
+## Learnings persistieren
+
+> Learnings, die kuenftige Runs beeinflussen sollen, gehoeren nicht nur in dieses Doc —
+> sie muessen dort landen, wo Agents sie automatisch lesen.
+
+- [ ] `CLAUDE.md` / `AGENTS.md` aktualisiert (projektspezifische Regeln)
+- [ ] Blueprint-Aenderung als PR vorgeschlagen (framework-weite Regeln)
+- [ ] Agent-Memory aktualisiert (Memory-Tool bzw. Memory Store), damit Agents
+      die Learnings in der naechsten Session selbst vorfinden
 
 ## Fazit
 

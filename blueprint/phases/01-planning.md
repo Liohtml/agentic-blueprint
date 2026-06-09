@@ -17,6 +17,10 @@ Aus dem Problem-Statement einen konkreten, chunk-basierten Implementierungsplan 
 3. **Kuerzen:** Mehr als 8 Chunks? Scope reduzieren oder Features priorisieren
 4. **Abhaengigkeiten markieren:** Welche Chunks muessen sequentiell sein, welche koennen parallel laufen?
 5. **Shared Contracts definieren:** Types, Interfaces, API-Contracts die in Phase 2 read-only sind
+6. **Ausfuehrungs-Modus waehlen:** Chunk-Mode (Default) oder Mission-Mode auf Fable 5 —
+   siehe [decision-trees.md](../meta/decision-trees.md). Im Mission-Mode dient derselbe
+   Plan als Gesamtspezifikation: die Chunks werden zu Abschnitten der Definition of Done
+   und als *ein* Prompt ausgespielt statt einzeln.
 
 ## Agent-Prompt
 
@@ -54,6 +58,7 @@ Markiere welche Chunks parallelisierbar sind.
 - [ ] Jeder Chunk hat ein klares Done-Kriterium
 - [ ] Abhaengigkeiten sind markiert
 - [ ] Shared Contracts sind definiert
+- [ ] Ausfuehrungs-Modus festgelegt (Chunk | Mission)
 - [ ] Mensch hat den Plan reviewed und fuer gut befunden
 
 ## Output

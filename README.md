@@ -32,6 +32,8 @@ Drop it into any project. Your agents know what to do.
 ### Key Features
 
 - **6-Phase Development Model** — Ideation, Planning, Building, Cleanup, Review, Merge
+- **Mission Mode (Fable 5)** — Long-horizon autonomous runs: full spec up front, binary definition of done, quality gates unchanged
+- **4-Tier Model Strategy** — Fable 5 for the lead and mission-critical work, Opus for hard logic, Sonnet as standard, Haiku for scouting — with effort as the second cost dimension
 - **Multi-Agent Coordination** — Claude Code + Antigravity (or any secondary agent) working in parallel without conflicts
 - **Automated Feedback Loops** — Build-Test, Cleanup-Verify, and Review-Fix loops with defined iteration limits
 - **Quality Gates** — Binary pass/fail checks between every phase
@@ -163,7 +165,7 @@ IDEATION  -->  PLANNING  -->  BUILDING  -->  CLEANUP   -->  REVIEW   -->  MERGE
 | 1 | **Human thinks, Agent builds** | You make architecture decisions. Agents execute. |
 | 2 | **Context is King, less is more** | Never load the entire codebase. Reference specific files only. |
 | 3 | **Code is the best documentation** | Load dependency source code directly, not prose docs. |
-| 4 | **Build small, merge often** | Max 3-5 files per chunk. More than 8 chunks = reduce scope. |
+| 4 | **Build small, merge often** | Max 3-5 files per chunk — or one well-specified Fable 5 mission. More than 8 chunks = reduce scope. |
 | 5 | **Structure after every feature** | Cleanup phase is never skipped. |
 | 6 | **Automated feedback loops** | Agents loop with defined abort conditions. No endless spinning. |
 
@@ -222,6 +224,7 @@ your-project/
 |   |   |-- antigravity.md        #   Secondary agent (3 configurable profiles)
 |   |   |-- coordination.md       #   Multi-agent protocol
 |   |   |-- agent-teams.md        #   Live teammates in tmux split-panes (setup + runbook)
+|   |   |-- managed-agents.md     #   Cloud execution profile (Managed Agents + Outcome rubrics)
 |   |
 |   |-- loops/                    # Feedback loop specs
 |   |   |-- build-test-loop.md
