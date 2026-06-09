@@ -12,6 +12,8 @@ npm install
 npm run observe        # build + start server on :4317 + open browser
 ```
 
+Or from the repo root: `./scripts/observe.sh --team <name>`.
+
 ## Development
 
 ```bash
@@ -24,16 +26,20 @@ npm test               # vitest
 
 ```
 observer/
+  bin/
+    observe.ts         # CLI entry point: observe [--team NAME] [--port N] [--no-open]
   src/
-    types.ts           # shared contract (READ-ONLY after T1 — all teammates import from here)
-    server/            # Node http + SSE collector (T2–T8)
-    parsers/           # file parsers: team, tasks, inbox, transcript (T2–T5)
-    metrics/           # token aggregation + cost (T6)
-    watcher/           # fs.watch aggregator (T7)
+    types.ts           # shared TypeScript contract (READ-ONLY after scaffold — everything imports from here)
+    server.ts          # Node http + SSE backend (no Express), serves web build + /events stream
+    collector/         # data pipeline (tests co-located as *.test.ts):
+                       #   teamParser, taskParser, inboxParser, transcriptParser  — file parsers
+                       #   pricing, metrics, aggregator                           — token aggregation + cost
+                       #   watcher                                                — fs.watch-based change detection
   web/
-    src/               # Vite + React + Tailwind + uPlot frontend (T9, T10)
-    dist/              # vite build output (git-ignored)
-  fixtures/            # sample data for tests and Storybook
+    src/               # Vite + React + Tailwind + uPlot frontend
+      components/      #   AgentGrid, AgentCard, charts/ (token/cost/tasks/messages)
+      lib/             #   useSnapshot (SSE client hook), mockSnapshot
+  fixtures/            # anonymized sample data (teams/, tasks/, projects/) for vitest
 ```
 
 ## Ports
@@ -45,6 +51,6 @@ observer/
 
 ## Notes
 
-- `PRICES PRÜFEN` — token pricing in `src/metrics/pricing.ts` is non-authoritative. Verify before sharing cost figures.
+- **Verify prices** — token pricing in `src/collector/pricing.ts` is non-authoritative. Check current rates before sharing cost figures.
 - Never hardcode `~` or `/Users/<name>` — paths resolve via `os.homedir()`.
 - The `[1m]` suffix on model names must be stripped before pricing lookup.

@@ -4,7 +4,7 @@ Five fully specified starter tasks for new contributors. Each one is written so 
 
 **For maintainers:** copy each section below into a new GitHub Issue and add the labels `good first issue` + `help wanted`.
 
-**For contributors:** pick one, comment on the issue so we know you're on it, then follow the 5-step guide in [CONTRIBUTING.md](../../CONTRIBUTING.md). Note: much of the existing blueprint content is in German — please write **new content in English**; mixing languages within the repo is fine during the ongoing translation effort.
+**For contributors:** pick one, comment on the issue so we know you're on it, then follow the 5-step guide in [CONTRIBUTING.md](../../CONTRIBUTING.md). The repo is English-first — please write all new content in English.
 
 ---
 
@@ -48,7 +48,7 @@ Use `<PLACEHOLDERS>` in angle brackets, matching the style of `blueprint/templat
 
 ### Context
 
-The blueprint mandates a fresh context window ("new thread") at every phase change, and the coordination protocol (`blueprint/agents/coordination.md`, section "Uebergabe-Artefakte") lists what one agent must hand to the next: contracts, shared types, status, blockers. But there is no template for that handoff document — every team improvises it, and information gets lost between phases.
+The blueprint mandates a fresh context window ("new thread") at every phase change, and the coordination protocol (`blueprint/agents/coordination.md`, handoff-artifacts section) lists what one agent must hand to the next: contracts, shared types, status, blockers. But there is no template for that handoff document — every team improvises it, and information gets lost between phases.
 
 ### Files
 
@@ -77,34 +77,34 @@ Keep it under ~60 lines — handoffs that are too long don't get read.
 
 ---
 
-## Issue 3 — Create a glossary of blueprint terms (`docs/GLOSSARY.md`)
+## Issue 3 — Extend and cross-link the glossary (`docs/glossary.md`)
 
 **Suggested labels:** `good first issue`, `help wanted`, `docs`
 
 ### Context
 
-The blueprint uses a lot of jargon — *chunk*, *mission chunk*, *quality gate*, *shared contract*, *teammate vs. subagent*, *conductor* — and there is currently no glossary anywhere in the repo. New users have to reverse-engineer the vocabulary from six phase docs, which is exactly the kind of barrier this project wants to remove.
+The repo has a glossary at `docs/glossary.md` covering 18 core terms, but several concepts that appear throughout the blueprint are still missing, and the blueprint documents themselves never link into the glossary — so readers who hit an unknown term in a phase doc have no path to its definition.
 
 ### Files
 
-- **Create:** `docs/GLOSSARY.md`
-- **Read for context:** `AGENTIC-BLUEPRINT.md`, `README.md`, `blueprint/agents/agent-teams.md` (the subagent/workflow/team comparison table), `blueprint/agents/managed-agents.md`
+- **Edit:** `docs/glossary.md`
+- **Read for context:** `AGENTIC-BLUEPRINT.md`, `blueprint/loops/` (the three loop specs), `blueprint/agents/managed-agents.md`, `blueprint/meta/retro-template.md`
 
 ### What to do
 
-Create an alphabetized glossary in English. Each entry: the term in bold, a 1-3 sentence plain-language definition, and (where it helps) a link to the file where the concept is defined. Cover at least these terms:
+1. Add the missing terms, alphabetized into the existing list, matching the existing entry style (bold term, 1-3 plain-language sentences, link to the defining file): *Build-Test Loop, Cleanup-Verify Loop, Review-Fix Loop, Definition of Done, Escalation, Outcome, Retro, Teammate, Task Budget, Mission Chunk* (as a pointer to Mission Mode if you prefer).
+2. Spot-check the existing 18 definitions against the current blueprint and fix anything that drifted.
+3. Optional stretch: add a "see the [Glossary](../docs/glossary.md)" pointer to the intro of `AGENTIC-BLUEPRINT.md` — one line, nothing more.
 
-*chunk, mission chunk, quality gate, feedback loop, build-test loop, cleanup-verify loop, review-fix loop, shared contract, file ownership, conductor, teammate, subagent, agent team, model tiering, effort, escalation, retro, observer, outcome / rubric, definition of done.*
-
-Definitions should be understandable by someone who has never used the blueprint. Don't copy German sentences — define from scratch in your own words.
+Definitions must be understandable by someone who has never used the blueprint — define from scratch in your own words.
 
 ### Definition of done / how to verify
 
-- `docs/GLOSSARY.md` exists with at least the 20 terms above, alphabetized, each with a definition.
+- All listed terms exist in `docs/glossary.md`, alphabetized, each with a definition and (where useful) a link.
 - Spot check: a colleague (or an LLM with no repo context) can read any definition and correctly explain the concept back.
 - Markdown-only change — no testing required.
 
-**Estimated effort:** 2-3 hours.
+**Estimated effort:** 1-2 hours.
 
 ---
 
@@ -123,7 +123,7 @@ Definitions should be understandable by someone who has never used the blueprint
 
 ### What to do
 
-Add a new section **"Team Sizing"** (in English is fine — the file is currently German and a translation effort is ongoing) between the model-tiering and cost-notes sections. It should state these heuristics and the reasoning behind each:
+Add a new section **"Team Sizing"** between the model-tiering and cost-notes sections. It should state these heuristics and the reasoning behind each:
 
 1. **Default to 3-5 teammates.** Coordination overhead grows with every pane; beyond 5, the lead spends more tokens coordinating than the team saves by parallelizing.
 2. **Plan 5-6 tasks per teammate.** Fewer means the teammate idles after one task; many more means the task graph was cut too fine.
