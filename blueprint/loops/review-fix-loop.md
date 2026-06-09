@@ -1,59 +1,59 @@
-# Review-Fix-Loop
+# Review-Fix Loop
 
 ## Phase
 Phase 4: Review Loop
 
 ## Trigger
-PR wurde erstellt und Review-Feedback liegt vor.
+A PR has been created and review feedback is available.
 
-## Ablauf
+## Flow
 
 ```
 Iteration = 0
 
 LOOP:
-  1. Review-Feedback lesen
-  2. Fuer jedes Finding:
-     a. Berechtigt? → Fix anwenden
-     b. Unberechtigt? → Kommentar schreiben warum
-  3. Fixes pushen
-  4. Neues Review abwarten
-  5. Score >= 5/5 oder manuelles Approval?
-     - JA → EXIT LOOP (Erfolg)
-     - NEIN → Iteration += 1
+  1. Read review feedback
+  2. For each finding:
+     a. Justified? → apply fix
+     b. Unjustified? → write a comment explaining why
+  3. Push fixes
+  4. Wait for new review
+  5. Score >= 5/5 or manual approval?
+     - YES → EXIT LOOP (success)
+     - NO → Iteration += 1
   6. Iteration > 7?
-     - JA → EXIT LOOP (Abbruch)
-     - NEIN → GOTO LOOP
+     - YES → EXIT LOOP (abort)
+     - NO → GOTO LOOP
 ```
 
-## Max Iterationen
+## Max Iterations
 7
 
-> Mit Fable 5 als Build-Agent sind one-shot Fixes der Normalfall. Laeuft der Loop
-> trotzdem >3 Iterationen, liegt das Problem fast sicher in der Spezifikation oder
-> einem Architektur-Konflikt — frueher eskalieren statt weiterloopen.
+> With Fable 5 as the build agent, one-shot fixes are the norm. If the loop still
+> runs >3 iterations, the problem is almost certainly in the specification or
+> an architecture conflict — escalate earlier instead of looping on.
 
-## Token-Budget (optional, API)
+## Token Budget (optional, API)
 
-Ergaenzend zum harten Iterations-Limit kann pro Loop-Durchlauf ein **Task Budget**
-gesetzt werden: `output_config: {task_budget: {type: "tokens", total: N}}`
-(Beta-Header `task-budgets-2026-03-13`, Minimum 20 000). Das Modell sieht einen
-laufenden Token-Countdown und priorisiert/beendet selbststaendig. Weiche Grenze —
-das Iterations-Limit bleibt der harte Abbruch.
+In addition to the hard iteration limit, a **Task Budget** can be set per loop run:
+`output_config: {task_budget: {type: "tokens", total: N}}`
+(beta header `task-budgets-2026-03-13`, minimum 20,000). The model sees a
+running token countdown and prioritizes/finishes on its own. Soft limit —
+the iteration limit remains the hard abort.
 
-## Bei Erfolg
-Weiter zu Phase 5 (Merge & Validate)
+## On Success
+Continue to Phase 5 (Merge & Validate)
 
-## Bei Abbruch
-1. Dokumentiere:
-   - Aktuelle Review-Findings die nicht geloest werden konnten
-   - Was bei jedem Versuch geaendert wurde
-   - Vermutete Ursache warum der Score nicht steigt
-2. Eskaliere an Mensch
-3. STOPP — Mensch uebernimmt manuelles Review und entscheidet
+## On Abort
+1. Document:
+   - Current review findings that could not be resolved
+   - What was changed in each attempt
+   - Suspected reason why the score is not improving
+2. Escalate to the human
+3. STOP — the human takes over manual review and decides
 
-## Haeufige Ursachen fuer Abbruch
-- PR zu gross (>500 Zeilen Diff) — schwer fuer Reviewer
-- Architektur-Feedback das groessere Umbauten erfordert
-- Sich widersprechende Findings zwischen Iterationen
-- Review-Agent hat andere Konventionen als das Projekt
+## Common Causes of Abort
+- PR too large (>500 lines of diff) — hard for reviewers
+- Architecture feedback requiring larger rework
+- Contradictory findings between iterations
+- Review agent has different conventions than the project

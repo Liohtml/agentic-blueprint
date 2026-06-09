@@ -1,44 +1,44 @@
-# Projekt-Konfiguration
+# Project Configuration
 
-> Fuell diese Datei aus bevor du das Blueprint nutzt.
-> Der Agent liest diese Datei um projektspezifische Entscheidungen zu treffen.
+> Fill out this file before using the Blueprint.
+> The agent reads this file to make project-specific decisions.
 
-## Projekt
+## Project
 
-- **Name:** <PROJEKTNAME>
-- **Beschreibung:** <1-2 Saetze was das Projekt macht>
-- **Tech-Stack:** <z.B. Next.js, Svelte, FastAPI, ...>
+- **Name:** <PROJECT_NAME>
+- **Description:** <1-2 sentences on what the project does>
+- **Tech stack:** <e.g. Next.js, Svelte, FastAPI, ...>
 - **Repository:** <GitHub URL>
 
 ## Agents
 
-- **Primaer-Agent:** Claude Code
-- **Sekundaer-Agent (optional):** <Antigravity | keiner>
-- **Antigravity-Profil:** <A: UI/Design | C: Orchestrator | nicht genutzt>
-- **Review-Tool:** </code-review Skill + Zweiter Claude Code Agent | Greptile | Manuell>
-- **Modell-Tiering:** Fable 5 (Lead/Mission) · Opus (harte Logik) · Sonnet (Standard) · Haiku (Explore)
-- **Default-Effort:** <xhigh fuer Mission-Chunks | high Standard | low fuer Subagents>
+- **Primary agent:** Claude Code
+- **Secondary agent (optional):** <Antigravity | none>
+- **Antigravity profile:** <A: UI/Design | C: Orchestrator | not used>
+- **Review tool:** </code-review skill + second Claude Code agent | Greptile | manual>
+- **Model Tiering:** Fable 5 (Lead/Mission) · Opus (hard logic) · Sonnet (standard) · Haiku (explore) — for current prices see `blueprint/meta/decision-trees.md`
+- **Default effort:** <xhigh for Mission Chunks | high standard | low for subagents>
 
-## Verzeichnis-Zuweisungen
+## Directory Assignments
 
-> Welcher Agent ist fuer welche Verzeichnisse zustaendig?
-> Agents arbeiten nie an denselben Dateien gleichzeitig.
+> Which agent is responsible for which directories?
+> Agents never work on the same files at the same time.
 
-- **Claude Code:** <z.B. src/lib/, src/api/, src/services/, tests/>
-- **Antigravity:** <z.B. src/components/, src/ui/, src/layouts/>
-- **Shared (read-only in Phase 2):** <z.B. src/types/, src/contracts/>
+- **Claude Code:** <e.g. src/lib/, src/api/, src/services/, tests/>
+- **Antigravity:** <e.g. src/components/, src/ui/, src/layouts/>
+- **Shared (read-only in Phase 2):** <e.g. src/types/, src/contracts/>
 
-## Konventionen
+## Conventions
 
-- **Branch-Prefix:** feature/
-- **Branch-Format:** feature/<chunk-nr>-<agent>-<beschreibung>
-- **Commit-Style:** <conventional commits | freeform>
-- **Max Chunks pro Plan:** 8
+- **Branch prefix:** feature/
+- **Branch format:** feature/<chunk-no>-<agent>-<description>
+- **Commit style:** <conventional commits | freeform>
+- **Max Chunks per plan:** 8
 
 ## Dependencies via Open-Source (Fallback)
 
-> Default: Dependency-Source direkt via grep/read/web_fetch laden.
-> Diese Liste nur fuer Repos, die der Agent nicht lokal oder per web_fetch erreicht.
+> Default: load dependency source directly via grep/read/web_fetch.
+> This list is only for repos the agent cannot reach locally or via web_fetch.
 
 - <github-url-1>
 - <github-url-2>

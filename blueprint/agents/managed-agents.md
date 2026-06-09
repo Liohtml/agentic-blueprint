@@ -1,57 +1,57 @@
 # Cloud Execution Profile — Managed Agents + Outcomes
 
-> Alternativer Ausfuehrungspfad fuer Phase 2–4: statt lokaler tmux-Teammates laeuft
-> der Build als **Managed-Agent-Session** auf Anthropics Infrastruktur — mit einer
-> **Outcome-Rubrik**, gegen die ein unabhaengiger Grader jede Iteration bewertet.
-> Status: Anthropic-Beta (`managed-agents-2026-04-01`). Lokale Agent Teams
-> ([agent-teams.md](agent-teams.md)) bleiben der Default fuer interaktive Arbeit.
+> Alternative execution path for Phases 2–4: instead of local tmux Teammates, the
+> build runs as a **managed-agent session** on Anthropic's infrastructure — with an
+> **outcome rubric** against which an independent grader evaluates every iteration.
+> Status: Anthropic beta (`managed-agents-2026-04-01`). Local Agent Teams
+> ([agent-teams.md](agent-teams.md)) remain the default for interactive work.
 
-## Warum das zum Blueprint passt
+## Why this fits the Blueprint
 
-Unser Review-Fix-Loop ist konzeptionell identisch mit Anthropics Outcome-Mechanismus:
-iterate → grade → revise, mit `max_iterations` als hartem Limit. Der Unterschied:
-beim Outcome laeuft der Loop serverseitig, und der Grader hat ein **eigenes
-Kontextfenster** — strukturell erzwungenes "kein Self-Review".
+Our Review-Fix Loop is conceptually identical to Anthropic's outcome mechanism:
+iterate → grade → revise, with `max_iterations` as the hard limit. The difference:
+with an outcome, the loop runs server-side, and the grader has its **own
+context window** — structurally enforced "no self-review".
 
-| Blueprint-Konzept | Managed-Agents-Pendant |
+| Blueprint concept | Managed-agents counterpart |
 |---|---|
-| Phase-1-Plan + Definition of Done | `user.define_outcome` mit Rubrik (`description` + `rubric`) |
-| Review-Fix-Loop (max 7) | Grader-Loop (`max_iterations`, Default 3, max 20) |
-| Loop-Abbruch → Eskalation | `result: max_iterations_reached` / `failed` → Session idle, Mensch uebernimmt |
-| Kein Self-Review | Grader = separates Kontextfenster, per Design |
-| Kein Merge ohne Human-Go | Session schreibt auf Feature-Branch; PR/Merge bleibt beim Menschen |
-| Datei-Eigentum / Isolation | Container pro Session, Repo via `github_repository`-Resource gemountet |
-| Agent Observer | Session-Events (`span.model_request_end.model_usage`) + Console-UI |
+| Phase 1 plan + Definition of Done | `user.define_outcome` with rubric (`description` + `rubric`) |
+| Review-Fix Loop (max 7) | Grader loop (`max_iterations`, default 3, max 20) |
+| Loop abort → Escalation | `result: max_iterations_reached` / `failed` → session idle, human takes over |
+| No self-review | Grader = separate context window, by design |
+| No merge without Human Go | Session writes to a feature branch; PR/merge stays with the human |
+| File Ownership / isolation | Container per session, repo mounted via `github_repository` resource |
+| Agent Observer | Session events (`span.model_request_end.model_usage`) + console UI |
 
-## Wann Cloud, wann lokal?
+## When cloud, when local?
 
 ```
-Build ansteht (Phase 2)
+Build is pending (Phase 2)
     |
     v
-Brauchst du Interaktion waehrend des Runs (Sparring, Kurskorrektur)?
-    ├── JA → Lokal: Agent Teams / Claude Code (Mission- oder Chunk-Mode)
-    └── NEIN: Ist die Definition of Done als gradebare Rubrik formulierbar?
-            ├── JA → Cloud Execution Profile (Outcome-Session, fire-and-forget)
-            └── NEIN → Zurueck zu Phase 1 — ohne pruefbare DoD kein autonomer Run
+Do you need interaction during the run (sparring, course correction)?
+    ├── YES → Local: Agent Teams / Claude Code (Mission or Chunk Mode)
+    └── NO: Can the Definition of Done be formulated as a gradeable rubric?
+            ├── YES → Cloud Execution Profile (outcome session, fire-and-forget)
+            └── NO → Back to Phase 1 — no autonomous run without a verifiable DoD
 ```
 
-Typische Cloud-Faelle: Overnight-Runs, Migrationen mit klarer Rubrik, wiederkehrende
-Wartungsauftraege (Dependency-Bumps, Lint-Kampagnen), CI-getriggerte Fixes.
+Typical cloud cases: overnight runs, migrations with a clear rubric, recurring
+maintenance jobs (dependency bumps, lint campaigns), CI-triggered fixes.
 
-## Setup (einmalig) — Agent + Environment als YAML im Repo
+## Setup (one-time) — Agent + Environment as YAML in the Repo
 
-Agents sind persistente, versionierte Objekte: **einmal erstellen, ID speichern,
-pro Run nur eine Session starten.** Nie `agents.create()` im Hot Path.
+Agents are persistent, versioned objects: **create once, store the ID,
+start only one session per run.** Never `agents.create()` in the hot path.
 
 ```yaml
 # blueprint-builder.agent.yaml
 name: Blueprint Builder
 model: claude-fable-5
 system: |
-  Du bist Build-Agent nach dem Agentic Blueprint. Befolge AGENTIC-BLUEPRINT.md
-  im gemounteten Repo: Tests fuer Kernlogik, keine Packages juenger als 14 Tage,
-  keine hartcodierten Secrets, kein Merge — du arbeitest auf dem Feature-Branch.
+  You are a build agent following the Agentic Blueprint. Follow AGENTIC-BLUEPRINT.md
+  in the mounted repo: tests for core logic, no packages younger than 14 days,
+  no hardcoded secrets, no merging — you work on the feature branch.
 tools:
   - type: agent_toolset_20260401
 ```
@@ -60,14 +60,14 @@ tools:
 AGENT_ID=$(ant beta:agents create < blueprint-builder.agent.yaml --transform id -r)
 ENV_ID=$(ant beta:environments create --name blueprint-env \
   --config '{type: cloud, networking: {type: unrestricted}}' --transform id -r)
-# IDs in config/.env persistieren — Updates via: ant beta:agents update --version N
+# Persist IDs in config/.env — updates via: ant beta:agents update --version N
 ```
 
-## Pro Run: Session + Outcome
+## Per Run: Session + Outcome
 
-Der Phase-1-Plan **ist** die Rubrik — die Definition-of-Done-Checkliste wird 1:1
-zu gradebaren Kriterien („CSV hat numerische `price`-Spalte", nicht „Daten sehen
-gut aus").
+The Phase 1 plan **is** the rubric — the Definition of Done checklist becomes
+gradeable criteria 1:1 ("CSV has a numeric `price` column", not "data looks
+good").
 
 ```python
 session = client.beta.sessions.create(
@@ -82,39 +82,39 @@ session = client.beta.sessions.create(
     }],
 )
 
-# Outcome STATT user.message — der Agent startet mit Empfang der Rubrik
+# Outcome INSTEAD of user.message — the agent starts upon receiving the rubric
 client.beta.sessions.events.send(
     session_id=session.id,
     events=[{
         "type": "user.define_outcome",
-        "description": "<Mission aus dem Phase-1-Plan>",
-        "rubric": {"type": "text", "content": PLAN_DOD_ALS_MARKDOWN},
-        "max_iterations": 5,   # Blueprint-Konvention: 5 (analog Build-Test-Loop)
+        "description": "<Mission from the Phase 1 plan>",
+        "rubric": {"type": "text", "content": PLAN_DOD_AS_MARKDOWN},
+        "max_iterations": 5,   # Blueprint convention: 5 (matching the Build-Test Loop)
     }],
 )
 ```
 
-Stream oeffnen **bevor** das Outcome gesendet wird; Abbruch-Gate: `session.status_idle`
-mit `stop_reason.type != "requires_action"` oder `session.status_terminated` —
-nicht auf das blanke `idle` brechen.
+Open the stream **before** the outcome is sent; abort Gate: `session.status_idle`
+with `stop_reason.type != "requires_action"` or `session.status_terminated` —
+do not break on the bare `idle`.
 
-## Blueprint-Regeln im Cloud-Profil (nicht verhandelbar)
+## Blueprint Rules in the Cloud Profile (non-negotiable)
 
-1. **Rubrik = Phase-1-Output.** Keine Session ohne reviewten Plan. Vage Rubriken
-   erzeugen teure, verrauschte Grader-Loops.
-2. **`max_iterations` = Loop-Limit** der entsprechenden Phase (Build: 5, Review: 7).
-3. **`max_iterations_reached` / `failed` = Eskalation an den Menschen** — wie jeder
-   Loop-Abbruch. Kein zweites Outcome „einfach nochmal probieren".
-4. **Kein Merge ohne Human-Go.** Der Agent pusht den Branch; PR-Erstellung und Merge
-   bleiben beim Menschen (oder laufen durch Phase 4/5 lokal).
-5. **Kosten beobachten:** `span.model_request_end.model_usage` liefert dieselben
-   Token-Felder wie die Observer-Pipeline; Fable-5-Raten siehe
-   [pricing.ts](../../observer/src/collector/pricing.ts).
+1. **Rubric = Phase 1 output.** No session without a reviewed plan. Vague rubrics
+   produce expensive, noisy grader loops.
+2. **`max_iterations` = the loop limit** of the corresponding phase (build: 5, review: 7).
+3. **`max_iterations_reached` / `failed` = Escalation to the human** — like any
+   loop abort. No second outcome to "just try again".
+4. **No merge without Human Go.** The agent pushes the branch; PR creation and merge
+   stay with the human (or go through Phases 4/5 locally).
+5. **Watch the costs:** `span.model_request_end.model_usage` delivers the same
+   token fields as the Observer pipeline; for Fable 5 rates see
+   [pricing.ts](https://github.com/Liohtml/agentic-blueprint/blob/master/observer/src/collector/pricing.ts).
 
-## Referenzen
+## References
 
-- Anthropic Docs: Managed Agents Overview / Define Outcomes / Sessions
+- Anthropic docs: Managed Agents Overview / Define Outcomes / Sessions
   (`platform.claude.com/docs/en/managed-agents/`)
-- Verwandt im Blueprint: [agent-teams.md](agent-teams.md) (lokales Pendant),
-  [02-building.md](../phases/02-building.md) (Mission-Mode),
-  [review-fix-loop.md](../loops/review-fix-loop.md) (Loop-Semantik)
+- Related in the Blueprint: [agent-teams.md](agent-teams.md) (local counterpart),
+  [02-building.md](../phases/02-building.md) (Mission Mode),
+  [review-fix-loop.md](../loops/review-fix-loop.md) (loop semantics)

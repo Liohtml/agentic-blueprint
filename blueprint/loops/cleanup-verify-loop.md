@@ -1,50 +1,50 @@
-# Cleanup-Verify-Loop
+# Cleanup-Verify Loop
 
 ## Phase
 Phase 3: Structure Cleanup
 
 ## Trigger
-Refactoring wurde auf den Code angewendet.
+Refactoring has been applied to the code.
 
-## Ablauf
+## Flow
 
 ```
 Iteration = 0
 
 LOOP:
-  1. Refactoring-Schritt anwenden
-  2. Alle Tests ausfuehren
-  3. Alle Tests gruen UND Funktionalitaet unveraendert?
-     - JA → Weitere Duplikate/Strukturprobleme?
-       - JA → Iteration += 1, naechster Refactoring-Schritt → GOTO LOOP
-       - NEIN → EXIT LOOP (Erfolg)
-     - NEIN → Rollback des letzten Schritts, Iteration += 1
+  1. Apply refactoring step
+  2. Run all tests
+  3. All tests green AND functionality unchanged?
+     - YES → More duplicates/structure problems?
+       - YES → Iteration += 1, next refactoring step → GOTO LOOP
+       - NO → EXIT LOOP (success)
+     - NO → rollback of the last step, Iteration += 1
   4. Iteration > 3?
-     - JA → EXIT LOOP (Abbruch)
-     - NEIN → GOTO LOOP
+     - YES → EXIT LOOP (abort)
+     - NO → GOTO LOOP
 ```
 
-## Max Iterationen
+## Max Iterations
 3
 
-## Token-Budget (optional, API)
+## Token Budget (optional, API)
 
-Ergaenzend zum harten Iterations-Limit kann pro Loop-Durchlauf ein **Task Budget**
-gesetzt werden: `output_config: {task_budget: {type: "tokens", total: N}}`
-(Beta-Header `task-budgets-2026-03-13`, Minimum 20 000). Das Modell sieht einen
-laufenden Token-Countdown und priorisiert/beendet selbststaendig. Weiche Grenze —
-das Iterations-Limit bleibt der harte Abbruch.
+In addition to the hard iteration limit, a **Task Budget** can be set per loop run:
+`output_config: {task_budget: {type: "tokens", total: N}}`
+(beta header `task-budgets-2026-03-13`, minimum 20,000). The model sees a
+running token countdown and prioritizes/finishes on its own. Soft limit —
+the iteration limit remains the hard abort.
 
-## Bei Erfolg
-Weiter zu Phase 4 (Review Loop)
+## On Success
+Continue to Phase 4 (Review Loop)
 
-## Bei Abbruch
-1. Rollback ALLER Refactoring-Schritte die Tests gebrochen haben
-2. Original-Code aus Phase 2 bleibt bestehen
-3. Dokumentiere welche Refactorings fehlgeschlagen sind und warum
-4. Weiter zu Phase 4 mit dem Original-Code (Cleanup ist nice-to-have, nicht blocker)
+## On Abort
+1. Rollback of ALL refactoring steps that broke tests
+2. The original code from Phase 2 remains in place
+3. Document which refactorings failed and why
+4. Continue to Phase 4 with the original code (cleanup is nice-to-have, not a blocker)
 
-## Wichtig
-- KEINE Funktionalitaetsaenderungen — nur Struktur
-- Jeder Refactoring-Schritt wird einzeln verifiziert
-- Bei Rollback: sauber zurueck, nicht "fixen" auf dem Fix
+## Important
+- NO functionality changes — structure only
+- Each refactoring step is verified individually
+- On rollback: revert cleanly, do not "fix" on top of the fix
