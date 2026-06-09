@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Question / Help
+    url: https://github.com/Liohtml/agentic-blueprint/discussions
+    about: Questions about using the blueprint or the Observer? Ask in Discussions — no template, no formality.
+  - name: Good first issues
+    url: https://github.com/Liohtml/agentic-blueprint/blob/main/docs/community/good-first-issues.md
+    about: Want to contribute but don't know where to start? Five fully specified starter tasks.
