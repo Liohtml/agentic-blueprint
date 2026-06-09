@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Scaffold shared types",
+  "description": "Define TypeScript interfaces used across all collector modules.",
+  "status": "completed",
+  "owner": "alice",
+  "blocks": ["2"],
+  "blockedBy": []
+}

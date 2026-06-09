@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Implement task parser",
+  "description": "Read task JSON files from ~/.claude/tasks/{team}/ and parse them into Task[].",
+  "status": "in_progress",
+  "owner": "bob",
+  "blocks": ["3"],
+  "blockedBy": ["1"]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "Implement message parser",
+  "description": "Read inbox JSON files from ~/.claude/teams/{team}/inboxes/ and parse messages.",
+  "status": "pending",
+  "owner": "carol",
+  "blocks": [],
+  "blockedBy": ["2"]
+}
