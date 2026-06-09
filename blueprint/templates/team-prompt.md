@@ -149,5 +149,5 @@ Ein laufendes Team live beobachten:
 
 ```bash
 ./scripts/observe.sh --team <TEAM-NAME>
-# öffnet das Dashboard auf http://localhost:4000
+# öffnet das Dashboard auf http://localhost:4317
 ```

@@ -131,10 +131,9 @@ and no merge without your Go.
 ```bash
 # Open a new pane: Ctrl-b "
 ./scripts/observe.sh --team <name>
-# Optional: ./scripts/observe.sh --team <name> --port 4000
 ```
 
-Open **http://localhost:4000** — the **[Agent Observer](observer/README.md)** streams live
+Open **http://localhost:4317** — the **[Agent Observer](observer/README.md)** streams live
 token counts, costs, tool activity, and task progress for every pane — built with these
 exact same team rules.
 
