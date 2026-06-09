@@ -11,8 +11,11 @@ import {
   createTranscriptReader,
   createStatsAccumulator,
   parseTranscriptFile,
+  summarize,
+  kindForTool,
 } from './transcriptParser.ts';
 import type { TeamInfo } from '../types.ts';
+import { ACTIVITY_CAP } from '../types.ts';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const FIXTURE_PROJECTS = join(here, '..', '..', 'fixtures', 'projects');
@@ -245,5 +248,94 @@ describe('live konzept-review data (optional)', () => {
     expect(names).toEqual(['advocatus', 'architekt', 'team-lead', 'ux']);
     // Skip files that aren't sessions (dirs) gracefully.
     expect(readdirSync(join(liveDir)).length).toBeGreaterThan(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Detail-insight extraction (activity feed, redaction, sends, turns)
+// ---------------------------------------------------------------------------
+
+describe('kindForTool', () => {
+  it('buckets tool names into coarse kinds', () => {
+    expect(kindForTool('Read')).toBe('read');
+    expect(kindForTool('Edit')).toBe('edit');
+    expect(kindForTool('Bash')).toBe('bash');
+    expect(kindForTool('SendMessage')).toBe('send');
+    expect(kindForTool('ToolSearch')).toBe('search');
+    expect(kindForTool('TaskUpdate')).toBe('task');
+    expect(kindForTool('SomethingElse')).toBe('tool');
+  });
+});
+
+describe('summarize — redaction by default', () => {
+  it('collapses file paths to basename', () => {
+    expect(summarize('Read', { file_path: '/Users/lionel/fitness-coach/coach/garmin_token.json' }))
+      .toBe('garmin_token.json');
+    expect(summarize('Edit', { file_path: '/a/b/types.ts' })).toBe('types.ts');
+  });
+  it('clips long Bash commands (no raw secrets streamed)', () => {
+    const long = 'grep -rn "GARMIN_TOKEN_B64" /Users/lionel/fitness-coach/.env /Users/lionel/fitness-coach/coach/garmin_token.json';
+    const out = summarize('Bash', { command: long });
+    expect(out.length).toBeLessThanOrEqual(81); // 80 + ellipsis
+    expect(out.endsWith('…')).toBe(true);
+  });
+  it('renders SendMessage as →to: summary (dual-key tolerant)', () => {
+    expect(summarize('SendMessage', { to: 'ux', summary: 'draft ready' })).toBe('→ux: draft ready');
+    expect(summarize('SendMessage', { recipient: 'lead', type: 'shutdown_response' })).toBe('→lead: shutdown_response');
+  });
+});
+
+describe('createStatsAccumulator — activity feed, sends, thinking, turns', () => {
+  it('builds a chronological feed in content[] order and captures sends + thinking', () => {
+    const acc = createStatsAccumulator('s');
+    acc.add([
+      {
+        type: 'assistant',
+        timestamp: '2026-06-09T13:00:00.000Z',
+        message: {
+          model: 'claude-opus-4-8',
+          stop_reason: 'tool_use',
+          content: [
+            { type: 'thinking', thinking: '', signature: 'abc' },
+            { type: 'text', text: 'Ich lese zuerst die Datei.' },
+            { type: 'tool_use', name: 'Read', input: { file_path: '/x/y/types.ts' } },
+            { type: 'tool_use', name: 'SendMessage', input: { to: 'ux', summary: 'done', message: 'hello there' } },
+          ],
+        },
+      },
+    ]);
+    const s = acc.stats();
+    expect(s.activity.map(e => e.kind)).toEqual(['think', 'say', 'read', 'send']);
+    expect(s.activity[2].label).toBe('types.ts');
+    expect(s.activity[3].label).toBe('→ux: done');
+    expect(s.thinkingCount).toBe(1);
+    expect(s.sentMessages).toEqual([
+      { ts: Date.parse('2026-06-09T13:00:00.000Z'), to: 'ux', type: 'message', summary: 'done', bodyLength: 'hello there'.length },
+    ]);
+  });
+
+  it('captures turn_duration system lines, ignoring stop_hook_summary', () => {
+    const acc = createStatsAccumulator('s');
+    acc.add([
+      { type: 'system', subtype: 'turn_duration', timestamp: '2026-06-09T13:00:01.000Z', durationMs: 129485, messageCount: 53 },
+      { type: 'system', subtype: 'stop_hook_summary', timestamp: '2026-06-09T13:00:02.000Z' },
+      { type: 'system', subtype: 'turn_duration', timestamp: '2026-06-09T13:00:03.000Z', durationMs: 14298, messageCount: 89 },
+    ]);
+    expect(acc.stats().turns).toEqual([
+      { ts: Date.parse('2026-06-09T13:00:01.000Z'), durationMs: 129485 },
+      { ts: Date.parse('2026-06-09T13:00:03.000Z'), durationMs: 14298 },
+    ]);
+  });
+
+  it('caps the activity ring buffer at ACTIVITY_CAP (newest kept)', () => {
+    const acc = createStatsAccumulator('s');
+    const content = Array.from({ length: ACTIVITY_CAP + 10 }, (_, i) => ({
+      type: 'tool_use', name: 'Bash', input: { command: `echo ${i}` },
+    }));
+    acc.add([{ type: 'assistant', timestamp: '2026-06-09T13:00:00.000Z', message: { content } }]);
+    const feed = acc.stats().activity;
+    expect(feed.length).toBe(ACTIVITY_CAP);
+    // oldest dropped → last event is the final echo
+    expect(feed[feed.length - 1].label).toBe(`echo ${ACTIVITY_CAP + 9}`);
   });
 });

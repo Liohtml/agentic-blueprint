@@ -174,5 +174,9 @@ export function buildAgentMetrics(
     messagesReceived,
     toolsUsed:        stats.toolsUsed,
     errorCount:       stats.errorCount,
+    thinkingCount:    stats.thinkingCount,
+    activity:         stats.activity,
+    sentMessages:     stats.sentMessages,
+    turns:            stats.turns,
   };
 }

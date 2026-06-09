@@ -1,8 +1,10 @@
 /**
  * observer/src/types.ts — shared type contract
  *
- * READ-ONLY after T1 lands. All teammates import from here.
- * Derived from DATA-NOTES.md (real Claude Code file shapes, 2026-06-09).
+ * Frozen during the initial parallel build (T1→T10). Now Lead-maintained: amended
+ * in one coordinated pass post-merge to add the detail-insight types (ActivityEvent,
+ * SentMessage, TurnDuration) and the per-agent feeds that surface "what each agent is
+ * actually doing". Derived from DATA-NOTES.md (real Claude Code file shapes, 2026-06-09).
  */
 
 // ---------------------------------------------------------------------------
@@ -39,6 +41,58 @@ export interface ToolUse {
 }
 
 // ---------------------------------------------------------------------------
+// Detail-insight feeds (post-merge contract amendment)
+//
+// These are extracted from the SAME per-message content[] loop the parser already
+// walks, then surfaced so the dashboard answers "what is the agent DOING", not just
+// "how much". All three are stored as HARD-CAPPED ring buffers (see *_CAP below) so
+// the SSE payload — which re-serialises the whole snapshot every change — stays small.
+// Privacy: labels are redacted by default (basenames, truncated commands); raw message
+// bodies and tool-RESULT payloads (file contents / Bash stdout) NEVER enter these.
+// ---------------------------------------------------------------------------
+
+/** Max events kept per agent in each ring buffer (newest-last). */
+export const ACTIVITY_CAP = 30;
+export const SENT_MESSAGES_CAP = 30;
+export const TURNS_CAP = 20;
+
+/**
+ * One entry in an agent's chronological activity feed, in transcript content[] order
+ * (NOT re-sorted by line timestamp). `kind` buckets the block; `label` is a single
+ * redacted human-readable line.
+ */
+export interface ActivityEvent {
+  /** Unix ms (the enclosing assistant line's timestamp). */
+  ts: number;
+  /** 'say' | 'think' | 'read' | 'write' | 'edit' | 'bash' | 'send' | 'search' | 'task' | 'tool'. */
+  kind: string;
+  /** Redacted one-liner: basename for paths, truncated command, "→to: summary" for sends. */
+  label: string;
+}
+
+/**
+ * One message an agent SENT, reconstructed from a `SendMessage` tool_use block.
+ * Durable: survives the inbox delivery-queue being consumed (fixes finding F2).
+ * Carries only metadata + summary — never the full body.
+ */
+export interface SentMessage {
+  ts: number;
+  to: string;
+  /** 'message' | 'shutdown_response' | … (from SendMessage input.type). */
+  type: string;
+  summary: string;
+  /** Length of the body, so the UI can show size without shipping the content. */
+  bodyLength: number;
+}
+
+/** One real turn latency from a transcript `subtype:"turn_duration"` system line. */
+export interface TurnDuration {
+  ts: number;
+  /** Milliseconds the turn took (durationMs). */
+  durationMs: number;
+}
+
+// ---------------------------------------------------------------------------
 // Transcript-derived stats (T5 output, T6 input)
 // ---------------------------------------------------------------------------
 
@@ -66,6 +120,14 @@ export interface AgentTranscriptStats {
   errorCount: number;
   /** Map of tool name → invocation count across the whole session. */
   toolsUsed: Record<string, number>;
+  /** Count of `thinking` content blocks (their text is empty — only the count is useful). */
+  thinkingCount: number;
+  /** Chronological activity feed, capped to ACTIVITY_CAP (newest-last). */
+  activity: ActivityEvent[];
+  /** Durable log of messages this agent sent, capped to SENT_MESSAGES_CAP. */
+  sentMessages: SentMessage[];
+  /** Real per-turn latencies, capped to TURNS_CAP. */
+  turns: TurnDuration[];
 }
 
 // ---------------------------------------------------------------------------
@@ -109,6 +171,14 @@ export interface AgentMetrics {
   /** Map of tool name → invocation count. */
   toolsUsed: Record<string, number>;
   errorCount: number;
+  /** Number of thinking blocks (reasoning happened, but its text is not retained). */
+  thinkingCount: number;
+  /** Chronological activity feed (redacted labels), capped to ACTIVITY_CAP. */
+  activity: ActivityEvent[];
+  /** Durable outbound message log, capped to SENT_MESSAGES_CAP. */
+  sentMessages: SentMessage[];
+  /** Real per-turn latencies, capped to TURNS_CAP. */
+  turns: TurnDuration[];
 }
 
 /**

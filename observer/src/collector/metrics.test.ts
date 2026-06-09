@@ -60,6 +60,10 @@ function makeStats(
     currentActivity: 'Bash',
     errorCount:      0,
     toolsUsed:       { Bash: 3, Read: 5 },
+    thinkingCount:   0,
+    activity:        [],
+    sentMessages:    [],
+    turns:           [],
     ...overrides,
   };
 }

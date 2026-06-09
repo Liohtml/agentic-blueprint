@@ -14,6 +14,32 @@ const NOW = Date.now()
 const TWO_HOURS = 2 * 60 * 60 * 1000
 const ONE_HOUR = 60 * 60 * 1000
 
+/** Sample detail-insight feeds so the mock dev view exercises the new UI. */
+function feed(
+  to: string,
+): Pick<AgentMetrics, 'thinkingCount' | 'activity' | 'sentMessages' | 'turns'> {
+  const t = NOW - 60_000
+  return {
+    thinkingCount: 14,
+    activity: [
+      { ts: t - 40_000, kind: 'think', label: '' },
+      { ts: t - 32_000, kind: 'say', label: 'Lese die Schlüsseldateien, um den Kontext zu verstehen.' },
+      { ts: t - 24_000, kind: 'read', label: 'types.ts' },
+      { ts: t - 16_000, kind: 'bash', label: 'grep -rn "AgentMetrics" src' },
+      { ts: t - 8_000, kind: 'edit', label: 'AgentCard.tsx' },
+      { ts: t - 2_000, kind: 'send', label: `→${to}: Abschnitt fertig` },
+    ],
+    sentMessages: [
+      { ts: t - 2_000, to, type: 'message', summary: 'Abschnitt fertig', bodyLength: 240 },
+    ],
+    turns: [
+      { ts: t - 30_000, durationMs: 129_485 },
+      { ts: t - 18_000, durationMs: 84_020 },
+      { ts: t - 4_000, durationMs: 14_298 },
+    ],
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Agents (real token counts from DATA-NOTES.md, colours from agent palette)
 // ---------------------------------------------------------------------------
@@ -42,6 +68,7 @@ const mockAgents: AgentMetrics[] = [
     messagesReceived: 31,
     toolsUsed: { Read: 187, Bash: 94, Edit: 63, Write: 12, Agent: 8 },
     errorCount: 2,
+    ...feed('architekt'),
   },
   {
     agentId: 'architekt@konzept-review',
@@ -67,6 +94,7 @@ const mockAgents: AgentMetrics[] = [
     messagesReceived: 14,
     toolsUsed: { Read: 144, Bash: 107, Edit: 55, Write: 9 },
     errorCount: 1,
+    ...feed('team-lead'),
   },
   {
     agentId: 'ux@konzept-review',
@@ -92,6 +120,7 @@ const mockAgents: AgentMetrics[] = [
     messagesReceived: 19,
     toolsUsed: { Read: 122, Write: 88, Edit: 41, Bash: 23 },
     errorCount: 0,
+    ...feed('team-lead'),
   },
   {
     agentId: 'advocatus@konzept-review',
@@ -117,6 +146,7 @@ const mockAgents: AgentMetrics[] = [
     messagesReceived: 28,
     toolsUsed: { Read: 98, Bash: 74, Edit: 22, Write: 6 },
     errorCount: 3,
+    ...feed('architekt'),
   },
 ]
 

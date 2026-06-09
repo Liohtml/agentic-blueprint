@@ -31,6 +31,33 @@ function fmtRate(tpm: number): string {
   return String(Math.round(tpm))
 }
 
+function fmtClock(ts: number): string {
+  if (!ts) return '--:--:--'
+  const d = new Date(ts)
+  const p = (n: number) => String(n).padStart(2, '0')
+  return `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`
+}
+
+function fmtDuration(ms: number): string {
+  const s = Math.round(ms / 1000)
+  if (s < 60) return `${s}s`
+  return `${Math.floor(s / 60)}m ${s % 60}s`
+}
+
+// kind → short tag + colour, used by the activity feed
+const KIND_META: Record<string, { tag: string; cls: string }> = {
+  read: { tag: 'read', cls: 'text-sky-400' },
+  write: { tag: 'write', cls: 'text-violet-400' },
+  edit: { tag: 'edit', cls: 'text-amber-400' },
+  bash: { tag: 'bash', cls: 'text-emerald-400' },
+  send: { tag: 'send', cls: 'text-pink-400' },
+  search: { tag: 'search', cls: 'text-cyan-400' },
+  task: { tag: 'task', cls: 'text-blue-400' },
+  say: { tag: 'say', cls: 'text-slate-400' },
+  think: { tag: 'think', cls: 'text-slate-600' },
+  tool: { tag: 'tool', cls: 'text-slate-400' },
+}
+
 // ---------------------------------------------------------------------------
 // Status dot
 // ---------------------------------------------------------------------------
@@ -64,6 +91,12 @@ export default function AgentCard({ agent }: AgentCardProps) {
     done: 'done',
   }
 
+  // Activity feed: newest first, capped for the card.
+  const feed = (agent.activity ?? []).slice(-8).reverse()
+  const turns = agent.turns ?? []
+  const lastTurnMs = turns.length > 0 ? turns[turns.length - 1].durationMs : null
+  const sentCount = (agent.sentMessages ?? []).filter(m => m.type === 'message').length
+
   return (
     <article
       className="relative overflow-hidden rounded-xl bg-slate-900 border border-slate-800 p-4 transition-colors hover:border-slate-700"
@@ -93,11 +126,33 @@ export default function AgentCard({ agent }: AgentCardProps) {
         </div>
       </div>
 
-      {/* ── Current activity ───────────────────────────────────────── */}
-      <p className="text-xs text-slate-400 mb-3 truncate font-mono">
-        <span className="text-slate-600 mr-1">▶</span>
-        {agent.currentActivity}
-      </p>
+      {/* ── Activity feed (what the agent is actually doing) ───────── */}
+      <div className="mb-3 rounded-lg bg-slate-950/50 border border-slate-800/70 px-2 py-1.5">
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-[9px] uppercase tracking-wider text-slate-600">activity</span>
+          <span className="text-[9px] font-mono text-slate-600">
+            ▶ {agent.currentActivity}
+          </span>
+        </div>
+        {feed.length === 0 ? (
+          <p className="text-[11px] text-slate-600 font-mono py-1">no recorded activity yet</p>
+        ) : (
+          <ul className="space-y-0.5 max-h-28 overflow-y-auto">
+            {feed.map((ev, i) => {
+              const meta = KIND_META[ev.kind] ?? KIND_META.tool
+              return (
+                <li key={i} className="flex items-baseline gap-1.5 text-[11px] leading-tight font-mono">
+                  <span className="text-slate-600 tabular-nums flex-shrink-0">{fmtClock(ev.ts)}</span>
+                  <span className={`${meta.cls} flex-shrink-0 w-10`}>{meta.tag}</span>
+                  <span className="text-slate-300 truncate">
+                    {ev.label || (ev.kind === 'think' ? '…' : '')}
+                  </span>
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </div>
 
       {/* ── Token grid ─────────────────────────────────────────────── */}
       <div className="grid grid-cols-3 gap-2 mb-3 text-center">
@@ -123,10 +178,20 @@ export default function AgentCard({ agent }: AgentCardProps) {
           tasks <span className="text-slate-200">{agent.tasksCompleted}</span>
           <span className="text-slate-600">/{agent.tasksTotal}</span>
         </span>
-        <span className="text-slate-400 font-mono">
-          <span className="text-slate-300">↑{agent.messagesSent}</span>{' '}
+        <span className="text-slate-400 font-mono" title="messages sent (durable) ↑ / received ↓">
+          <span className="text-slate-300">↑{sentCount || agent.messagesSent}</span>{' '}
           <span className="text-slate-300">↓{agent.messagesReceived}</span>
         </span>
+        {lastTurnMs != null && (
+          <span className="text-slate-400 font-mono" title="last turn latency">
+            ⏱{fmtDuration(lastTurnMs)}
+          </span>
+        )}
+        {agent.thinkingCount > 0 && (
+          <span className="text-slate-500 font-mono text-[10px]" title="thinking blocks">
+            ∴{agent.thinkingCount}
+          </span>
+        )}
         {agent.errorCount > 0 && (
           <span className="text-red-400 font-mono text-[10px]">
             ✕{agent.errorCount}
