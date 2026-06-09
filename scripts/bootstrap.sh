@@ -152,7 +152,7 @@ cat <<'NEXTSTEPS'
   5. Open a second pane (Ctrl+B, ") and start the live dashboard:
        ./scripts/observe.sh --team <name>
 
-  6. Open your browser at http://localhost:4000 to watch the team live.
+  6. Open your browser at http://localhost:4317 to watch the team live.
 
   For full details: README.md and docs/
 
