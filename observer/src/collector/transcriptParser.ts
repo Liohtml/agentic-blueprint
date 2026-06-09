@@ -99,7 +99,10 @@ export function defaultProjectsDir(): string {
 // resolveSessions
 // ---------------------------------------------------------------------------
 
-const DU_BIST_RE = /Du bist "([^"]+)"/;
+// Teammate sessions open with the lead's spawn prompt, which by convention names the
+// agent as `You are "{name}"` (en) or `Du bist "{name}"` (de). Match both, case-insensitive,
+// so the mapping is locale-independent rather than hardcoded to one phrasing.
+const AGENT_NAME_RE = /(?:You are|Du bist)\s+"([^"]+)"/i;
 
 /** Flatten a `message.content` (string | block[]) into plain text for regex. */
 function contentToText(content: unknown): string {
@@ -145,7 +148,7 @@ function leadName(team: TeamInfo): string {
  *
  * - Project dirs come from encoding each member `cwd` (deduped).
  * - The session whose id === `team.leadSessionId` is the lead.
- * - Every other `*.jsonl` whose first `type:"user"` body matches `Du bist "{name}"`
+ * - Every other `*.jsonl` whose first `type:"user"` body matches `You are "{name}"` (or `Du bist "{name}"`)
  *   AND references this team's name is a teammate session for `{name}`.
  *   (The team-name guard avoids picking up sessions from other teams that happen to
  *   share a cwd.)
@@ -191,7 +194,7 @@ export function resolveSessions(team: TeamInfo, opts: ResolveSessionsOptions = {
 
       const body = firstUserMessageText(filePath);
       if (!body) continue;
-      const match = DU_BIST_RE.exec(body);
+      const match = AGENT_NAME_RE.exec(body);
       if (!match) continue;
       // Guard against cross-team contamination sharing a cwd.
       if (team.name && !body.includes(team.name)) continue;
