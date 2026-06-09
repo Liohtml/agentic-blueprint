@@ -30,7 +30,15 @@ import {
 import { join } from 'node:path';
 import { homedir } from 'node:os';
 
-import type { AgentTranscriptStats, TokenUsage, TeamInfo } from '../types.ts';
+import type {
+  AgentTranscriptStats,
+  TokenUsage,
+  TeamInfo,
+  ActivityEvent,
+  SentMessage,
+  TurnDuration,
+} from '../types.ts';
+import { ACTIVITY_CAP, SENT_MESSAGES_CAP, TURNS_CAP } from '../types.ts';
 
 // ---------------------------------------------------------------------------
 // Public result shape for session discovery
@@ -62,6 +70,9 @@ interface RawLine {
   level?: string;
   content?: unknown;
   hookErrors?: unknown;
+  subtype?: string;
+  durationMs?: number;
+  messageCount?: number;
   // user / assistant
   message?: {
     role?: string;
@@ -370,6 +381,117 @@ function userLineErrorCount(line: RawLine): number {
   return n;
 }
 
+// ---------------------------------------------------------------------------
+// Activity labelling + redaction (feeds the detail-insight feeds)
+// ---------------------------------------------------------------------------
+
+/** basename of a path, tolerant of both `/` and `\`. */
+function basename(p: string): string {
+  const s = p.replace(/[/\\]+$/, '');
+  const i = Math.max(s.lastIndexOf('/'), s.lastIndexOf('\\'));
+  return i >= 0 ? s.slice(i + 1) : s;
+}
+
+/** Truncate to `n` chars with an ellipsis marker. */
+function clip(s: string, n: number): string {
+  const t = s.replace(/\s+/g, ' ').trim();
+  return t.length > n ? `${t.slice(0, n)}…` : t;
+}
+
+/** Map a tool name to a coarse activity `kind` for the feed. */
+export function kindForTool(name: string): string {
+  switch (name) {
+    case 'Read':
+    case 'NotebookRead':
+      return 'read';
+    case 'Write':
+      return 'write';
+    case 'Edit':
+    case 'MultiEdit':
+    case 'NotebookEdit':
+      return 'edit';
+    case 'Bash':
+    case 'BashOutput':
+    case 'KillShell':
+      return 'bash';
+    case 'SendMessage':
+      return 'send';
+    case 'WebSearch':
+    case 'WebFetch':
+    case 'ToolSearch':
+    case 'Grep':
+    case 'Glob':
+      return 'search';
+    default:
+      if (name.startsWith('Task') || name.startsWith('Team')) return 'task';
+      return 'tool';
+  }
+}
+
+/**
+ * Produce ONE redacted human-readable label for a tool_use block.
+ *
+ * Redaction is the DEFAULT (the real transcripts contain Bash commands naming
+ * `.env` / `*token*.json`): file paths collapse to their basename and commands are
+ * clipped. Message BODIES and tool-RESULT payloads are never read here.
+ */
+export function summarize(name: string, input: unknown): string {
+  const inp = (input && typeof input === 'object' ? input : {}) as Record<string, unknown>;
+  const str = (k: string): string => (typeof inp[k] === 'string' ? (inp[k] as string) : '');
+  switch (kindForTool(name)) {
+    case 'read':
+    case 'write':
+    case 'edit': {
+      const fp = str('file_path') || str('notebook_path');
+      return fp ? basename(fp) : name;
+    }
+    case 'bash': {
+      const cmd = str('command');
+      return cmd ? clip(cmd, 80) : name;
+    }
+    case 'send': {
+      const to = str('to') || str('recipient') || '?';
+      const label = str('summary') || str('type') || 'message';
+      return `→${to}: ${clip(label, 60)}`;
+    }
+    case 'search': {
+      const q = str('query') || str('pattern') || '';
+      return q ? `${name} ${clip(q, 50)}` : name;
+    }
+    case 'task': {
+      const subj = str('subject') || str('team_name') || (inp.taskId != null ? `#${String(inp.taskId)}` : '');
+      return subj ? `${name} ${clip(subj, 50)}` : name;
+    }
+    default: {
+      // First scalar input value, if any, gives a hint without leaking structure.
+      for (const v of Object.values(inp)) {
+        if (typeof v === 'string' && v) return `${name} ${clip(v, 40)}`;
+      }
+      return name;
+    }
+  }
+}
+
+/** Extract a SentMessage from a SendMessage tool_use input (dual-key tolerant). */
+function toSentMessage(ts: number, input: unknown): SentMessage {
+  const inp = (input && typeof input === 'object' ? input : {}) as Record<string, unknown>;
+  const str = (k: string): string => (typeof inp[k] === 'string' ? (inp[k] as string) : '');
+  const body = str('message') || str('content');
+  return {
+    ts,
+    to: str('to') || str('recipient') || '?',
+    type: str('type') || 'message',
+    summary: str('summary'),
+    bodyLength: body.length,
+  };
+}
+
+/** Append to a ring buffer, dropping the oldest beyond `cap`. */
+function pushCapped<T>(buf: T[], item: T, cap: number): void {
+  buf.push(item);
+  if (buf.length > cap) buf.splice(0, buf.length - cap);
+}
+
 /** Stateful aggregator returned by {@link createStatsAccumulator}. */
 export interface StatsAccumulator {
   /** Fold a batch of raw lines into the running totals. */
@@ -396,6 +518,12 @@ export function createStatsAccumulator(sessionId: string): StatsAccumulator {
   let errorCount = 0;
   let resolvedSessionId = sessionId;
 
+  // Detail-insight ring buffers (capped in stats() consumers via pushCapped).
+  let thinkingCount = 0;
+  const activity: ActivityEvent[] = [];
+  const sentMessages: SentMessage[] = [];
+  const turns: TurnDuration[] = [];
+
   // currentActivity is derived from the most-recent assistant message only.
   let latestTs = -Infinity;
   let currentActivity = 'thinking';
@@ -406,6 +534,12 @@ export function createStatsAccumulator(sessionId: string): StatsAccumulator {
 
       if (type === 'system') {
         if (systemLineIsError(line)) errorCount++;
+        // Real per-turn latency. durationMs is null on stop_hook_summary lines, so
+        // we filter to subtype 'turn_duration' with a numeric durationMs.
+        if (line.subtype === 'turn_duration' && typeof line.durationMs === 'number') {
+          const tts = line.timestamp ? Date.parse(line.timestamp) : NaN;
+          pushCapped(turns, { ts: Number.isNaN(tts) ? 0 : tts, durationMs: line.durationMs }, TURNS_CAP);
+        }
         continue;
       }
 
@@ -432,17 +566,38 @@ export function createStatsAccumulator(sessionId: string): StatsAccumulator {
       const m = normalizeModel(line.message?.model);
       if (m) model = m;
 
+      const ts = line.timestamp ? Date.parse(line.timestamp) : NaN;
+      const evTs = Number.isNaN(ts) ? lastActiveAt : ts;
+
       const content = line.message?.content;
       if (Array.isArray(content)) {
+        // Walk blocks in array order (NEVER re-sorted) to build the activity feed.
         for (const b of content) {
-          if (b && typeof b === 'object' && (b as { type?: string }).type === 'tool_use') {
+          if (!b || typeof b !== 'object') continue;
+          const bt = (b as { type?: string }).type;
+          if (bt === 'tool_use') {
             const n = (b as { name?: unknown }).name;
-            if (typeof n === 'string') toolsUsed[n] = (toolsUsed[n] ?? 0) + 1;
+            if (typeof n === 'string') {
+              toolsUsed[n] = (toolsUsed[n] ?? 0) + 1;
+              const input = (b as { input?: unknown }).input;
+              pushCapped(activity, { ts: evTs, kind: kindForTool(n), label: summarize(n, input) }, ACTIVITY_CAP);
+              if (n === 'SendMessage') {
+                pushCapped(sentMessages, toSentMessage(evTs, input), SENT_MESSAGES_CAP);
+              }
+            }
+          } else if (bt === 'text') {
+            const txt = (b as { text?: unknown }).text;
+            if (typeof txt === 'string' && txt.trim()) {
+              pushCapped(activity, { ts: evTs, kind: 'say', label: clip(txt, 100) }, ACTIVITY_CAP);
+            }
+          } else if (bt === 'thinking') {
+            // Thinking text is empty in practice (signature only) — record the marker + count.
+            thinkingCount++;
+            pushCapped(activity, { ts: evTs, kind: 'think', label: '' }, ACTIVITY_CAP);
           }
         }
       }
 
-      const ts = line.timestamp ? Date.parse(line.timestamp) : NaN;
       if (!Number.isNaN(ts)) {
         if (ts > lastActiveAt) lastActiveAt = ts;
         if (ts >= latestTs) {
@@ -465,6 +620,10 @@ export function createStatsAccumulator(sessionId: string): StatsAccumulator {
       currentActivity,
       errorCount,
       toolsUsed: { ...toolsUsed },
+      thinkingCount,
+      activity: activity.slice(),
+      sentMessages: sentMessages.slice(),
+      turns: turns.slice(),
     };
   }
 

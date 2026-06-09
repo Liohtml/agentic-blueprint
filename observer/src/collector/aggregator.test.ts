@@ -64,6 +64,10 @@ function stats(over: Partial<AgentTranscriptStats>): AgentTranscriptStats {
     currentActivity: 'thinking',
     errorCount: 0,
     toolsUsed: {},
+    thinkingCount: 0,
+    activity: [],
+    sentMessages: [],
+    turns: [],
     ...over,
   };
 }
@@ -134,6 +138,35 @@ describe('assembleSnapshot', () => {
 
   it('stamps generatedAt with the injected nowMs', () => {
     expect(snap.generatedAt).toBe(NOW);
+  });
+});
+
+describe('assembleSnapshot — durable edges from sent-log (F2 fix)', () => {
+  it('derives edges from agents\' sentMessages, ignoring the volatile inbox', () => {
+    const map = new Map<string, AgentTranscriptStats>([
+      ['team-lead', stats({
+        sessionId: 'sess-lead',
+        lastActiveAt: NOW - 1_000,
+        sentMessages: [
+          { ts: NOW - 9_000, to: 'ux', type: 'message', summary: 'go', bodyLength: 2 },
+          { ts: NOW - 8_000, to: 'ux', type: 'message', summary: 'again', bodyLength: 5 },
+          { ts: NOW - 7_000, to: 'team-lead', type: 'shutdown_response', summary: '', bodyLength: 0 },
+        ],
+      })],
+      ['architekt', stats({
+        sessionId: 'sess-a',
+        lastActiveAt: NOW - 10 * 60_000,
+        sentMessages: [{ ts: NOW - 6_000, to: 'team-lead', type: 'message', summary: 'hi', bodyLength: 2 }],
+      })],
+    ]);
+    const lead = resolveLeadName(TEAM, new Map([['sess-lead', 'team-lead']]));
+    // Pass empty inbox edges — the durable send-log must take over.
+    const snap = assembleSnapshot(TEAM, map, lead, [], [], [], NOW);
+    // team-lead→ux counted twice; control shutdown_response excluded; architekt→team-lead once.
+    expect(snap.edges).toEqual([
+      { from: 'team-lead', to: 'ux', count: 2 },
+      { from: 'architekt', to: 'team-lead', count: 1 },
+    ]);
   });
 });
 
