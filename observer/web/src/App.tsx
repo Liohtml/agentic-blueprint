@@ -140,14 +140,16 @@ export default function App() {
     return () => ro.disconnect()
   }, [])
 
-  // Fetch team list once on mount; fall back to mock when server isn't up
+  // Fetch team list once on mount; fall back to mock when server isn't up.
+  // T8 /api/teams returns { name, description, createdAt }[] — extract names.
   useEffect(() => {
     fetch('/api/teams')
       .then(r => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-      .then((data: string[]) => {
-        if (data.length === 0) throw new Error('empty')
-        setTeams(data)
-        setSelectedTeam(prev => prev || data[0]!)
+      .then((data: Array<{ name: string; description: string; createdAt: number }>) => {
+        const names = data.map(t => t.name)
+        if (names.length === 0) throw new Error('empty')
+        setTeams(names)
+        setSelectedTeam(prev => prev || names[0]!)
       })
       .catch(() => {
         setTeams(mockTeams)
