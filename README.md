@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.3-blue" alt="Version 1.3">
+  <img src="https://img.shields.io/badge/version-1.4-blue" alt="Version 1.4">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License MIT">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs Welcome">
 </p>

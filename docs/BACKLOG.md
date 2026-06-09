@@ -21,24 +21,23 @@
   spec-driven-development four-phase loop (GitHub Spec Kit, Kiro, OpenSpec converge on it).
 - [ ] **Observer: effort/task-budget display** — verify transcript data shapes per the
   DATA-NOTES process first, then extend parser/UI (from the Fable 5 evaluation, wave 3).
-- [ ] **Check CLAUDE.md.template / AGENTS.md.template against v1.3** — mission mode,
-  4-tier model strategy and the new context rules must be reflected in generated files.
 - [ ] **End-to-end worked example** — a small real project showing a full 6-phase run
   (not just the Observer as a reference).
 - [ ] **German translation** — once English content stabilizes, offer DE as a translation
   (maintainer decision 2026-06-09: English is the primary language).
 
-## In progress (cycle 1 — 2026-06-09)
+## In progress
 
-- [x] Research agent: agentic-coding innovations, onboarding patterns, contributor strategies
-- [x] Devil's advocate: critique from non-technical / senior engineer / contributor perspectives
-- [ ] Implementation wave (3 agents, strict file ownership):
-  - README & onboarding (README.md, observer/README.md, docs/GETTING-STARTED.md, docs/glossary.md)
-  - Contributor funnel (CONTRIBUTING.md, .github/, docs/community/good-first-issues.md)
-  - Blueprint translation to English + dead-link fixes + canonical pricing source (AGENTIC-BLUEPRINT.md, blueprint/**)
+(nothing — next cycle starts on the next heartbeat)
 
 ## Done
 
+- [x] **2026-06-09 (cycle 1, v1.4):** English-first release. Research agent (15 sourced
+  ideas) + devil's advocate (10 findings, 2 blockers) + 3 implementation agents:
+  "first 10 minutes" quickstart, GETTING-STARTED (non-technical + developer tracks),
+  glossary, contributor funnel (.github/, CONTRIBUTING, 5 good-first-issue drafts),
+  full DE→EN translation of the blueprint, dead-link fixes, canonical price source,
+  observer/README drift fix, template alignment. All DA blockers resolved.
 - [x] **2026-06-09 (cycle 0):** Fable 5 evaluation + roadmap waves 1-3 — 4-tier model
   strategy, mission mode, task budgets, cloud execution profile, observer pricing fix,
   modernized context rules. See `docs/2026-06-09-fable-5-evaluation.md` and PR #7.

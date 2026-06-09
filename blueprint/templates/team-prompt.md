@@ -1,66 +1,68 @@
-# Team-Lead Prompt Template — Agent Teams
+# Team Lead Prompt Template — Agent Teams
 
-> Kopiere diesen Prompt in Claude Code, befülle alle `<PLATZHALTER>` und starte dein Team.
-> Generalisiert aus dem Bau des **[Agent Observer](../../observer/README.md)**.
-> Setup & Runbook: **[blueprint/agents/agent-teams.md](../agents/agent-teams.md)**.
+> Copy this prompt into Claude Code, fill in all `<PLACEHOLDERS>`, and start your team.
+> Generalized from building the **[Agent Observer](https://github.com/Liohtml/agentic-blueprint/blob/master/observer/README.md)**.
+> Setup & runbook: **[blueprint/agents/agent-teams.md](../agents/agent-teams.md)**.
 
 ---
 
-Du bist Team-Lead für das folgende Vorhaben. Erstelle das Team, lege den Task-Graphen an
-und koordiniere die Teammates bis zur Fertigstellung.
+You are the team Lead for the following undertaking. Create the team, set up the task graph,
+and coordinate the Teammates through to completion.
 
 ## Mission
 
-**Ziel:** `<KURZE BESCHREIBUNG — z.B. "Baue einen Live-Dashboard für Agent-Teams">`
+**Goal:** `<SHORT DESCRIPTION — e.g. "Build a live dashboard for Agent Teams">`
 
-**Repo:** `<PFAD-ZUM-REPO>` · **Branch:** `<FEATURE-BRANCH>`
+**Repo:** `<PATH-TO-REPO>` · **Branch:** `<FEATURE-BRANCH>`
 
-**Tech-Constraints:**
-- `<TECH-STACK — z.B. "Node 20 + TypeScript, kein Framework außer Vite für Web-UI">`
-- `<WEITERE CONSTRAINTS — z.B. "kein Express; nur Node-stdlib http">`
+**Tech constraints:**
+- `<TECH STACK — e.g. "Node 20 + TypeScript, no framework except Vite for the web UI">`
+- `<FURTHER CONSTRAINTS — e.g. "no Express; only Node stdlib http">`
 
 **Definition of Done:**
-- [ ] `<ABNAHMEKRITERIUM 1 — z.B. "npm test && npm run typecheck laufen clean">`
-- [ ] `<ABNAHMEKRITERIUM 2 — z.B. "Dashboard zeigt Live-Daten eines echten Teams">`
+- [ ] `<ACCEPTANCE CRITERION 1 — e.g. "npm test && npm run typecheck run clean">`
+- [ ] `<ACCEPTANCE CRITERION 2 — e.g. "Dashboard shows live data of a real team">`
 
 ---
 
-## Pflicht-Regeln (nicht verhandelbar)
+## Mandatory Rules (non-negotiable)
 
-### 1 · Shared Contract zuerst
+### 1 · Shared Contract first
 
-Erstelle einen **Blocker-Task T1** (z.B. `types.ts`, API-Interface, Daten-Contract).
+Create a **blocker task T1** (e.g. `types.ts`, API interface, data contract).
 
-- T1 **blockiert alle anderen Tasks** (`addBlocks: ["T2", "T3", …]`).
-- Spawne nur den T1-Bearbeiter. Erst wenn T1 `completed` ist, werden die übrigen Tasks
-  freigegeben und die restlichen Teammates gespawnt.
-- Nach Freigabe ist der Contract **READ-ONLY** — Änderungen erfordern: STOPP aller Agents,
-  Mensch entscheidet, Neustart der betroffenen Tasks.
+- T1 **blocks all other tasks** (`addBlocks: ["T2", "T3", …]`).
+- Spawn only the T1 worker. Only when T1 is `completed` are the remaining tasks
+  released and the remaining Teammates spawned.
+- After release, the contract is **READ-ONLY** — changes require: STOP all agents,
+  human decides, restart of the affected tasks.
 
-### 2 · Datei-Eigentum (kein Overlap)
+### 2 · File Ownership (no overlap)
 
-Jeder Teammate besitzt exklusiv seine Dateien.
-**Kein Teammate berührt Dateien eines anderen Teammates.**
+Every Teammate exclusively owns their files.
+**No Teammate touches another Teammate's files.**
 
-Definiere die Eigentümer-Matrix im Plan, bevor die ersten Agents gespawnt werden:
+Define the ownership matrix in the plan before the first agents are spawned:
 
-| Teammate | Eigene Dateien / Verzeichnisse |
+| Teammate | Own files / directories |
 |---|---|
-| `<AGENT-1>` | `<PFADE — z.B. src/server/, src/parsers/>` |
-| `<AGENT-2>` | `<PFADE — z.B. web/src/, web/index.html>` |
-| `<AGENT-3>` | `<PFADE — z.B. src/metrics/, src/watcher/>` |
+| `<AGENT-1>` | `<PATHS — e.g. src/server/, src/parsers/>` |
+| `<AGENT-2>` | `<PATHS — e.g. web/src/, web/index.html>` |
+| `<AGENT-3>` | `<PATHS — e.g. src/metrics/, src/watcher/>` |
 
-Wenn zwei Tasks dieselbe Datei brauchen → **sequenziell**, nicht parallel.
+If two tasks need the same file → **sequential**, not parallel.
 Details: [coordination.md](../agents/coordination.md).
 
-### 3 · Modell-Tiering (Kostenkontrolle)
+### 3 · Model Tiering (cost control)
 
-| Modell | Wann einsetzen |
+For current prices see [decision-trees.md](../meta/decision-trees.md).
+
+| Model | When to use |
 |---|---|
-| **Fable 5** | Lead/Koordinator, Mission-Chunks, architektur-kritische Tasks (2× Opus-Preis — gezielt einsetzen) |
-| **Opus** | Harte Logik, Parser, Algorithmen, Aggregation mit Korrektheits-Risiko |
-| **Sonnet** | Scaffold, UI, CRUD, Tests, Docs, alles Übrige |
-| **Haiku** | Explore-/Recherche-Subagents, mechanische Massen-Edits |
+| **Fable 5** | Lead/coordinator, Mission Chunks, architecture-critical tasks (2× the Opus price — use deliberately) |
+| **Opus** | Hard logic, parsers, algorithms, aggregation with correctness risk |
+| **Sonnet** | Scaffold, UI, CRUD, tests, docs, everything else |
+| **Haiku** | Explore/research subagents, mechanical bulk edits |
 
 ```
 Agent(team_name: "<TEAM>", name: "<LEAD-AGENT>", model: "fable",  …)
@@ -69,89 +71,89 @@ Agent(team_name: "<TEAM>", name: "<REST-AGENT>", model: "sonnet", …)
 Agent(team_name: "<TEAM>", name: "<SCOUT-AGENT>", model: "haiku", …)
 ```
 
-Spawne **bedarfsgesteuert**: T1 zuerst allein, erst nach T1-Grün den Rest.
-10 idle Panes warten teuer auf einen Contract.
+Spawn **on demand**: T1 first on its own, only after T1 is green the rest.
+10 idle panes waiting for a contract is expensive.
 
-### 4 · Task-Graph mit Abhängigkeiten
+### 4 · Task Graph with Dependencies
 
-Lege **alle Tasks mit `addBlocks` / `addBlockedBy`** an, bevor du die ersten Teammates spawnt.
-Teammates ziehen nur freigeschaltete, unblockierte Tasks.
+Set up **all tasks with `addBlocks` / `addBlockedBy`** before you spawn the first Teammates.
+Teammates only pull released, unblocked tasks.
 
-Beispiel-Graph (passe ihn an dein Vorhaben an):
+Example graph (adapt it to your undertaking):
 
 ```
-T1 [shared-contract]  →  blockiert T2, T3, T4, T5
-T3 [server]           →  blockiert T6
-T4 [parser]           →  blockiert T7
-T6 + T7               →  blockiert T8 [integration]
+T1 [shared-contract]  →  blocks T2, T3, T4, T5
+T3 [server]           →  blocks T6
+T4 [parser]           →  blocks T7
+T6 + T7               →  block T8 [integration]
 …
 ```
 
-### 5 · Build-Test-Loop (max 5 Iterationen)
+### 5 · Build-Test Loop (max 5 iterations)
 
-Jeder Teammate läuft **maximal 5 Build-Test-Iterationen** pro Task.
-Bei Ablauf: **STOPP** — Blocker dokumentieren, an Lead eskalieren.
-Kein endloses Herumspinnen.
+Each Teammate runs **at most 5 build-test iterations** per task.
+On expiry: **STOP** — document the blocker, escalate to the Lead.
+No endless fiddling.
 
-### 6 · Kein Self-Review
+### 6 · No Self-Review
 
-Der Autor eines Chunks reviewed **nicht seinen eigenen Code**.
-Weise Reviews einem anderen Teammate zu oder behalte sie als Lead.
+The author of a Chunk does **not review their own code**.
+Assign reviews to another Teammate or keep them as the Lead.
 
-### 7 · Kein Merge ohne menschliches Go
+### 7 · No Merge Without Human Go
 
-Kein Teammate merged, pusht forcefully oder schließt PRs eigenständig.
-Der Mensch gibt das finale Go nach eigenem Review.
+No Teammate merges, force-pushes, or closes PRs on their own.
+The human gives the final go after their own review.
 
 ---
 
-## Team-Zusammensetzung
+## Team Composition
 
 ```bash
-# Erstelle das Team (Lead bist du)
+# Create the team (you are the Lead)
 TeamCreate "<TEAM-NAME>"
 ```
 
-| # | Teammate | Aufgabe | Modell | Eigene Dateien |
+| # | Teammate | Task | Model | Own files |
 |---|---|---|---|---|
-| T1 | `<CONTRACT-AGENT>` | Typen / Shared Interface | sonnet | `<z.B. src/types.ts>` |
-| T2 | `<AGENT-A>` | `<AUFGABE>` | sonnet | `<PFADE>` |
-| T3 | `<AGENT-B>` | `<AUFGABE>` | opus | `<PFADE>` |
-| T4 | `<AGENT-C>` | `<AUFGABE>` | sonnet | `<PFADE>` |
+| T1 | `<CONTRACT-AGENT>` | Types / shared interface | sonnet | `<e.g. src/types.ts>` |
+| T2 | `<AGENT-A>` | `<TASK>` | sonnet | `<PATHS>` |
+| T3 | `<AGENT-B>` | `<TASK>` | opus | `<PATHS>` |
+| T4 | `<AGENT-C>` | `<TASK>` | sonnet | `<PATHS>` |
 
-_Spawne den T1-Bearbeiter zuerst. Nach T1-Grün: die übrigen in einer Welle spawnen._
+_Spawn the T1 worker first. After T1 is green: spawn the rest in one wave._
 
 ---
 
-## Abschluss & Verifikation
+## Completion & Verification
 
-Wenn alle Tasks `completed` sind:
+When all tasks are `completed`:
 
-1. **Smoke-Test:** `<BEFEHL — z.B. "npm test && npm run typecheck">`
-2. **Integrations-Check:** Starte das Ergebnis manuell: `<BEFEHL — z.B. "npm run observe">`
-3. **Visuell verifizieren:** `<WAS PRÜFEN — z.B. "Dashboard zeigt Live-Token-Daten">`
-4. **Cleanup:** Sende `{ type: "shutdown_request" }` an jeden Teammate; sie antworten mit
-   `shutdown_response` und beenden ihren Prozess/ihr Pane.
-5. **Human Go einholen:** Kein Merge ohne Bestätigung durch den Menschen.
-6. **Team aufräumen:** `TeamDelete "<TEAM-NAME>"` + `tmux kill-session -t <SESSION>`.
+1. **Smoke test:** `<COMMAND — e.g. "npm test && npm run typecheck">`
+2. **Integration check:** Start the result manually: `<COMMAND — e.g. "npm run observe">`
+3. **Verify visually:** `<WHAT TO CHECK — e.g. "Dashboard shows live token data">`
+4. **Cleanup:** Send `{ type: "shutdown_request" }` to every Teammate; they reply with
+   `shutdown_response` and end their process/pane.
+5. **Obtain Human Go:** No merge without confirmation by the human.
+6. **Clean up the team:** `TeamDelete "<TEAM-NAME>"` + `tmux kill-session -t <SESSION>`.
 
 ---
 
 ## Worked Example — Agent Observer
 
-Dieses Template ist eine Abstraktion davon, wie der **[Agent Observer](../../observer/README.md)**
-in diesem Repo gebaut wurde:
+This template is an abstraction of how the **[Agent Observer](https://github.com/Liohtml/agentic-blueprint/blob/master/observer/README.md)**
+in this repo was built:
 
-- **10 Teammates** (T1–T10) auf einem geteilten Branch (`feature/agent-observer`).
-- **T1** (`types.ts`) als Blocker-Contract — alle anderen warteten auf T1-Grün.
-- **T5** (Transcript-Parser) und **T7** (Token-Aggregator) auf **Opus** (harte Logik),
-  alle übrigen acht auf **Sonnet**.
-- Striktes Datei-Eigentum: kein Teammate hat die Dateien eines anderen angefasst.
-- Kein Merge ohne menschliches Go nach finalem Review.
+- **10 Teammates** (T1–T10) on a shared branch (`feature/agent-observer`).
+- **T1** (`types.ts`) as the blocker contract — all others waited for T1 to be green.
+- **T5** (transcript parser) and **T7** (token aggregator) on **Opus** (hard logic),
+  all remaining eight on **Sonnet**.
+- Strict File Ownership: no Teammate touched another's files.
+- No merge without Human Go after the final review.
 
-Ein laufendes Team live beobachten:
+Observe a running team live:
 
 ```bash
 ./scripts/observe.sh --team <TEAM-NAME>
-# öffnet das Dashboard auf http://localhost:4317
+# opens the dashboard at http://localhost:4317
 ```

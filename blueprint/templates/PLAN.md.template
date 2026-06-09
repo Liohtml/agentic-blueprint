@@ -1,50 +1,50 @@
-# Feature-Plan: {{FEATURE_NAME}}
+# Feature Plan: {{FEATURE_NAME}}
 
-**Erstellt:** {{DATUM}}
+**Created:** {{DATE}}
 **Status:** {{draft | approved | in_progress | completed}}
-**Anforderung:** {{LINK_ZU_PHASE_0_OUTPUT}}
+**Requirement:** {{LINK_TO_PHASE_0_OUTPUT}}
 
 ---
 
 ## Scope
-{{SCOPE_BESCHREIBUNG}}
+{{SCOPE_DESCRIPTION}}
 
-## Erfolgskriterien
-{{#KRITERIEN}}
-- {{KRITERIUM}}
-{{/KRITERIEN}}
+## Success Criteria
+{{#CRITERIA}}
+- {{CRITERION}}
+{{/CRITERIA}}
 
 ## Shared Contracts
-> Types und Interfaces die vor dem Building definiert werden und waehrend Phase 2 read-only sind.
+> Types and interfaces that are defined before building and are read-only during Phase 2.
 
-{{CONTRACTS_LISTE}}
+{{CONTRACTS_LIST}}
 
 ---
 
 ## Chunks
 
-### Chunk 1: {{TITEL}}
-**Dateien:** {{DATEILISTE}}
+### Chunk 1: {{TITLE}}
+**Files:** {{FILE_LIST}}
 **Agent:** {{AGENT}}
-**Abhaengig von:** {{ABHAENGIGKEIT}}
-**Parallelisierbar:** {{JA_NEIN}}
-**Done-Kriterium:** {{KRITERIUM}}
+**Depends on:** {{DEPENDENCY}}
+**Parallelizable:** {{YES_NO}}
+**Done criterion:** {{CRITERION}}
 
-### Chunk 2: {{TITEL}}
-**Dateien:** {{DATEILISTE}}
+### Chunk 2: {{TITLE}}
+**Files:** {{FILE_LIST}}
 **Agent:** {{AGENT}}
-**Abhaengig von:** {{ABHAENGIGKEIT}}
-**Parallelisierbar:** {{JA_NEIN}}
-**Done-Kriterium:** {{KRITERIUM}}
+**Depends on:** {{DEPENDENCY}}
+**Parallelizable:** {{YES_NO}}
+**Done criterion:** {{CRITERION}}
 
-<!-- Weitere Chunks nach Bedarf. Max 8. -->
+<!-- More Chunks as needed. Max 8. -->
 
 ---
 
-## Abhaengigkeits-Graph
+## Dependency Graph
 
 ```
 Chunk 1 ──► Chunk 3
-Chunk 2 ──► Chunk 3  (parallel mit Chunk 1)
+Chunk 2 ──► Chunk 3  (parallel with Chunk 1)
 Chunk 3 ──► Chunk 4
 ```

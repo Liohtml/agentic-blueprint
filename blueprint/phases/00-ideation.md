@@ -1,44 +1,44 @@
 # Phase 0: Ideation & Scoping
 
-## Zweck
-Problem verstehen, Scope definieren, Erfolgskriterien festlegen.
+## Purpose
+Understand the problem, define the scope, set success criteria.
 
-## Wer
-- **Mensch:** Treibt die Ideation, trifft alle Entscheidungen
-- **Agent:** Sparring-Partner, prueft Machbarkeit, stellt Rueckfragen
+## Who
+- **Human:** Drives the ideation, makes all decisions
+- **Agent:** Sparring partner, checks feasibility, asks clarifying questions
 
-## Eingang
-- Idee, Feature-Request, Bug-Report oder Geschaeftsanforderung
+## Input
+- Idea, feature request, bug report, or business requirement
 
-## Prozess
+## Process
 
-1. **Problem formulieren:** Was genau soll geloest werden? (Nicht die Loesung, das Problem.)
-2. **Scope begrenzen:** Was gehoert NICHT dazu? Explizit auflisten.
-3. **Erfolgskriterien definieren:** Woran erkennt man, dass das Feature fertig ist?
-4. **Machbarkeits-Check:** Agent pruefen lassen ob der Scope realistisch ist.
+1. **Formulate the problem:** What exactly should be solved? (Not the solution, the problem.)
+2. **Limit the scope:** What is NOT part of it? List explicitly.
+3. **Define success criteria:** How do you know the feature is done?
+4. **Feasibility check:** Have the agent verify the scope is realistic.
 
-## Agent-Prompt fuer Sparring
+## Agent Prompt for Sparring
 
 ```
-Ich habe folgende Idee: <IDEE>
+I have the following idea: <IDEA>
 
-Hilf mir diese zu schaerfen:
-1. Was ist das Kernproblem das geloest wird?
-2. Was sollte explizit NICHT im Scope sein?
-3. Welche Erfolgskriterien wuerden zeigen dass es funktioniert?
-4. Siehst du technische Risiken oder Unklarheiten?
+Help me sharpen it:
+1. What is the core problem being solved?
+2. What should explicitly NOT be in scope?
+3. Which success criteria would show that it works?
+4. Do you see technical risks or ambiguities?
 
-Sei kritisch. Hinterfrage Annahmen.
+Be critical. Question assumptions.
 ```
 
 ## Gate
-- [ ] Problem-Statement ist klar und spezifisch
-- [ ] Scope ist explizit begrenzt (was ist NICHT drin)
-- [ ] Mindestens 2 messbare Erfolgskriterien definiert
-- [ ] Mensch ist zufrieden mit der Schaerfe der Anforderung
+- [ ] Problem statement is clear and specific
+- [ ] Scope is explicitly limited (what is NOT included)
+- [ ] At least 2 measurable success criteria defined
+- [ ] Human is satisfied with the sharpness of the requirement
 
 ## Output
-Dokumentiertes Problem-Statement mit Scope und Erfolgskriterien. Kann formlos sein oder in einem Issue/Ticket.
+Documented problem statement with scope and success criteria. Can be informal or in an issue/ticket.
 
-## Weiter zu
+## Next
 [Phase 1: Planning](01-planning.md)

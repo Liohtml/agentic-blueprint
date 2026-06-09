@@ -1,5 +1,40 @@
 # Blueprint Changelog
 
+## v1.4 — 2026-06-09
+
+English-first release: onboarding, contributor funnel, full translation
+(cycle 1 of the continuous improvement loop — research agent + devil's
+advocate + three implementation agents with strict file ownership).
+
+### New
+- **"Your First 10 Minutes"** copy-paste quickstart (no terminal required) and a
+  beginner/expert path table in the README.
+- **docs/GETTING-STARTED.md**: guided first win in under 15 minutes, with a
+  non-technical (browser-only) and a developer track plus troubleshooting.
+- **docs/glossary.md** (18 core terms) and **docs/BACKLOG.md** as the public roadmap.
+- **Contributor funnel**: CONTRIBUTING.md rewritten around minimal friction with
+  explicit maintainer promises, `.github/` issue and PR templates, and five
+  ready-to-post good-first-issue drafts (`docs/community/good-first-issues.md`).
+
+### Changed
+- **Entire blueprint + root doc translated German → English** (maintainer decision;
+  a German translation is welcome as a future contribution).
+- **Honest positioning**: "Built for Claude Code" — removed "Cursor, Codex, or
+  similar"; core principles noted as transferable.
+- README requirements split per path — resolves the "no dependencies, that's it"
+  contradiction with the tmux/Node/CLI requirements of the Agent Teams path.
+- blueprint→observer links are now absolute GitHub URLs so they survive the
+  copy-into-your-project use case.
+- `decision-trees.md` is the single canonical source for model price anchors.
+- `CLAUDE.md.template` context rules aligned with v1.3 (no hard 30/70 thresholds,
+  direct source access as the dependency default).
+
+### Fixed
+- `observer/README.md` architecture section now matches the real file tree
+  (the old text described directories that never existed).
+- Removed the placeholder YouTube link in the README credits.
+- README version badge synced with the blueprint version.
+
 ## v1.3 — 2026-06-09
 
 Mission Mode + wave 2 of the Fable 5 roadmap.

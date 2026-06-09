@@ -1,32 +1,32 @@
-# Agent-Konfiguration: {{AGENT_NAME}}
+# Agent Configuration: {{AGENT_NAME}}
 
-## Rolle
-{{ROLLE}} — siehe [{{AGENT_DATEI}}](blueprint/agents/{{AGENT_DATEI}})
+## Role
+{{ROLE}} — see [{{AGENT_FILE}}](blueprint/agents/{{AGENT_FILE}})
 
-## Zugewiesene Verzeichnisse
-{{#VERZEICHNISSE}}
-- `{{PFAD}}/`
-{{/VERZEICHNISSE}}
+## Assigned Directories
+{{#DIRECTORIES}}
+- `{{PATH}}/`
+{{/DIRECTORIES}}
 
-## Shared Verzeichnisse (read-only in Phase 2)
+## Shared Directories (read-only in Phase 2)
 {{#SHARED}}
-- `{{PFAD}}/`
+- `{{PATH}}/`
 {{/SHARED}}
 
-## Aktive Phase
-> Wird pro Phase aktualisiert.
+## Active Phase
+> Updated per phase.
 
-Phase: **{{PHASE_NR}}**
-Lies: [{{PHASE_DATEI}}](blueprint/phases/{{PHASE_DATEI}})
+Phase: **{{PHASE_NO}}**
+Read: [{{PHASE_FILE}}](blueprint/phases/{{PHASE_FILE}})
 
-## Arbeitsregeln
-1. Arbeite NUR in deinen zugewiesenen Verzeichnissen
-2. Shared Verzeichnisse sind in Phase 2 read-only
-3. Ein Chunk pro Thread, frisches Kontextfenster
-4. Halte dich an die Loop-Limits
-5. Eskaliere statt endlos zu loopen
-6. Reviewe dich nie selbst
-7. Merge nie ohne menschliches Go
+## Working Rules
+1. Work ONLY in your assigned directories
+2. Shared directories are read-only in Phase 2
+3. One Chunk per thread, fresh context window
+4. Stick to the loop limits
+5. Escalate instead of looping endlessly
+6. Never review yourself
+7. Never merge without Human Go
 
-## Branch-Format
-`feature/{{CHUNK_NR}}-{{AGENT_KUERZEL}}-{{BESCHREIBUNG}}`
+## Branch Format
+`feature/{{CHUNK_NO}}-{{AGENT_SHORTNAME}}-{{DESCRIPTION}}`

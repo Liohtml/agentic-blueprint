@@ -1,115 +1,115 @@
 # Phase 2: Building
 
-## Zweck
-Den Plan implementieren — als einzelne Chunks (Chunk-Mode, Default) oder als
-zusammenhaengende Mission auf Fable 5 (Mission-Mode). Pro Chunk/Mission ein frischer Thread.
+## Purpose
+Implement the plan — as individual Chunks (Chunk Mode, default) or as a
+coherent Mission on Fable 5 (Mission Mode). One fresh thread per Chunk/Mission.
 
-## Wer
-- **Agent:** Arbeitet autonom
-- **Mensch:** Greift nur ein bei Eskalation
+## Who
+- **Agent:** Works autonomously
+- **Human:** Only intervenes on Escalation
 
-## Eingang
-- Ein Chunk aus dem Plan mit Done-Kriterium
-- Gezielter Kontext (spezifische Dateien, nicht die ganze Codebase)
+## Input
+- One Chunk from the plan with a done criterion
+- Targeted context (specific files, not the entire codebase)
 
-## Prozess
+## Process
 
-1. **Neuen Thread starten** — sauberes Kontextfenster
-2. **Kontext laden:** Nur die Dateien die der Chunk benoetigt + Shared Contracts
-3. **Implementieren:** Code schreiben gemaess Done-Kriterium
-4. **Tests schreiben:** Mindestens ein Test pro neuer Funktion
-5. **Build-Test-Loop:** Loopen bis alle Tests gruen (max 5 Iterationen)
-6. **Gate pruefen:** Alle Checks erfuellt?
+1. **Start a new thread** — clean context window
+2. **Load context:** Only the files the Chunk needs + Shared Contracts
+3. **Implement:** Write code according to the done criterion
+4. **Write tests:** At least one test per new function
+5. **Build-Test Loop:** Loop until all tests are green (max 5 iterations)
+6. **Check the Gate:** All checks fulfilled?
 
-## Agent-Prompt
+## Agent Prompt
 
 ```
-Implementiere Chunk <NR> aus dem Plan: <PLAN-LINK>
+Implement Chunk <NO> from the plan: <PLAN_LINK>
 
-Referenziere: <GEZIELTER KONTEXT — spezifische Dateien/Ordner>
-Done-Kriterium: <KRITERIUM>
+Reference: <TARGETED CONTEXT — specific files/folders>
+Done criterion: <CRITERION>
 
-Regeln:
-- Schreibe Tests fuer die Kernlogik
-- Installiere keine Packages die juenger als 14 Tage sind
-- Keine hartcodierten Secrets
-- Wenn du nach 5 Versuchen nicht weiterkommst: STOPP und melde den Blocker
+Rules:
+- Write tests for the core logic
+- Do not install packages younger than 14 days
+- No hardcoded secrets
+- If you are stuck after 5 attempts: STOP and report the blocker
 ```
 
-## Build-Test-Loop
+## Build-Test Loop
 
-Siehe: [build-test-loop.md](../loops/build-test-loop.md)
+See: [build-test-loop.md](../loops/build-test-loop.md)
 
-Max 5 Iterationen. Bei Abbruch: Blocker dokumentieren und an Mensch eskalieren.
+Max 5 iterations. On abort: document the blocker and escalate to the human.
 
-## Mission-Mode (Fable 5)
+## Mission Mode (Fable 5)
 
-Seit Fable 5 (06/2026) gibt es zwei Ausfuehrungs-Modi. Mission-Mode nutzt die
-Long-Horizon-Autonomie des Modells: statt 8 Mikro-Chunks ein gut spezifizierter
-Gesamtauftrag.
+Since Fable 5 (06/2026) there are two execution modes. Mission Mode uses the
+model's long-horizon autonomy: instead of 8 micro-Chunks, one well-specified
+overall assignment.
 
-| | Chunk-Mode (Default) | Mission-Mode |
+| | Chunk Mode (default) | Mission Mode |
 |---|---|---|
-| Modell | Sonnet / Opus | Fable 5 |
-| Einheit | 1 Chunk (3-5 Dateien) | 1 Mission (zusammenhaengender Feature-Teil, auch >5 Dateien) |
-| Spezifikation | Done-Kriterium pro Chunk | Vollstaendiger Plan als ein Prompt im ersten Turn |
+| Model | Sonnet / Opus | Fable 5 |
+| Unit | 1 Chunk (3-5 files) | 1 Mission (coherent feature part, also >5 files) |
+| Specification | Done criterion per Chunk | Complete plan as one prompt in the first turn |
 | Effort | Standard | `high` / `xhigh` |
-| Wann | Standard-Arbeit, parallele Teammates | Migrationen, zusammenhaengende Subsysteme, Refactors ueber viele Dateien |
+| When | Standard work, parallel Teammates | Migrations, coherent subsystems, refactors across many files |
 
-**Mission-Mode-Regeln:**
+**Mission Mode rules:**
 
-1. **Volle Spec up front.** Fables Long-Horizon-Qualitaet haengt direkt an der
-   Spezifikationsqualitaet — der Phase-1-Plan wird als *ein* Prompt ausgespielt,
-   nicht haeppchenweise nachgereicht. Unterspezifizierte Missionen sind teures Raten.
-2. **Definition of Done als Checkliste** — jedes Kriterium binaer pruefbar.
-3. **Gates bleiben.** Mission-Mode aendert die Ausfuehrungsgroesse, nicht die
-   Qualitaetsschranken: Cleanup (Phase 3) und Review (Phase 4) laufen unveraendert.
-4. **Optionales Token-Budget** pro Mission (siehe [build-test-loop.md](../loops/build-test-loop.md)).
-5. **Kosten-Check:** Fable kostet 2× Opus. Mission-Mode lohnt, wenn der
-   Koordinations-Overhead des Chunk-Modes (Thread-Wechsel, Kontext-Reloads,
-   Handoffs) den Preisaufschlag uebersteigt — bei Migrationen praktisch immer.
+1. **Full spec up front.** Fable's long-horizon quality depends directly on the
+   specification quality — the Phase 1 plan is delivered as *one* prompt,
+   not fed in piecemeal. Underspecified Missions are expensive guessing.
+2. **Definition of Done as a checklist** — every criterion binary-checkable.
+3. **Gates remain.** Mission Mode changes the execution size, not the
+   quality bars: Cleanup (Phase 3) and Review (Phase 4) run unchanged.
+4. **Optional token budget** per Mission (see [build-test-loop.md](../loops/build-test-loop.md)).
+5. **Cost check:** Fable costs 2× Opus. Mission Mode pays off when the
+   coordination overhead of Chunk Mode (thread switches, context reloads,
+   Handoffs) exceeds the price premium — for migrations practically always.
 
-**Agent-Prompt (Mission):**
+**Agent prompt (Mission):**
 
 ```
-Mission: <FEATURE/MIGRATION — vollstaendige Beschreibung>
+Mission: <FEATURE/MIGRATION — complete description>
 
-Spezifikation: <PLAN-LINK — kompletter Plan, nicht ein Einzel-Chunk>
+Specification: <PLAN_LINK — the complete plan, not a single Chunk>
 
 Definition of Done:
-- [ ] <KRITERIUM 1 — binaer pruefbar>
-- [ ] <KRITERIUM 2>
+- [ ] <CRITERION 1 — binary-checkable>
+- [ ] <CRITERION 2>
 
-Kontext: <Einstiegspunkte — der Agent exploriert selbst weiter>
+Context: <entry points — the agent explores further on its own>
 
-Regeln:
-- Arbeite die Mission vollstaendig ab, bevor du zurueckmeldest
-- Schreibe Tests fuer die Kernlogik; fuehre die Suite nach jedem Teilschritt aus
-- Installiere keine Packages die juenger als 14 Tage sind
-- Keine hartcodierten Secrets
-- Bei Blockern die die Spezifikation betreffen: STOPP und eskalieren — nicht raten
+Rules:
+- Work through the Mission completely before reporting back
+- Write tests for the core logic; run the suite after every substep
+- Do not install packages younger than 14 days
+- No hardcoded secrets
+- On blockers that concern the specification: STOP and escalate — do not guess
 ```
 
-Modus-Entscheidung: siehe [decision-trees.md](../meta/decision-trees.md).
+Mode decision: see [decision-trees.md](../meta/decision-trees.md).
 
-## Parallelisierung
+## Parallelization
 
-Mehrere Agents koennen verschiedene Chunks gleichzeitig bauen wenn:
-- Die Chunks als "parallelisierbar" markiert sind
-- Sie verschiedene Dateien beruehren
-- Shared Contracts sind read-only (in Phase 1 definiert)
-- Jeder Agent arbeitet auf eigenem Branch: `feature/<chunk-nr>-<agent>-<beschreibung>`
+Multiple agents can build different Chunks simultaneously when:
+- The Chunks are marked as "parallelizable"
+- They touch different files
+- Shared Contracts are read-only (defined in Phase 1)
+- Each agent works on its own branch: `feature/<chunk-no>-<agent>-<description>`
 
 ## Gate
-- [ ] Done-Kriterium des Chunks erfuellt
-- [ ] Alle neuen Funktionen haben mindestens einen Test
-- [ ] Alle Tests gruen
-- [ ] Keine hartcodierten Secrets/Credentials
-- [ ] Keine Packages juenger als 14 Tage installiert
-- [ ] Feature funktioniert lokal
+- [ ] Done criterion of the Chunk fulfilled
+- [ ] All new functions have at least one test
+- [ ] All tests green
+- [ ] No hardcoded secrets/credentials
+- [ ] No packages younger than 14 days installed
+- [ ] Feature works locally
 
 ## Output
-Funktionierender Code mit Tests auf Feature-Branch
+Working code with tests on a feature branch
 
-## Weiter zu
+## Next
 [Phase 3: Structure Cleanup](03-cleanup.md)
