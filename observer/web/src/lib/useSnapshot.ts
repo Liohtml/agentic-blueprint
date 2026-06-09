@@ -28,6 +28,9 @@ function deriveTimeline(
 ): Pick<TokenTimelineProps, 'seriesData' | 'timestamps'> {
   if (history.length === 0) return { seriesData: [], timestamps: [] }
 
+  // TeamSnapshot.generatedAt is Unix ms (per types.ts / DATA-NOTES.md).
+  // uPlot requires Unix seconds — divide by 1000 here.
+  // If T7 ever changes generatedAt to seconds, remove the division.
   const timestamps = history.map(s => s.generatedAt / 1_000)
   const agentCount = history[history.length - 1].agents.length
 
