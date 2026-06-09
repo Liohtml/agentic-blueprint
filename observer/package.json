@@ -8,10 +8,10 @@
   },
   "scripts": {
     "dev": "concurrently -k -n server,web -c cyan,magenta \"npm run dev:server\" \"npm run dev:web\"",
-    "dev:server": "tsx watch src/server/index.ts",
+    "dev:server": "tsx watch src/server.ts",
     "dev:web": "vite",
     "build": "vite build",
-    "observe": "npm run build && tsx src/server/index.ts",
+    "observe": "npm run build && tsx bin/observe.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
