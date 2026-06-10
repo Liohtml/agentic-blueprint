@@ -1,4 +1,4 @@
-# Agentic Engineering Blueprint v1.5
+# Agentic Engineering Blueprint v1.6
 
 > This document is the central working instruction for all agents in this project.
 > It is loaded automatically and defines principles, phases, and roles.
@@ -112,7 +112,7 @@ Bootstrapping guide: [how-to-adapt.md](blueprint/meta/how-to-adapt.md)
 
 ## Meta
 
-- **Version:** 1.5
+- **Version:** 1.6
 - **Changelog:** [changelog.md](blueprint/meta/changelog.md)
 - **Retro template:** [retro-template.md](blueprint/meta/retro-template.md)
 - **Decision trees:** [decision-trees.md](blueprint/meta/decision-trees.md)

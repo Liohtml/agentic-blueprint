@@ -38,6 +38,16 @@ started any time by re-running the orchestrator prompt.
 
 ## Done
 
+- [x] **2026-06-10 (v1.6, user-testing cycle):** Onboarding hardening after a real
+  non-technical tester failed at setup. Setup wizard prompt (agent does the whole
+  setup; existing vs. empty project), `scripts/start-team.sh` (one command replaces
+  four manual tmux steps, plain-language preflight errors), Docker sandbox guide +
+  template (`docs/docker-sandbox.md`, `sandbox/`), agent-teams runbook in
+  "Type this → You should see" format. DA review with the failed-tester lens:
+  3× approve-with-fixes, 13 fixes applied (incl. copied-blueprint script paths,
+  tmux flag for existing sessions, node:22 image, Claude Code install explainer).
+  Version decision logged: three user-facing features → v1.6.
+
 - [x] **2026-06-10 (cycle 4, v1.5):** Wrap-up — Antigravity removed repo-wide
   (file deleted, 8 live documents cleaned, verification grep empty; historical docs
   untouched), dogfooding retro on cycles 0-3 (docs/retros/), learnings persisted into

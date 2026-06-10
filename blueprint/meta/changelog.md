@@ -1,5 +1,43 @@
 # Blueprint Changelog
 
+## v1.6 — 2026-06-10
+
+Onboarding hardening — driven by real user testing (a non-technical tester
+failed at setup), implemented as wizard + one-command launcher + Docker
+sandbox, then devil's-advocate-reviewed with 13 fixes applied.
+
+### New
+- **Setup wizard prompt** (`blueprint/templates/setup-wizard-prompt.md`, also
+  inline in the README): one copy-paste message and the agent does the entire
+  setup itself — detects existing vs. empty project, fetches the blueprint
+  files (with a no-tools fallback), interviews for config.md one question at
+  a time with defaults, generates CLAUDE.md/AGENTS.md, ends with a ready
+  Phase 0 prompt. Safety rules: never overwrite without asking, merge —
+  never replace — existing agent files, no git commands in the project.
+- **`scripts/start-team.sh`**: one command replaces the four manual Agent
+  Teams steps — plain-language preflight checks (git/node≥20/claude/tmux≥3
+  with install hints), sets the experimental flag (including for existing
+  tmux sessions), starts claude in the caller's project folder, optional
+  `--observer <team>` pane that stays open on failure, `--check`, `--help`.
+- **Docker sandbox** (`docs/docker-sandbox.md` + `sandbox/` template):
+  run agents safely in a container — Dev Container path for beginners and
+  plain-docker path, with an honest "what the sandbox does NOT protect"
+  section, persistent-login volume hint, and a commented node:22 Dockerfile
+  + devcontainer.json.
+
+### Changed
+- README "Your First 10 Minutes" and Quick Start now lead with the wizard
+  (manual clone+cp kept as the alternative); a plain-language paragraph
+  explains what Claude Code is and how to open it in a folder.
+- `docs/GETTING-STARTED.md`: explicit "existing project vs. starting from
+  scratch" paths with what-you-should-see expectations; docker-sandbox
+  pointer.
+- `blueprint/agents/agent-teams.md`: runbook rewritten in "Type this →
+  You should see" format, three-row troubleshooting table (not-in-tmux,
+  flag-not-set, GPU-terminal rendering), and an explicit note that the
+  helper scripts live in the repo clone — with a curl one-liner for
+  copied-blueprint users.
+
 ## v1.5 — 2026-06-10
 
 Antigravity removed; dogfooding retro; continuous-loop wrap-up.

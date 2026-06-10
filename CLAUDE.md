@@ -31,6 +31,9 @@ English-first. All content, commits, and docs in English. (Maintainer decision
 - If an external limit (session cap, timeout) interrupts a cycle mid-review:
   commit work-in-progress with a transparent "unreviewed, DA pending" note and
   complete the review first thing in the next session.
+- The setup wizard prompt exists twice (README.md +
+  blueprint/templates/setup-wizard-prompt.md) — any change must update both;
+  verify with a diff.
 
 ## Linking Conventions
 - Links **between files inside `blueprint/`**: relative paths.
