@@ -15,7 +15,7 @@ Open `blueprint/config.md` and fill out all fields:
 
 1. **Project name and description** — what are you building?
 2. **Tech stack** — which languages, frameworks, databases?
-3. **Agents** — which agents do you use? Which Antigravity profile?
+3. **Agents** — which agents do you use? Solo Claude Code, an Agent Team, or a second Claude Code agent (separate session or teammate)?
 4. **Review tool** — `/code-review` skill + second agent (default), Greptile, or manual?
 5. **Directory assignments** — which agent works where?
 6. **Dependencies (fallback)** — which repos are not directly reachable via grep/read/web_fetch

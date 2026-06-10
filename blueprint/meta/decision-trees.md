@@ -26,19 +26,11 @@ Fable costs 2× Opus — the added value lies in long-horizon autonomy, not in e
 
 ## When to Use Which Agent?
 
-```
-Task received
-    |
-    v
-Is it a UI/design task?
-    |
-    ├── YES: Is Antigravity on Profile A (UI/Design)?
-    |       ├── YES → Antigravity
-    |       └── NO → Claude Code (or switch the Antigravity profile)
-    |
-    └── NO: Is it code/logic/backend/tests?
-            └── YES → Claude Code
-```
+Claude Code handles all task types. Solo work goes to a single Claude Code session;
+in an Agent Team the Lead assigns Chunks to teammates (e.g. UI/design to a Sonnet
+teammate — see [agent-teams.md](../agents/agent-teams.md)). Reviews always go to the
+`/code-review` skill plus a second Claude Code agent with fresh context — never to
+the author (see "Which Review Tool to Choose?" below).
 
 ## When to Start a New Thread?
 

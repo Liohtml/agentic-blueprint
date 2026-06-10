@@ -49,7 +49,7 @@ Also propose the execution mode (Chunk | Mission) with a one-sentence rationale.
 **Files:** <list of affected files>
 **Depends on:** <Chunk no. or "none">
 **Parallelizable:** yes/no
-**Agent:** <Claude Code | Antigravity>
+**Agent:** <Claude Code | teammate name>
 **Done criterion:** <What must be true for this Chunk to be done>
 ```
 

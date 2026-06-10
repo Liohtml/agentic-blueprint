@@ -1,5 +1,26 @@
 # Blueprint Changelog
 
+## v1.5 — 2026-06-10
+
+Antigravity removed; dogfooding retro; continuous-loop wrap-up.
+
+### Removed
+- **Antigravity agent role** (maintainer decision): `blueprint/agents/antigravity.md`
+  deleted; all live documents now use generic roles — teammates in an Agent Team,
+  or a second Claude Code agent in a separate session. UI/design work goes to a
+  Sonnet teammate, orchestration is the Lead role, reviews go through `/code-review`
+  plus a second agent. Historical documents (older changelog entries, the Fable 5
+  evaluation, planning artifacts) are unchanged on purpose.
+
+### New
+- **docs/retros/2026-06-10-continuous-loop-retro.md** — the repo's own retro template
+  applied to the continuous-improvement loop (cycles 0-3), including the honest
+  failure points (session-limit interruption, a protocol-violating subagent commit,
+  the twice-dead heartbeat, the worked example initially skipping its own new gates).
+- **CLAUDE.md** (repo root) — the retro's learnings persisted as agent rules for
+  working on this repository (dogfooding, DA-review requirement, file ownership,
+  test gate, link conventions, good-first-issues reservation).
+
 ## v1.4 — 2026-06-09
 
 English-first release: onboarding, contributor funnel, full translation

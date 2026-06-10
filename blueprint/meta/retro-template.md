@@ -5,7 +5,7 @@
 
 **Feature:** <name>
 **Date:** <YYYY-MM-DD>
-**Agents involved:** <Claude Code, Antigravity, ...>
+**Agents involved:** <Claude Code, teammates, ...>
 **Duration:** <how long the feature took>
 
 ---

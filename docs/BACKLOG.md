@@ -24,9 +24,13 @@
 - [ ] **German translation** — once English content stabilizes, offer DE as a translation
   (maintainer decision 2026-06-09: English is the primary language).
 
-## In progress
+## Loop status
 
-(nothing — next cycle starts on the next heartbeat)
+**The continuous-improvement loop ended on 2026-06-10** (maintainer decision): all
+planned autonomous work is done, PR #7 is merged, Antigravity is removed (v1.5).
+Remaining open items are community-reserved (good-first-issues) or maintainer-gated
+(repo settings, demo GIF, observer data shapes) — see Open above. A new loop can be
+started any time by re-running the orchestrator prompt.
 
 > Note for the PR: absolute GitHub links from blueprint/ files to docs/ (SDD page,
 > pricing.ts) point at `master` and 404 until PR #7 merges — intentional, they serve
@@ -34,6 +38,10 @@
 
 ## Done
 
+- [x] **2026-06-10 (cycle 4, v1.5):** Wrap-up — Antigravity removed repo-wide
+  (file deleted, 8 live documents cleaned, verification grep empty; historical docs
+  untouched), dogfooding retro on cycles 0-3 (docs/retros/), learnings persisted into
+  a repo-root CLAUDE.md, PR #7 merged, loop ended by maintainer decision.
 - [x] **2026-06-10 (cycle 3):** End-to-end worked example (docs/examples/): full 6-phase
   run on a fictional expense-tracker CLI with filled SPEC/PLAN artifacts, one failed
   build-test iteration, one rejected review finding. DA verdict: 3× approve-with-fixes,
@@ -67,6 +75,8 @@
 | 2026-06-09 | Primary repo language | ✅ English (German optional as a translation later) |
 | 2026-06-09 | Delete sources/ + docs/superpowers/ (DA recommendation) | ❌ Keep everything — don't advertise it, but don't delete |
 | 2026-06-09 | Positioning | ✅ Honest "Built for Claude Code"; core principles may be noted as transferable |
+| 2026-06-10 | Remove Antigravity entirely | ✅ Removed in v1.5 — roles covered by teammates / second Claude Code agent |
+| 2026-06-10 | Finish planned work, merge PR #7, end the loop | ✅ Executed — see Loop status |
 
 ## Loop rules (short version)
 

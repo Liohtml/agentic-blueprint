@@ -1,5 +1,9 @@
 # Multi-Agent Coordination Protocol
 
+> Applies to any multi-agent setup: teammates in an Agent Team (see
+> [agent-teams.md](agent-teams.md)) or a second Claude Code agent in a
+> separate session.
+
 ## Ground Rule
 The human is the conductor. Agents work autonomously within their Chunks, but the human assigns work and makes decisions on conflicts.
 
@@ -18,7 +22,7 @@ An agent NEVER works in another agent's directories.
 - Format: `feature/<chunk-no>-<agent>-<description>`
 - Examples:
   - `feature/01-claude-code-api-endpoints`
-  - `feature/02-antigravity-dashboard-ui`
+  - `feature/02-teammate-ui-dashboard-ui`
   - `feature/03-claude-code-auth-logic`
 
 ### File locking (implicit)

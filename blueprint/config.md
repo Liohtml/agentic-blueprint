@@ -13,8 +13,7 @@
 ## Agents
 
 - **Primary agent:** Claude Code
-- **Secondary agent (optional):** <Antigravity | none>
-- **Antigravity profile:** <A: UI/Design | C: Orchestrator | not used>
+- **Secondary agent (optional):** <second Claude Code agent (separate session or teammate) | none>
 - **Review tool:** </code-review skill + second Claude Code agent | Greptile | manual>
 - **Model Tiering:** Fable 5 (Lead/Mission) · Opus (hard logic) · Sonnet (standard) · Haiku (explore) — for current prices see `blueprint/meta/decision-trees.md`
 - **Default effort:** <xhigh for Mission Chunks | high standard | low for subagents>
@@ -24,8 +23,8 @@
 > Which agent is responsible for which directories?
 > Agents never work on the same files at the same time.
 
-- **Claude Code:** <e.g. src/lib/, src/api/, src/services/, tests/>
-- **Antigravity:** <e.g. src/components/, src/ui/, src/layouts/>
+- **Primary agent:** <e.g. src/lib/, src/api/, src/services/, tests/>
+- **Secondary agent:** <e.g. src/components/, src/ui/, src/layouts/>
 - **Shared (read-only in Phase 2):** <e.g. src/types/, src/contracts/>
 
 ## Conventions

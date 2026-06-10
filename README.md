@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.4-blue" alt="Version 1.4">
+  <img src="https://img.shields.io/badge/version-1.5-blue" alt="Version 1.5">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License MIT">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs Welcome">
 </p>
@@ -227,8 +227,9 @@ Each loop has a hard iteration limit. When reached, the agent stops and escalate
     YOU (Conductor)
     /             \
    /               \
-Claude Code      Antigravity
-(Engineering)    (UI / Review / Orchestration)
+Claude Code      Second Claude Code agent
+(Engineering)    (teammate or separate session:
+   |              UI, review, parallel chunks)
    |                |
    |-- src/lib/     |-- src/components/
    |-- src/api/     |-- src/ui/
@@ -263,7 +264,6 @@ your-project/
 |   |
 |   |-- agents/                   # Role definitions
 |   |   |-- claude-code.md        #   Primary engineering agent
-|   |   |-- antigravity.md        #   Secondary agent (3 configurable profiles)
 |   |   |-- coordination.md       #   Multi-agent protocol
 |   |   |-- agent-teams.md        #   Live teammates in tmux split-panes (setup + runbook)
 |   |   |-- managed-agents.md     #   Cloud execution profile (Managed Agents + Outcome rubrics)

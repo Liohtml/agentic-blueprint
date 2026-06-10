@@ -1,4 +1,4 @@
-# Agentic Engineering Blueprint v1.4
+# Agentic Engineering Blueprint v1.5
 
 > This document is the central working instruction for all agents in this project.
 > It is loaded automatically and defines principles, phases, and roles.
@@ -44,15 +44,9 @@ Responsible for: code logic, architecture, backend, tests, DevOps, fixes on revi
 Not responsible for: design decisions, reviewing its own work, merging without Human Go.
 Detail: [claude-code.md](blueprint/agents/claude-code.md)
 
-### Antigravity — Configurable Profile
-Three profiles available, pick one per project:
-- **Profile A (UI/Design):** frontend components, layouts, visual prototypes
-- **Profile B (Review/QA, legacy):** replaced by the `/code-review` skill + a second Claude agent; only for setups without Claude Code
-- **Profile C (Orchestrator):** session coordination, Chunk assignment
-Detail: [antigravity.md](blueprint/agents/antigravity.md)
-
 ### Coordination
-Multi-agent protocol, collision avoidance, Handoff artifacts.
+Multi-agent protocol for teammates and an optional second Claude Code agent
+(separate session or teammate): collision avoidance, Handoff artifacts.
 Detail: [coordination.md](blueprint/agents/coordination.md)
 
 ### Agent Teams (live collaboration)
@@ -118,7 +112,7 @@ Bootstrapping guide: [how-to-adapt.md](blueprint/meta/how-to-adapt.md)
 
 ## Meta
 
-- **Version:** 1.4
+- **Version:** 1.5
 - **Changelog:** [changelog.md](blueprint/meta/changelog.md)
 - **Retro template:** [retro-template.md](blueprint/meta/retro-template.md)
 - **Decision trees:** [decision-trees.md](blueprint/meta/decision-trees.md)
