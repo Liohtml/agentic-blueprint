@@ -288,6 +288,7 @@ your-project/
 |-- docs/
 |   |-- GETTING-STARTED.md        # Guided first-win walkthrough (two tracks)
 |   |-- glossary.md               # Short definitions of all blueprint terms
+|   |-- examples/                 # Worked example: full 6-phase run on one small feature
 |   |-- BACKLOG.md                # Roadmap / continuous-improvement backlog
 |
 |-- observer/                     # Agent Observer — live dashboard for running agent teams

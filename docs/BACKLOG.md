@@ -26,12 +26,13 @@
 
 ## In progress
 
-- [ ] **Cycle 2 (SPEC + SDD):** implemented and committed; the devil's-advocate review
-  was interrupted by a session usage limit — **DA verdict outstanding**, re-run it
-  before building anything on top of the SPEC template. Orchestrator self-review
-  done (one copy-breaking relative link found and fixed).
-- [ ] **Cycle 3 (worked example):** queued — agent spawn failed on the session limit,
-  restart after the limit resets.
+- [ ] **Cycle 3 (worked example):** implemented (docs/examples/ — full 6-phase run on a
+  fictional expense-tracker CLI, incl. one failed build-test iteration and one rejected
+  review finding); **DA review running**, fixes to follow per verdict.
+
+> Note for the PR: absolute GitHub links from blueprint/ files to docs/ (SDD page,
+> pricing.ts) point at `master` and 404 until PR #7 merges — intentional, they serve
+> the copy-into-your-project use case after the merge.
 
 ## Done
 

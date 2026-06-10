@@ -64,6 +64,7 @@ Which option is used is stated in `blueprint/config.md`.
 
 ## Gate
 - [ ] Review score 5/5 or explicit human approval
+- [ ] The plan's Success Criteria (and the SPEC's Acceptance Criteria, if one exists) verified as passing on the assembled result
 - [ ] CI pipeline green
 - [ ] No open review comments left unanswered
 - [ ] Branch is up-to-date with main

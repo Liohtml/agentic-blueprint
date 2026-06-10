@@ -8,7 +8,7 @@ Turn the problem statement into a concrete, chunk-based implementation plan.
 - **Agent:** Generates the plan, proposes Chunks
 
 ## Input
-- Problem statement with scope and success criteria from Phase 0, ideally formalized as a [SPEC](../templates/SPEC.md.template) whose Acceptance Criteria become this plan's Success Criteria
+- Problem statement with scope and success criteria from Phase 0 — for larger features (see the Phase 0 threshold) formalized as a [SPEC](../templates/SPEC.md.template) whose Acceptance Criteria become this plan's Success Criteria
 
 ## Process
 
@@ -58,6 +58,7 @@ Mark which Chunks are parallelizable.
 - [ ] Each Chunk has a clear done criterion
 - [ ] Dependencies are marked
 - [ ] Shared Contracts are defined
+- [ ] If a SPEC exists: every Acceptance Criterion is covered by at least one Chunk done criterion
 - [ ] Execution mode set (Chunk | Mission)
 - [ ] Human has reviewed and approved the plan
 

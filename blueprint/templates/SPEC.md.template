@@ -46,12 +46,13 @@ overruns only after the fact. Goal: live cost visibility per agent during a sess
 ## Acceptance Criteria
 
 > Binary-checkable only — each line is pass/fail with no judgment call, and states
-> how to check it. These become the Success Criteria of the Phase 1 plan; in the
-> Cloud Execution Profile, that plan then becomes the outcome rubric for the grader.
+> how to check it. These become the Success Criteria of the Phase 1 plan, and each
+> one must be covered by at least one Chunk's done criterion (checked at the Phase 1
+> gate); in the Cloud Execution Profile, that plan then becomes the outcome rubric.
 
 - [ ] <CRITERION — a command, an observable state, a measurable number — plus how to check it>
 - [ ] _ex: `npm test && npm run typecheck` exit 0_
-- [ ] _ex: Dashboard shows live token data for every agent of a running 3-agent team (check: start `scripts/observe.sh` against a live team, count the rows)_
+- [ ] _ex: Dashboard shows one row per agent of a running 3-agent team (check: start `scripts/observe.sh`, row count == 3)_
 
 ## Open Questions
 
@@ -59,7 +60,7 @@ overruns only after the fact. Goal: live cost visibility per agent during a sess
 > question here is unresolved — resolve or explicitly defer to Out of Scope.
 
 - <QUESTION> — Owner: <HUMAN> — Decision: <pending | RESOLUTION>
-- _ex: Poll the transcript files or watch via fs events? — Owner: Lionel — Decision: pending_
+- _ex: Poll the transcript files or watch via fs events? — Owner: Alex — Decision: pending_
 
 ---
 

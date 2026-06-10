@@ -77,6 +77,7 @@ You just did what most people never do with AI: instead of one vague prompt and 
 **Where to go next:**
 
 - Continue with Phase 2 (Building) on the same idea: "Phase 1 is approved. Start Phase 2 with chunk 1." (For this you'll want an agent that can actually edit files, i.e. Claude Code.)
+- Want to see a full run? The [worked example](examples/worked-example.md) shows all six phases on one small feature — including a failed test iteration and a rejected review finding.
 - Read the [Glossary](glossary.md) to put names on what you just experienced.
 - When you're ready for a terminal, switch to Track B below.
 

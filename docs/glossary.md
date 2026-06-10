@@ -4,7 +4,7 @@ Short definitions of the terms used throughout the Agentic Blueprint. Alphabetic
 
 | Term | Definition |
 |------|------------|
-| **Acceptance Criteria** | The binary pass/fail checklist in a [SPEC](../blueprint/templates/SPEC.md.template): each line states an observable result and how to check it. They become the Phase 1 plan's Success Criteria, which in the cloud execution profile become the outcome rubric. |
+| **Acceptance Criteria** | The binary pass/fail checklist in a [SPEC](../blueprint/templates/SPEC.md.template) (or informal Phase 0 output): each line states an observable result and how to check it. They become the Phase 1 plan's Success Criteria, which — as the plan's binary done-criteria checklist (its Definition of Done) — become the outcome rubric in the cloud execution profile. |
 | **Agent Team** | Multiple Claude Code agents working in parallel on one feature, each in its own tmux pane, coordinated by a lead agent under strict file ownership. Experimental Claude Code feature. See [`blueprint/agents/agent-teams.md`](../blueprint/agents/agent-teams.md). |
 | **Chunk** | The smallest unit of planned work: max 3–5 files, one fresh context window, one binary done-criterion. A feature with more than 8 chunks means the scope is too big. |
 | **Conductor** | You — the human. You make architecture, scope, and technology decisions; agents execute. ("Human thinks, Agent builds.") |

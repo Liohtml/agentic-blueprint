@@ -31,13 +31,14 @@ interoperable with these frameworks without changing any phase or gate.
 | Specify | 0 — Ideation & Scoping | [SPEC.md](../blueprint/templates/SPEC.md.template) (formalized Phase 0 output) |
 | Plan | 1 — Planning | [PLAN.md](../blueprint/templates/PLAN.md.template) with Chunks |
 | Implement / Tasks | 2 — Building + 3 — Structure Cleanup | Code + tests (Chunk or Mission Mode), then refactored structure |
-| Verify | 4 — Review Loop | PR reviewed against the criteria, score 5/5 |
+| Verify | 2 (gate) + 4 — Review Loop | Chunk done criteria checked at the Phase 2 gate; the Phase 4 gate checks quality (score 5/5) *and* the full acceptance-criteria list on the assembled result |
 | *(Ship — beyond the SDD loop)* | 5 — Merge & Validate | Merged PR after Human Go |
 
 Phase 3 (Structure Cleanup) is a Blueprint addition *inside* Implement — it
-refactors, it does not verify anything against the spec. Verification against
-the spec happens in Phase 4. The explicit Ship phase with a human gate is a
-superset of the SDD loop, not a deviation from it.
+refactors, it does not verify anything against the spec. Verification is split:
+each Chunk's done criterion is checked at the Phase 2 gate, and the Phase 4 gate
+re-checks the complete criteria list against the assembled result. The explicit
+Ship phase with a human gate is a superset of the SDD loop, not a deviation from it.
 
 ## When to write the SPEC
 
@@ -45,13 +46,14 @@ After the [Phase 0 gate](../blueprint/phases/00-ideation.md) passes, before
 [Phase 1](../blueprint/phases/01-planning.md) starts. Phase 0 may end with
 informal notes or an issue; the SPEC turns that into one structured file the
 planning agent can consume. Rule of thumb (checkable *before* any planning):
-write a SPEC when the feature will clearly touch more than ~3 files, needs more
-than 2 acceptance criteria, or will take more than a day. For a one-file
-bugfix, the issue itself is enough — do not add ceremony where a sentence
-suffices.
+write a SPEC when the feature will clearly span more than one Chunk's worth of
+work — more than ~5 files, or more than a day. For a one-file bugfix, the issue
+itself is enough — do not add ceremony where a sentence suffices.
 
 The SPEC stays human-owned: the human resolves the Open Questions and sets the
 status to `approved`. That preserves principle 1 — *human thinks, agent builds*.
+If the SPEC and the plan ever diverge, the SPEC wins: change the SPEC first,
+then update the plan — never the other way around.
 
 ## SPEC → PLAN → RUBRIC
 
@@ -59,9 +61,10 @@ One chain of criteria, refined at each step but never reinvented:
 
 ```
 SPEC Acceptance Criteria          (binary-checkable, written at the Phase 0/1 boundary)
-        │  Phase 1: each criterion is covered by ≥1 Chunk done criterion
+        │  Phase 1 gate: each criterion is covered by ≥1 Chunk done criterion
         ▼
-PLAN Success Criteria             (Chunk done criteria + plan-level success criteria)
+PLAN Success Criteria             (the plan's Success Criteria section; coverage comes
+                                   from the per-Chunk done criteria)
         │  Cloud Execution Profile: the plan's criteria checklist passed 1:1 as rubric
         ▼
 Outcome rubric                    (user.define_outcome — independent grader)
@@ -80,7 +83,7 @@ Missions are expensive guessing (see [02-building.md](../blueprint/phases/02-bui
 Before the SPEC template, that first turn was assembled ad hoc from Phase 0
 notes plus the plan. With it, the Mission prompt has a fixed, complete shape:
 Behavior gives the testable statements, Constraints bound the solution space,
-Acceptance Criteria are the binary Definition of Done, and an empty Open
+Acceptance Criteria become the Mission prompt's Definition of Done, and an empty Open
 Questions section proves the human already made the calls the agent would
 otherwise have to guess or escalate mid-run. Same model, same phases — fewer
 clarification round-trips and fewer wasted iterations.
