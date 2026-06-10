@@ -8,14 +8,15 @@
   <a href="#your-first-10-minutes">First 10 Minutes</a> &bull;
   <a href="docs/GETTING-STARTED.md">Getting Started</a> &bull;
   <a href="#quick-start-developers">Quick Start</a> &bull;
+  <a href="#clone--go--agent-teams">Agent Teams</a> &bull;
+  <a href="#run-agents-safely--docker-sandbox">Docker Sandbox</a> &bull;
   <a href="#how-it-works">How It Works</a> &bull;
   <a href="#project-structure">Structure</a> &bull;
-  <a href="#credits--inspiration">Credits</a> &bull;
   <a href="CONTRIBUTING.md">Contributing</a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.5-blue" alt="Version 1.5">
+  <img src="https://img.shields.io/badge/version-1.6-blue" alt="Version 1.6">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License MIT">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs Welcome">
 </p>
@@ -28,17 +29,97 @@ Agentic Blueprint is a structured playbook for building software with AI agents:
 
 ## Your First 10 Minutes
 
-The blueprint is **just folders and text files — no code required**. You don't need a terminal to try it:
+The blueprint is **just folders and text files — no code required**. And you don't set it up yourself: **the agent does the setup for you.**
+
+### With Claude Code (recommended)
+
+[Claude Code](https://claude.com/claude-code) is Anthropic's AI coding agent — a program that reads and edits the files in a folder for you; install it from that link if you don't have it yet. To "open it in your project folder": in a terminal, type `cd path/to/your/project` and then `claude` — or, if you use the VS Code extension, open the folder in VS Code and open the Claude panel.
+
+1. **Open Claude Code in your project folder.** An existing project works; a brand-new empty folder works too. *(You should see: Claude Code running, waiting for your message.)*
+2. **Paste the setup wizard prompt below** — it's one message. (Also available as a file: [`blueprint/templates/setup-wizard-prompt.md`](blueprint/templates/setup-wizard-prompt.md).)
+3. **Answer the questions.** One at a time, in plain language, each with a suggested default — if you're unsure, take the suggestion. *(You should see at the end: a plain-language summary plus a ready-to-copy Phase 0 prompt for your first feature.)*
+
+<details>
+<summary><b>📋 Click to show the wizard prompt (copy everything inside the box)</b></summary>
+
+<!-- KEEP IN SYNC: this prompt exists in README.md and blueprint/templates/setup-wizard-prompt.md — change both -->
+```text
+You are my setup wizard for the Agentic Engineering Blueprint
+(https://github.com/Liohtml/agentic-blueprint). Set it up in this folder.
+I may not be technical: use plain language, avoid jargon, and tell me in
+one sentence what you are about to do before each step.
+
+## Safety rules (apply to every step)
+- Never overwrite or delete an existing file without asking me first.
+- If a CLAUDE.md or AGENTS.md already exists, propose a merge — show me
+  exactly what you would add — never replace it.
+- Run no git commands in this project (no commit, push, branch, init) —
+  a temporary clone elsewhere for fetching files is fine.
+
+## Step 1 — Look around
+Check what is in this folder and tell me what you find.
+- Existing project (e.g. package.json, pyproject.toml, go.mod, Cargo.toml,
+  source folders present): infer the tech stack from those files and
+  confirm it with me in one sentence.
+- Empty (or nearly empty) folder: say so, and make clear you will NOT
+  scaffold any project structure now. Scaffolding is offered later, after
+  Phase 0 (ideation) and Phase 1 (planning) of the first feature — never
+  blindly up front.
+
+## Step 2 — Get the blueprint files
+From https://github.com/Liohtml/agentic-blueprint fetch exactly two things:
+- AGENTIC-BLUEPRINT.md  -> into the project root
+- the complete blueprint/ folder -> into the project root
+Do NOT bring in observer/, docs/, scripts/, or anything else.
+Pick whatever method works here: shallow git clone into a temp folder and
+copy the two items over, `npx degit`, or curl the GitHub tarball and
+extract only those paths. If neither git, npx, nor curl is available:
+fetch the files one by one with your web-fetch capability, or tell me
+the single tool to install and the exact install command — then wait
+for my go. Afterwards verify that AGENTIC-BLUEPRINT.md and
+blueprint/config.md exist in this folder, and clean up any temp files.
+
+## Step 3 — Fill out blueprint/config.md by interviewing me
+Ask me ONE question at a time, in plain language. For every question,
+propose a sensible default (use what you learned in Step 1) and add:
+"If you're unsure, take the suggestion." Cover at least: project name,
+one-sentence description, tech stack, secondary agent (default: none),
+review tool (default: /code-review skill), directory assignments (keep
+minimal or mark as "decided later" for an empty project), and commit
+style. Write my answers into blueprint/config.md as we go.
+
+## Step 4 — Generate CLAUDE.md and AGENTS.md
+Generate a project-specific CLAUDE.md and AGENTS.md in the project root,
+using blueprint/templates/CLAUDE.md.template and
+blueprint/templates/AGENTS.md.template plus the filled-in config.
+Remember the safety rule if either file already exists.
+
+## Step 5 — Wrap up in plain language
+Give me a short summary: which files now exist, which rules apply from
+now on (work happens in phases, each phase ends at a gate I approve,
+nothing merges without my explicit Go), and what to do next. End by
+printing this ready-to-copy prompt for my first feature:
+
+"Read AGENTIC-BLUEPRINT.md. I want to build [describe your idea in one
+sentence]. Start with Phase 0 and act as my sparring partner. Ask me one
+question at a time."
+```
+
+</details>
+
+### No terminal? Use claude.ai
+
+If you don't use Claude Code, you can still try the workflow in a plain chat:
 
 1. **Get the files.** Click the green **Code** button on GitHub and choose **Download ZIP** (or use **"Use this template"** if you want your own copy on GitHub). Unzip it.
-2. **Open the folder** in Claude Code — or upload `AGENTIC-BLUEPRINT.md` to a chat at [claude.ai](https://claude.ai).
+2. **Upload `AGENTIC-BLUEPRINT.md`** to a new chat at [claude.ai](https://claude.ai).
 3. **Paste these prompts**, one at a time:
 
 > **Prompt 1 — understand it:**
 > "Read `AGENTIC-BLUEPRINT.md` and explain in plain language how this workflow would change the way I build things with you."
 
 > **Prompt 2 — make it yours:**
-> "Read `blueprint/config.md`. Interview me one question at a time and fill it out for my project."
+> "Read `blueprint/config.md`. Interview me one question at a time and fill it out for my project." (Upload `blueprint/config.md` first.)
 
 > **Prompt 3 — start your first feature:**
 > "Read `AGENTIC-BLUEPRINT.md`. I want to build [describe your idea in one sentence]. Start with Phase 0 and act as my sparring partner."
@@ -54,7 +135,7 @@ That's the whole loop: the agent reads the rules, you make the decisions, it doe
 
 | | Path | Start here |
 |---|------|------------|
-| 🟢 | **Beginner / non-technical** — you've never used a terminal, or you just want the workflow without any setup | [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md) — a guided "first win" in under 15 minutes, no terminal needed |
+| 🟢 | **Beginner / non-technical** — you've never used a terminal, or you just want the workflow without any setup | [Track A in Getting Started](docs/GETTING-STARTED.md#-track-a--im-not-technical) — a guided "first win" in under 15 minutes, no terminal needed |
 | 🔵 | **Developer / expert** — you want the blueprint in your own repo, or a full multi-agent team with a live dashboard | [Quick Start](#quick-start-developers) and [Clone & Go — Agent Teams](#clone--go--agent-teams) |
 
 New terms (Phase, Gate, Chunk, Mission Mode, ...) are defined in the [Glossary](docs/glossary.md).
@@ -72,6 +153,9 @@ Drop it into any project. Your agents know what to do.
 ### Key Features
 
 - **6-Phase Development Model** — Ideation, Planning, Building, Cleanup, Review, Merge
+- **Agent-Driven Setup** — One copy-paste [wizard prompt](blueprint/templates/setup-wizard-prompt.md) and the agent installs and configures the blueprint in your project itself
+- **One-Command Agent Teams** — [`scripts/start-team.sh`](scripts/start-team.sh) checks your environment in plain language, starts tmux, and launches the team
+- **Docker Sandbox** — Ready-to-use [container template](docs/docker-sandbox.md) so agents can work autonomously without touching your host system
 - **Mission Mode (Fable 5)** — Long-horizon autonomous runs: full spec up front, binary definition of done, quality gates unchanged
 - **4-Tier Model Strategy** — Fable 5 for the lead and mission-critical work, Opus for hard logic, Sonnet as standard, Haiku for scouting — with effort as the second cost dimension
 - **Multi-Agent Coordination** — Claude Code agents (plus an optional secondary agent) working in parallel without conflicts
@@ -85,7 +169,17 @@ Drop it into any project. Your agents know what to do.
 
 ## Quick Start (Developers)
 
-### 1. Copy into your project
+### Recommended: let the agent set it up
+
+1. Open Claude Code in your project folder (existing repo or empty directory — both work).
+2. Paste the **setup wizard prompt** — shown inline in [Your First 10 Minutes](#your-first-10-minutes), or copy it from [`blueprint/templates/setup-wizard-prompt.md`](blueprint/templates/setup-wizard-prompt.md).
+3. Answer the interview questions.
+
+The wizard detects your tech stack, fetches `AGENTIC-BLUEPRINT.md` + `blueprint/` from this repo, fills out `blueprint/config.md` with you, and generates `CLAUDE.md` + `AGENTS.md` — without overwriting anything you already have.
+
+### Manual setup (alternative)
+
+If you'd rather do it by hand:
 
 ```bash
 # Clone the blueprint
@@ -96,24 +190,11 @@ cp agentic-blueprint/AGENTIC-BLUEPRINT.md ./
 cp -r agentic-blueprint/blueprint/ ./blueprint/
 ```
 
-### 2. Configure for your project
-
-Edit `blueprint/config.md` — or let the agent interview you (see [Your First 10 Minutes](#your-first-10-minutes), Prompt 2):
-
-```markdown
-- Name: My SaaS App
-- Tech stack: Next.js + Supabase
-- Secondary agent: none
-- Review tool: /code-review skill + second Claude Code agent
-```
-
-### 3. Generate project-specific agent files
-
-Tell your agent:
+Then edit `blueprint/config.md` (name, tech stack, secondary agent, review tool) and tell your agent:
 
 > "Read `blueprint/config.md` and `blueprint/templates/CLAUDE.md.template`. Generate a project-specific `CLAUDE.md` based on the configuration."
 
-### 4. Start building
+### Start building
 
 Begin every feature with:
 
@@ -125,44 +206,34 @@ The agent follows the phases automatically.
 
 ## Clone & Go — Agent Teams
 
-Spin up a full Claude Code agent team from a fresh clone in under five minutes.
+Spin up a full Claude Code agent team — multiple agents working in parallel, each in
+its own terminal pane — with **one command**.
 
 **Requirements (this path only):** [tmux](https://github.com/tmux/tmux/wiki) ≥ 3.x · Node.js ≥ 20 · git · [Claude Code CLI](https://claude.com/claude-code)
 
-### 1. Clone & bootstrap
+### 1. Clone once
 
 ```bash
 git clone https://github.com/Liohtml/agentic-blueprint.git
 cd agentic-blueprint
-./scripts/bootstrap.sh
+./scripts/bootstrap.sh   # installs observer deps, checks your environment
 ```
 
-`bootstrap.sh` installs the Observer dependencies and verifies your environment
-(checks for tmux, node, and git — missing tools get a friendly install hint).
-
-### 2. Enable the agent-teams flag
-
-Agent teams are an **experimental Claude Code feature**, gated behind an environment variable:
+### 2. Start the team — one command
 
 ```bash
-export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+./scripts/start-team.sh
 ```
 
-To make it permanent, add that line to your shell profile (`~/.bashrc`, `~/.zshrc`, or equivalent).
+The script checks everything (git, node, claude, tmux — every missing piece gets a
+plain-language install hint), enables the experimental agent-teams flag, starts tmux
+for you, and launches Claude Code in **your current folder**. Options: `--check`
+(checks only), `--observer <team>` (adds a live dashboard pane), `--help`.
 
-### 3. Start a tmux session
+**You should see:** five ✓ lines, a three-line tmux crash course, then Claude Code
+inside a tmux pane (green status bar at the bottom).
 
-```bash
-tmux new -s agent-teams
-```
-
-Each teammate gets its own split-pane — you see them all working simultaneously.
-
-### 4. Launch Claude and paste your team prompt
-
-```bash
-claude
-```
+### 3. Paste your team prompt
 
 Fill in [`blueprint/templates/team-prompt.md`](blueprint/templates/team-prompt.md)
 and paste it into Claude. The template covers every rule the team needs: shared contract
@@ -171,19 +242,35 @@ work, Opus for hard logic, Sonnet for the rest, Haiku for scouting),
 task-graph with `blocks`/`blockedBy`, build-test-loop max 5 iterations, no self-review,
 and no merge without your Go.
 
-### 5. Watch the team live (second pane)
+### 4. Watch the team live
 
 ```bash
-# Open a new pane: Ctrl-b "
-./scripts/observe.sh --team <name>
+./scripts/start-team.sh --observer <team-name>   # or in a new pane: ./scripts/observe.sh --team <name>
 ```
 
 Open **http://localhost:4317** — the **[Agent Observer](observer/README.md)** streams live
 token counts, costs, tool activity, and task progress for every pane — built with these
 exact same team rules.
 
-> See [`blueprint/agents/agent-teams.md`](blueprint/agents/agent-teams.md) for the full
-> setup runbook and coordination protocol.
+> Manual steps (what the script does under the hood), a "Type this → You should see"
+> walkthrough, and a troubleshooting table live in
+> [`blueprint/agents/agent-teams.md`](blueprint/agents/agent-teams.md).
+
+---
+
+## Run Agents Safely — Docker Sandbox
+
+Before giving agents real autonomy, put them in a container: inside it they cannot
+touch your host files, keys, or other projects. The repo ships a ready-to-use template:
+
+```bash
+docker build -t agent-sandbox sandbox/
+docker run -it --rm -v "$PWD":/workspace -w /workspace agent-sandbox
+```
+
+Two paths — **VS Code Dev Container** (beginner-friendly, click "Reopen in Container")
+and **plain Docker** — plus an honest list of what the sandbox does *not* protect:
+**[docs/docker-sandbox.md](docs/docker-sandbox.md)**.
 
 ---
 
@@ -274,6 +361,7 @@ your-project/
 |   |   |-- review-fix-loop.md
 |   |
 |   |-- templates/                # Copy-paste ready templates
+|   |   |-- setup-wizard-prompt.md
 |   |   |-- CLAUDE.md.template
 |   |   |-- AGENTS.md.template
 |   |   |-- PLAN.md.template
@@ -287,9 +375,17 @@ your-project/
 |
 |-- docs/
 |   |-- GETTING-STARTED.md        # Guided first-win walkthrough (two tracks)
+|   |-- docker-sandbox.md         # Run agents safely in a container (two paths)
 |   |-- glossary.md               # Short definitions of all blueprint terms
 |   |-- examples/                 # Worked example: full 6-phase run on one small feature
 |   |-- BACKLOG.md                # Roadmap / continuous-improvement backlog
+|
+|-- sandbox/                      # Docker sandbox template (Dockerfile + devcontainer.json)
+|
+|-- scripts/
+|   |-- start-team.sh             # One command: checks env, starts tmux + agent team
+|   |-- observe.sh                # Launch the Agent Observer dashboard
+|   |-- bootstrap.sh              # Fresh-clone setup: deps + environment check
 |
 |-- observer/                     # Agent Observer — live dashboard for running agent teams
     |-- DATA-NOTES.md             #   Verified real shapes of ~/.claude files (data contract)

@@ -11,6 +11,28 @@ Unfamiliar terms (Phase, Gate, Chunk, ...) are defined in the [Glossary](glossar
 
 ---
 
+## Existing project or starting from scratch?
+
+If you use **Claude Code**, you don't set the blueprint up yourself — you paste **one prompt** and the agent does the whole setup: the [setup wizard prompt](../blueprint/templates/setup-wizard-prompt.md). It handles both situations:
+
+[Claude Code](https://claude.com/claude-code) is Anthropic's AI coding agent — a program that reads and edits the files in a folder for you; install it from that link if you don't have it yet. To "open it in your project's folder": in a terminal, type `cd path/to/your/project` and then `claude` — or, if you use the VS Code extension, open the folder in VS Code and open the Claude panel.
+
+**"I have an existing project."**
+
+1. Open Claude Code in your project's folder. *(What you should see: Claude Code running, your project files visible to it.)*
+2. Paste the full [setup wizard prompt](../blueprint/templates/setup-wizard-prompt.md). *(What you should see: the agent names your tech stack — e.g. "This looks like a Next.js app" — then downloads `AGENTIC-BLUEPRINT.md` and the `blueprint/` folder into your project.)*
+3. Answer its questions, one at a time. Every question comes with a suggested default — if you're unsure, take the suggestion. *(What you should see: `blueprint/config.md` filling up with your answers, then a generated `CLAUDE.md` and `AGENTS.md`. If you already had a `CLAUDE.md`, the agent proposes a merge instead of replacing it.)*
+
+**"I'm starting from scratch (empty folder)."**
+
+1. Create a new, empty folder and open Claude Code in it. *(What you should see: Claude Code running in an empty directory — that's fine.)*
+2. Paste the full [setup wizard prompt](../blueprint/templates/setup-wizard-prompt.md). *(What you should see: the agent says the folder is empty and explicitly does **not** create any project structure yet — scaffolding comes after Phase 0 and Phase 1, once you know what you're building. It still downloads the blueprint files.)*
+3. Answer its questions; for an empty project, things like directory assignments stay minimal or are marked "decided later". *(What you should see: a filled `blueprint/config.md` plus generated `CLAUDE.md` and `AGENTS.md` — and nothing else added to your folder.)*
+
+In both cases, setup ends with a plain-language summary and a ready-to-copy **Phase 0 prompt** for your first feature. From there, continue below — Track A at Step 3, Track B at Step 2.
+
+---
+
 ## 🟢 Track A — "I'm not technical"
 
 **What you need:**
@@ -20,6 +42,8 @@ Unfamiliar terms (Phase, Gate, Chunk, ...) are defined in the [Glossary](glossar
 
 That's all. The blueprint is just folders and text files — there is nothing to install or run.
 
+> **Using Claude Code?** Then skip Steps 1–2: paste the [setup wizard prompt](../blueprint/templates/setup-wizard-prompt.md) instead — see [Existing project or starting from scratch?](#existing-project-or-starting-from-scratch) above. The agent downloads the files and configures everything for you. Then come back here at Step 3.
+
 ### Step 1 — Download the blueprint (2 min)
 
 1. Open the repository page on GitHub.
@@ -27,11 +51,9 @@ That's all. The blueprint is just folders and text files — there is nothing to
    (If you're signed in to GitHub, **"Use this template"** also works and gives you your own copy — but it's not required.)
 3. Unzip the downloaded file. You now have a folder called something like `agentic-blueprint-main`.
 
-You can open any file in it with a normal text editor — it's all readable markdown.
+*(What you should see: a folder of readable markdown files — you can open any of them with a normal text editor.)*
 
 ### Step 2 — Give the agent the rules (2 min)
-
-**If you use Claude Code (desktop or web):** open the unzipped folder as your project. Done.
 
 **If you use claude.ai chat:** start a new chat and upload these two files from the folder:
 
@@ -39,6 +61,8 @@ You can open any file in it with a normal text editor — it's all readable mark
 - `blueprint/phases/00-ideation.md` (the Phase 0 instructions)
 
 You'll upload `blueprint/phases/01-planning.md` later, when you reach Phase 1.
+
+*(What you should see: both files attached to the chat, and the agent able to quote from them when you ask.)*
 
 ### Step 3 — Pick a tiny idea (1 min)
 
@@ -91,7 +115,16 @@ You just did what most people never do with AI: instead of one vague prompt and 
 - git
 - A project to work in (an empty repo is fine)
 
-### Step 1 — Install the blueprint into your project (3 min)
+### Step 1 — Run the setup wizard (≈5 min)
+
+Start Claude Code in your project folder — an existing repo or a fresh empty directory, both work (see [Existing project or starting from scratch?](#existing-project-or-starting-from-scratch) for what differs) — and paste the full [setup wizard prompt](../blueprint/templates/setup-wizard-prompt.md).
+
+The agent detects your tech stack, fetches `AGENTIC-BLUEPRINT.md` + `blueprint/` from the repo, interviews you to fill out `blueprint/config.md`, and generates `CLAUDE.md` + `AGENTS.md` — merging instead of overwriting if those files already exist.
+
+*(What you should see when it's done: `AGENTIC-BLUEPRINT.md`, `blueprint/`, a filled `blueprint/config.md`, and generated `CLAUDE.md` + `AGENTS.md` in your project — plus a Phase 0 prompt ready to copy.)*
+
+<details>
+<summary>Manual setup (alternative, if you'd rather copy files yourself)</summary>
 
 ```bash
 git clone https://github.com/Liohtml/agentic-blueprint.git
@@ -100,15 +133,19 @@ cp ../agentic-blueprint/AGENTIC-BLUEPRINT.md ./
 cp -r ../agentic-blueprint/blueprint/ ./blueprint/
 ```
 
-### Step 2 — Configure (3 min)
-
-Start Claude Code in your project and let the agent do the form-filling:
+Then start Claude Code in your project and let the agent do the form-filling:
 
 > "Read `blueprint/config.md`. Interview me one question at a time and fill it out for this project."
 
-Then generate your project-specific agent file:
+And generate your project-specific agent file:
 
 > "Read `blueprint/config.md` and `blueprint/templates/CLAUDE.md.template`. Generate a project-specific `CLAUDE.md`."
+
+</details>
+
+### Step 2 — Sandbox your agents (recommended)
+
+See [docs/docker-sandbox.md](docker-sandbox.md) to run agents safely in a container — recommended before giving agents autonomy.
 
 ### Step 3 — First win: plan a mini feature (≈8 min)
 

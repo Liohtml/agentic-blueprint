@@ -1,0 +1,35 @@
+// Dev Container definition for the agent sandbox.
+// Copy this file together with the Dockerfile into <your-project>/.devcontainer/
+// and use "Dev Containers: Reopen in Container" in VS Code.
+// Full walkthrough: docs/docker-sandbox.md
+// Reference setup: https://github.com/anthropics/claude-code/tree/main/.devcontainer
+{
+  "name": "Agent Sandbox",
+
+  // Build the image from the Dockerfile next to this file.
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  // Matches the non-root user created in the Dockerfile.
+  "remoteUser": "node",
+
+  // Pass your API key from the host into the container (only needed if you
+  // authenticate via key instead of `claude login` inside the container).
+  // Remove this block if you don't want the key inside the sandbox.
+  "remoteEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code"
+      ]
+    }
+  }
+
+  // Optional: install project dependencies after the container is created.
+  // Keep this npm-install-like — heavier setup belongs in the Dockerfile.
+  // "postCreateCommand": "npm install"
+}
