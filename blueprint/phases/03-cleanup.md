@@ -1,60 +1,60 @@
 # Phase 3: Structure Cleanup
 
-## Zweck
-Code nach dem Build aufraumen. Duplikate eliminieren, Service Layers aufbauen, Struktur fuer den naechsten Agent-Durchlauf optimieren.
+## Purpose
+Clean up the code after the build. Eliminate duplicates, build service layers, optimize the structure for the next agent pass.
 
-## Wer
-- **Agent:** Fuehrt Cleanup autonom durch
-- **Mensch:** Greift nur ein bei Eskalation
+## Who
+- **Agent:** Performs the cleanup autonomously
+- **Human:** Only intervenes on Escalation
 
-## WICHTIG
-Diese Phase wird NIE uebersprungen. Auch wenn der Code "gut aussieht".
+## IMPORTANT
+This phase is NEVER skipped. Even if the code "looks good".
 
-## Eingang
-- Code aus Phase 2 auf Feature-Branch
+## Input
+- Code from Phase 2 on a feature branch
 
-## Prozess
+## Process
 
-1. **Neuen Thread starten** — sauberes Kontextfenster
-2. **Analyse:** Agent scannt den geaenderten Code nach Duplikaten und fehlender Struktur
-3. **Refactoring:** Wiederverwendbare Logik in Service-Layer extrahieren
-4. **Cleanup-Verify-Loop:** Nach jedem Refactoring pruefen ob alle Tests noch gruen sind
-5. **Gate pruefen**
+1. **Start a new thread** — clean context window
+2. **Analysis:** Agent scans the changed code for duplicates and missing structure
+3. **Refactoring:** Extract reusable logic into a service layer
+4. **Cleanup-Verify Loop:** After each refactoring, check that all tests are still green
+5. **Check the Gate**
 
-## Agent-Prompt
+## Agent Prompt
 
 ```
-Analysiere den Code der in diesem Feature-Branch geaendert wurde.
+Analyze the code that was changed in this feature branch.
 
-Finde:
-- Duplizierte Logik ueber mehrere Dateien hinweg
-- Fehlende Service-Layer-Abstraktionen
-- Code der in zukuenftigen Sessions schwer zu verstehen waere
-- Funktionen die an mehreren Stellen aehnlich implementiert sind
+Find:
+- Duplicated logic across multiple files
+- Missing service-layer abstractions
+- Code that would be hard to understand in future sessions
+- Functions that are implemented similarly in several places
 
-Refactore in wiederverwendbare Module.
-Aendere KEINE Funktionalitaet — nur Struktur.
+Refactor into reusable modules.
+Do NOT change any functionality — structure only.
 
-Nach jedem Refactoring-Schritt: pruefe ob alle Tests noch gruen sind.
-Wenn ein Test bricht: Rollback des letzten Schritts.
-Max 3 Iterationen.
+After each refactoring step: check that all tests are still green.
+If a test breaks: roll back the last step.
+Max 3 iterations.
 ```
 
-## Cleanup-Verify-Loop
+## Cleanup-Verify Loop
 
-Siehe: [cleanup-verify-loop.md](../loops/cleanup-verify-loop.md)
+See: [cleanup-verify-loop.md](../loops/cleanup-verify-loop.md)
 
-Max 3 Iterationen. Bei Abbruch: Rollback, Original bleibt.
+Max 3 iterations. On abort: rollback, the original remains.
 
 ## Gate
-- [ ] Keine duplizierten Logik-Bloecke ueber Dateien hinweg
-- [ ] Wiederverwendbare Logik in Service-Layer extrahiert
-- [ ] Alle bestehenden Tests laufen noch gruen
-- [ ] Diff beruehrt maximal die Dateien aus dem Chunk-Plan
-- [ ] Keine Funktionalitaetsaenderung — nur Struktur
+- [ ] No duplicated logic blocks across files
+- [ ] Reusable logic extracted into a service layer
+- [ ] All existing tests still green
+- [ ] Diff touches at most the files from the Chunk plan
+- [ ] No functionality change — structure only
 
 ## Output
-Sauber strukturierter Code, bereit fuer Review
+Cleanly structured code, ready for review
 
-## Weiter zu
+## Next
 [Phase 4: Review Loop](04-review-loop.md)

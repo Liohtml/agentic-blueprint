@@ -1,30 +1,30 @@
-## Was wurde gebaut
+## What Was Built
 
-**Chunk:** #{{CHUNK_NR}} — {{CHUNK_TITEL}}
+**Chunk:** #{{CHUNK_NO}} — {{CHUNK_TITLE}}
 **Plan:** {{PLAN_LINK}}
 **Agent:** {{AGENT_NAME}}
 
-## Aenderungen
+## Changes
 
-{{ZUSAMMENFASSUNG_DER_AENDERUNGEN}}
+{{SUMMARY_OF_CHANGES}}
 
 ## Tests
 
 - {{TEST_1}}
 - {{TEST_2}}
 
-## Gate-Checkliste
+## Gate Checklist
 
-- [ ] Done-Kriterium des Chunks erfuellt
-- [ ] Alle neuen Funktionen haben mindestens einen Test
-- [ ] Alle Tests gruen
-- [ ] Keine hartcodierten Secrets/Credentials
-- [ ] Keine Packages juenger als 14 Tage
-- [ ] Keine duplizierten Logik-Bloecke (Phase 3 durchlaufen)
-- [ ] Code-Struktur clean (Phase 3 durchlaufen)
+- [ ] Done criterion of the Chunk fulfilled
+- [ ] All new functions have at least one test
+- [ ] All tests green
+- [ ] No hardcoded secrets/credentials
+- [ ] No packages younger than 14 days
+- [ ] No duplicated logic blocks (Phase 3 completed)
+- [ ] Code structure clean (Phase 3 completed)
 
-## Review-Status
+## Review Status
 
-| Iteration | Score | Offene Findings |
-|-----------|-------|-----------------|
+| Iteration | Score | Open findings |
+|-----------|-------|---------------|
 | 1 | —/5 | — |

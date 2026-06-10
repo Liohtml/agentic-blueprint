@@ -1,44 +1,52 @@
-# Build-Test-Loop
+# Build-Test Loop
 
 ## Phase
 Phase 2: Building
 
 ## Trigger
-Code fuer einen Chunk wurde geschrieben.
+Code for a Chunk has been written.
 
-## Ablauf
+## Flow
 
 ```
 Iteration = 0
 
 LOOP:
-  1. Code ausfuehren / builden
-  2. Tests ausfuehren
-  3. Alle Tests gruen?
-     - JA → EXIT LOOP (Erfolg)
-     - NEIN → Iteration += 1
+  1. Run / build the code
+  2. Run the tests
+  3. All tests green?
+     - YES → EXIT LOOP (success)
+     - NO → Iteration += 1
   4. Iteration > 5?
-     - JA → EXIT LOOP (Abbruch)
-     - NEIN → Fehler analysieren, Fix anwenden → GOTO LOOP
+     - YES → EXIT LOOP (abort)
+     - NO → analyze errors, apply fix → GOTO LOOP
 ```
 
-## Max Iterationen
+## Max Iterations
 5
 
-## Bei Erfolg
-Weiter zu Phase 3 (Structure Cleanup)
+## Token Budget (optional, API)
 
-## Bei Abbruch
-1. Dokumentiere:
-   - Welche Tests fehlschlagen
-   - Welche Fehler auftreten
-   - Was bereits versucht wurde (alle 5 Ansaetze)
-2. Erstelle einen Kommentar/Issue mit diesem Kontext
-3. STOPP — kein weiteres Herumprobieren
-4. Warte auf Mensch-Entscheidung
+In addition to the hard iteration limit, a **Task Budget** can be set per loop run:
+`output_config: {task_budget: {type: "tokens", total: N}}`
+(beta header `task-budgets-2026-03-13`, minimum 20,000). The model sees a
+running token countdown and prioritizes/finishes on its own. Soft limit —
+the iteration limit remains the hard abort.
 
-## Haeufige Ursachen fuer Abbruch
-- Falscher Ansatz gewaehlt (Architektur-Problem, nicht Code-Problem)
-- Fehlende Dependency oder API-Verstaendnis
-- Chunk zu gross / beruehrt zu viele Dateien
-- Kontext nicht praezise genug
+## On Success
+Continue to Phase 3 (Structure Cleanup)
+
+## On Abort
+1. Document:
+   - Which tests fail
+   - Which errors occur
+   - What has already been tried (all 5 approaches)
+2. Create a comment/issue with this context
+3. STOP — no further trial and error
+4. Wait for the human's decision
+
+## Common Causes of Abort
+- Wrong approach chosen (architecture problem, not a code problem)
+- Missing dependency or API understanding
+- Chunk too large / touches too many files
+- Context not precise enough

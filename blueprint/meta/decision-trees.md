@@ -1,81 +1,121 @@
-# Entscheidungsbaeume
+# Decision Trees
 
-## Wann welchen Agent einsetzen?
+## Which Model for Which Task? (since Fable 5, 06/2026)
 
 ```
-Aufgabe erhalten
+Task received
     |
     v
-Ist es eine UI/Design-Aufgabe?
+Long-horizon Mission (migration, multi-hour autonomous run,
+architecture decisions, team Lead role)?
+    ├── YES → Fable 5 (effort high/xhigh, complete spec in the first turn)
     |
-    ├── JA: Ist Antigravity auf Profil A (UI/Design)?
-    |       ├── JA → Antigravity
-    |       └── NEIN → Claude Code (oder Antigravity-Profil wechseln)
-    |
-    └── NEIN: Ist es Code/Logik/Backend/Tests?
-            └── JA → Claude Code
-```
-
-## Wann einen neuen Thread starten?
-
-```
-Aktueller Thread
-    |
-    v
-Kontextfenster > 70% gefuellt?
-    ├── JA → Neuer Thread
-    |
-    └── NEIN: Agent wird ungenau / halluziniert?
-            ├── JA → Neuer Thread
+    └── NO: Hard logic with correctness risk (parsers, algorithmics, aggregation)?
+            ├── YES → Opus 4.8
             |
-            └── NEIN: Neue Phase beginnt?
-                    ├── JA → Neuer Thread
-                    └── NEIN → Weiter im aktuellen Thread
+            └── NO: Read-only research / explore / mechanical bulk edit?
+                    ├── YES → Haiku 4.5
+                    └── NO → Sonnet 4.6 (standard)
 ```
 
-## Wann eskalieren?
+**Cost anchors** (in/out per MTok) — this is the single canonical place for concrete
+prices in the Blueprint; all other documents reference this section:
+
+Fable $10/$50 · Opus $5/$25 · Sonnet $3/$15 · Haiku $1/$5.
+Fable costs 2× Opus — the added value lies in long-horizon autonomy, not in every single task.
+
+## When to Use Which Agent?
+
+Claude Code handles all task types. Solo work goes to a single Claude Code session;
+in an Agent Team the Lead assigns Chunks to teammates (e.g. UI/design to a Sonnet
+teammate — see [agent-teams.md](../agents/agent-teams.md)). Reviews always go to the
+`/code-review` skill plus a second Claude Code agent with fresh context — never to
+the author (see "Which Review Tool to Choose?" below).
+
+## When to Start a New Thread?
 
 ```
-Agent arbeitet an einem Problem
+Current thread
     |
     v
-Loop-Limit erreicht?
-    ├── JA → STOPP, Eskalation an Mensch
+New phase begins?
+    ├── YES → New thread
     |
-    └── NEIN: Agent dreht sich im Kreis (gleicher Fehler wiederholt)?
-            ├── JA → STOPP, Eskalation an Mensch
+    └── NO: Agent gets imprecise / hallucinates / repeats itself?
+            ├── YES → New thread
             |
-            └── NEIN: Agent will Shared Contracts aendern?
-                    ├── JA → STOPP, Eskalation an Mensch
-                    └── NEIN → Agent arbeitet weiter
+            └── NO: Topic change (new Chunk / new Mission)?
+                    ├── YES → New thread
+                    └── NO → Continue in the current thread
 ```
 
-## Wann Chunks parallelisieren?
+(Hard percentage thresholds are obsolete since 1M context + server-side compaction —
+the agent's quality signals are the better trigger.)
+
+## When to Escalate?
+
+```
+Agent is working on a problem
+    |
+    v
+Loop limit reached?
+    ├── YES → STOP, Escalation to the human
+    |
+    └── NO: Agent is going in circles (same error repeated)?
+            ├── YES → STOP, Escalation to the human
+            |
+            └── NO: Agent wants to change Shared Contracts?
+                    ├── YES → STOP, Escalation to the human
+                    └── NO → Agent continues working
+```
+
+## Chunk Mode or Mission Mode? (Phase 2)
+
+```
+Plan reviewed (Phase 1 completed)
+    |
+    v
+Coherent long-horizon assignment
+(migration, subsystem, refactor across many files)?
+    ├── NO → Chunk Mode (default): 3-5 files per Chunk, Sonnet/Opus Teammates
+    |
+    └── YES: Specification complete (Definition of Done binary-checkable)?
+            ├── NO → Back to Phase 1 — sharpen the spec
+            |        (Mission without a spec = expensive guessing)
+            |
+            └── YES: Does the work split into independent parallel parts?
+                    ├── YES → Hybrid: Fable Lead coordinates the team,
+                    |        Missions/Chunks as tasks to tiered Teammates
+                    └── NO → Mission Mode: Fable 5, effort high/xhigh,
+                               one prompt, fresh thread
+```
+
+## When to Parallelize Chunks?
 
 ```
 Plan reviewed
     |
     v
-Chunk A und Chunk B beruehren verschiedene Dateien?
-    ├── JA: Beide haben keine Abhaengigkeit zueinander?
-    |       ├── JA → Parallel ausfuehren
-    |       └── NEIN → Sequentiell (abhaengiger Chunk wartet)
+Chunk A and Chunk B touch different files?
+    ├── YES: Neither depends on the other?
+    |       ├── YES → Run in parallel
+    |       └── NO → Sequential (dependent Chunk waits)
     |
-    └── NEIN → Sequentiell (gleiche Dateien = Kollisionsgefahr)
+    └── NO → Sequential (same files = collision risk)
 ```
 
-## Welches Review-Tool waehlen?
+## Which Review Tool to Choose?
 
 ```
-Projekt-Setup
+Project setup
     |
     v
-Externes Review-Tool verfuegbar (Greptile)?
-    ├── JA: Budget/Zugang vorhanden?
-    |       ├── JA → Greptile nutzen
-    |       └── NEIN → Zweiter Claude Code Agent
+Claude Code available?
+    ├── YES → /code-review skill as the first stage (every PR)
+    |        + second agent with fresh context for critical PRs
+    |        (the author never reviews their own work — different session/pane)
     |
-    └── NEIN: Mehrere Agent-Sessions moeglich?
-            ├── JA → Zweiter Claude Code Agent
-            └── NEIN → Manuelles Review durch Mensch
+    └── NO: External review tool (e.g. Greptile) available?
+            ├── YES → Use the external tool
+            └── NO → Manual review by the human
 ```

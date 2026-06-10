@@ -1,68 +1,70 @@
-# Blueprint fuer ein neues Projekt einrichten
+# Setting Up the Blueprint for a New Project
 
-## Schritt 1: Blueprint kopieren
+## Step 1: Copy the Blueprint
 
-Kopiere den gesamten `blueprint/` Ordner und `AGENTIC-BLUEPRINT.md` in dein neues Projekt-Root.
+Copy the entire `blueprint/` folder and `AGENTIC-BLUEPRINT.md` into your new project root.
 
 ```bash
-cp -r /pfad/zum/blueprint-repo/blueprint/ ./blueprint/
-cp /pfad/zum/blueprint-repo/AGENTIC-BLUEPRINT.md ./
+cp -r /path/to/blueprint-repo/blueprint/ ./blueprint/
+cp /path/to/blueprint-repo/AGENTIC-BLUEPRINT.md ./
 ```
 
-## Schritt 2: config.md ausfuellen
+## Step 2: Fill Out config.md
 
-Oeffne `blueprint/config.md` und fuell alle Felder aus:
+Open `blueprint/config.md` and fill out all fields:
 
-1. **Projektname und Beschreibung** — was baust du?
-2. **Tech-Stack** — welche Sprachen, Frameworks, Datenbanken?
-3. **Agents** — welche Agents nutzt du? Welches Antigravity-Profil?
-4. **Review-Tool** — Greptile, zweiter Agent, oder manuell?
-5. **Verzeichnis-Zuweisungen** — welcher Agent arbeitet wo?
-6. **Dependencies** — welche Repos sollen via open-source geladen werden?
+1. **Project name and description** — what are you building?
+2. **Tech stack** — which languages, frameworks, databases?
+3. **Agents** — which agents do you use? Solo Claude Code, an Agent Team, or a second Claude Code agent (separate session or teammate)?
+4. **Review tool** — `/code-review` skill + second agent (default), Greptile, or manual?
+5. **Directory assignments** — which agent works where?
+6. **Dependencies (fallback)** — which repos are not directly reachable via grep/read/web_fetch
+   and should be loaded via open-source?
 
-## Schritt 3: CLAUDE.md und AGENTS.md generieren
+## Step 3: Generate CLAUDE.md and AGENTS.md
 
-Gib dem Agent folgendes Prompt:
+Give the agent the following prompt:
 
 ```
-Lies blueprint/config.md und blueprint/templates/CLAUDE.md.template.
-Generiere eine projektspezifische CLAUDE.md basierend auf der Konfiguration.
-Ersetze alle {{PLATZHALTER}} mit den Werten aus config.md.
+Read blueprint/config.md and blueprint/templates/CLAUDE.md.template.
+Generate a project-specific CLAUDE.md based on the configuration.
+Replace all {{PLACEHOLDERS}} with the values from config.md.
 
-Mach dasselbe fuer AGENTS.md mit blueprint/templates/AGENTS.md.template.
+Do the same for AGENTS.md with blueprint/templates/AGENTS.md.template.
 ```
 
-Review die generierten Dateien und committe sie.
+Review the generated files and commit them.
 
-## Schritt 4: Dependencies laden (optional)
+## Step 4: Load Dependencies (optional, fallback)
 
-Fuer jede Dependency die in config.md gelistet ist:
+The default is direct source access (grep/read in `node_modules`, web_fetch).
+Only for repos that are not reachable this way and were listed in config.md:
 
 ```bash
 npx open-source <github-url>
 ```
 
-Stelle sicher dass `open-source/` in `.gitignore` steht.
+Make sure `open-source/` is in `.gitignore`.
 
-## Schritt 5: Los gehts
+## Step 5: Get Going
 
-Starte mit Phase 0 (Ideation) gemaess dem Blueprint.
+Start with Phase 0 (Ideation) according to the Blueprint.
 
-## Anpassungen
+## Adaptations
 
-### Loop-Limits aendern
-Editiere die Dateien unter `blueprint/loops/`. Passe `Max Iterationen` an.
+### Changing loop limits
+Edit the files under `blueprint/loops/`. Adjust `Max Iterations`.
 
-### Neue Phase hinzufuegen
-1. Erstelle `blueprint/phases/XX-name.md` nach dem Muster der existierenden Phasen
-2. Fuege die Phase in die Tabelle in `AGENTIC-BLUEPRINT.md` ein
-3. Aktualisiere `blueprint/meta/changelog.md`
+### Adding a new phase
+1. Create `blueprint/phases/XX-name.md` following the pattern of the existing phases
+2. Add the phase to the table in `AGENTIC-BLUEPRINT.md`
+3. Update `blueprint/meta/changelog.md`
 
-### Neuen Agent hinzufuegen
-1. Erstelle `blueprint/agents/neuer-agent.md` nach dem Muster der existierenden Agents
-2. Fuege den Agent in `AGENTIC-BLUEPRINT.md` ein
-3. Definiere Verzeichnis-Zustaendigkeiten in `blueprint/config.md`
-4. Aktualisiere das Koordinationsprotokoll in `blueprint/agents/coordination.md`
+### Adding a new agent
+1. Create `blueprint/agents/new-agent.md` following the pattern of the existing agents
+2. Add the agent to `AGENTIC-BLUEPRINT.md`
+3. Define directory responsibilities in `blueprint/config.md`
+4. Update the coordination protocol in `blueprint/agents/coordination.md`
 
-### Prompt-Templates verfeinern
-Die Prompt-Templates stehen in den jeweiligen Phase-Dateien. Passe sie nach Erfahrung an — besonders nach Retros.
+### Refining prompt templates
+The prompt templates live in the respective phase files. Adapt them based on experience — especially after retros.

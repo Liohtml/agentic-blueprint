@@ -1,75 +1,76 @@
 # Phase 4: Review Loop
 
-## Zweck
-Automatisierter Review-Zyklus bis der Code Qualitaetsstandards erfuellt.
+## Purpose
+Automated review cycle until the code meets quality standards.
 
-## Wer
-- **Review-Agent:** Greptile, zweiter Claude Code Agent, oder manuell (siehe config.md)
-- **Build-Agent:** Fixt basierend auf Feedback
-- **Mensch:** Greift ein bei Loop-Abbruch
+## Who
+- **Review agent:** Greptile, second Claude Code agent, or manual (see config.md)
+- **Build agent:** Fixes based on feedback
+- **Human:** Intervenes on loop abort
 
-## WICHTIG
-Ein Agent reviewed sich NIE selbst. Review muss immer von einer separaten Instanz kommen.
+## IMPORTANT
+An agent NEVER reviews itself. The review must always come from a separate instance.
 
-## Eingang
-- Sauber strukturierter Code aus Phase 3
-- Feature-Branch bereit fuer PR
+## Input
+- Cleanly structured code from Phase 3
+- Feature branch ready for PR
 
-## Prozess
+## Process
 
-1. **PR erstellen** mit PR-Template (siehe templates/PR-TEMPLATE.md)
-2. **Review abwarten** — automatisch oder manuell
-3. **Feedback lesen und bewerten**
-4. **Fixes anwenden und pushen**
-5. **Neues Review abwarten**
-6. **Wiederholen bis Score 5/5 oder manuelles Approval**
+1. **Create PR** with the PR template (see templates/PR-TEMPLATE.md)
+2. **Wait for review** — automatic or manual
+3. **Read and evaluate feedback**
+4. **Apply fixes and push**
+5. **Wait for new review**
+6. **Repeat until score 5/5 or manual approval**
 
-## Agent-Prompt (Build-Agent nach Review)
+## Agent Prompt (build agent after review)
 
 ```
-Lies das Review-Feedback auf PR #<NR>.
+Read the review feedback on PR #<NO>.
 
-Fuer jedes Finding:
-1. Analysiere ob es berechtigt ist
-2. Wenn ja: fixe es und erklaere kurz was du geaendert hast
-3. Wenn nein: kommentiere warum du es fuer unberechtigt haeltst
+For each finding:
+1. Analyze whether it is justified
+2. If yes: fix it and briefly explain what you changed
+3. If no: comment why you consider it unjustified
 
-Pushe alle Fixes.
-Warte auf neues Review.
-Wiederhole bis Score 5/5.
+Push all fixes.
+Wait for a new review.
+Repeat until score 5/5.
 
-Max 7 Iterationen. Danach: STOPP und eskaliere an Mensch.
+Max 7 iterations. After that: STOP and escalate to the human.
 ```
 
-## Review-Fix-Loop
+## Review-Fix Loop
 
-Siehe: [review-fix-loop.md](../loops/review-fix-loop.md)
+See: [review-fix-loop.md](../loops/review-fix-loop.md)
 
-Max 7 Iterationen.
+Max 7 iterations.
 
-## Review-Agent Optionen
+## Review Agent Options
 
-### Option A: Greptile (extern)
-- Automatisches Review bei jedem Push an den PR
-- Confidence-Scores 1-5
-- Agent liest Feedback via GitHub API / PR-Kommentare
+### Option A: Greptile (external)
+- Automatic review on every push to the PR
+- Confidence scores 1-5
+- Agent reads feedback via the GitHub API / PR comments
 
-### Option B: Zweiter Claude Code Agent
-- Starten in eigenem Thread/Worktree
-- Liest den Diff des PRs
-- Schreibt strukturiertes Review mit Findings und Severity
-- Vorteil: kein externes Tool, volle Kontrolle
+### Option B: Second Claude Code agent
+- Started in its own thread/worktree
+- Reads the diff of the PR
+- Writes a structured review with findings and severity
+- Advantage: no external tool, full control
 
-Welche Option genutzt wird steht in `blueprint/config.md`.
+Which option is used is stated in `blueprint/config.md`.
 
 ## Gate
-- [ ] Review-Score 5/5 oder explizites menschliches Approval
-- [ ] CI-Pipeline gruen
-- [ ] Keine offenen Review-Kommentare unbeantwortet
-- [ ] Branch ist up-to-date mit Main
+- [ ] Review score 5/5 or explicit human approval
+- [ ] The plan's Success Criteria (and the SPEC's Acceptance Criteria, if one exists) verified as passing on the assembled result
+- [ ] CI pipeline green
+- [ ] No open review comments left unanswered
+- [ ] Branch is up-to-date with main
 
 ## Output
-PR bereit zum Merge
+PR ready to merge
 
-## Weiter zu
+## Next
 [Phase 5: Merge & Validate](05-merge.md)

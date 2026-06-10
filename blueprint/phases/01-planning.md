@@ -1,63 +1,70 @@
 # Phase 1: Planning
 
-## Zweck
-Aus dem Problem-Statement einen konkreten, chunk-basierten Implementierungsplan erstellen.
+## Purpose
+Turn the problem statement into a concrete, chunk-based implementation plan.
 
-## Wer
-- **Mensch:** Denkt, bewertet, kuerzt
-- **Agent:** Generiert Plan, schlaegt Chunks vor
+## Who
+- **Human:** Thinks, evaluates, trims
+- **Agent:** Generates the plan, proposes Chunks
 
-## Eingang
-- Problem-Statement mit Scope und Erfolgskriterien aus Phase 0
+## Input
+- Problem statement with scope and success criteria from Phase 0 — for larger features (see the Phase 0 threshold) formalized as a [SPEC](../templates/SPEC.md.template) whose Acceptance Criteria become this plan's Success Criteria
 
-## Prozess
+## Process
 
-1. **Plan generieren lassen:** Agent erstellt Plan mit nummerierten Chunks
-2. **Chunk-Groesse pruefen:** Jeder Chunk muss in einem frischen Kontextfenster umsetzbar sein
-3. **Kuerzen:** Mehr als 8 Chunks? Scope reduzieren oder Features priorisieren
-4. **Abhaengigkeiten markieren:** Welche Chunks muessen sequentiell sein, welche koennen parallel laufen?
-5. **Shared Contracts definieren:** Types, Interfaces, API-Contracts die in Phase 2 read-only sind
+1. **Have the plan generated:** Agent creates a plan with numbered Chunks
+2. **Check Chunk size:** Each Chunk must be implementable in a fresh context window
+3. **Trim:** More than 8 Chunks? Reduce scope or prioritize features
+4. **Mark dependencies:** Which Chunks must be sequential, which can run in parallel?
+5. **Define Shared Contracts:** Types, interfaces, API contracts that are read-only in Phase 2
+6. **Choose the execution mode:** Chunk Mode (default) or Mission Mode on Fable 5 —
+   see [decision-trees.md](../meta/decision-trees.md). In Mission Mode the same
+   plan serves as the overall specification: the Chunks become sections of the Definition of Done
+   and are delivered as *one* prompt instead of individually.
 
-## Agent-Prompt
-
-```
-Analysiere die Anforderung: <ANFORDERUNG>
-
-Erstelle einen Plan mit nummerierten Chunks.
-Jeder Chunk muss:
-- In einem frischen Kontextfenster umsetzbar sein
-- Maximal 3-5 Dateien beruehren
-- Ein klares "Done"-Kriterium haben
-- Angeben welche Dateien erstellt/geaendert werden
-
-Wenn der Plan mehr als 8 Chunks hat: schlage vor wie man den Scope reduziert.
-
-Markiere Abhaengigkeiten zwischen Chunks.
-Markiere welche Chunks parallelisierbar sind.
-```
-
-## Chunk-Format
+## Agent Prompt
 
 ```
-### Chunk <NR>: <Titel>
+Analyze the requirement: <REQUIREMENT>
 
-**Dateien:** <Liste der betroffenen Dateien>
-**Abhaengig von:** <Chunk-NR oder "keine">
-**Parallelisierbar:** ja/nein
-**Agent:** <Claude Code | Antigravity>
-**Done-Kriterium:** <Was muss wahr sein damit dieser Chunk fertig ist>
+Create a plan with numbered Chunks.
+Each Chunk must:
+- Be implementable in a fresh context window
+- Touch at most 3-5 files
+- Have a clear "done" criterion
+- State which files are created/changed
+
+If the plan has more than 8 Chunks: propose how to reduce the scope.
+
+Mark dependencies between Chunks.
+Mark which Chunks are parallelizable.
+Also propose the execution mode (Chunk | Mission) with a one-sentence rationale.
+```
+
+## Chunk Format
+
+```
+### Chunk <NO>: <Title>
+
+**Files:** <list of affected files>
+**Depends on:** <Chunk no. or "none">
+**Parallelizable:** yes/no
+**Agent:** <Claude Code | teammate name>
+**Done criterion:** <What must be true for this Chunk to be done>
 ```
 
 ## Gate
-- [ ] Plan hat maximal 8 Chunks
-- [ ] Jeder Chunk hat max 3-5 Dateien
-- [ ] Jeder Chunk hat ein klares Done-Kriterium
-- [ ] Abhaengigkeiten sind markiert
-- [ ] Shared Contracts sind definiert
-- [ ] Mensch hat den Plan reviewed und fuer gut befunden
+- [ ] Plan has at most 8 Chunks
+- [ ] Each Chunk has max 3-5 files
+- [ ] Each Chunk has a clear done criterion
+- [ ] Dependencies are marked
+- [ ] Shared Contracts are defined
+- [ ] If a SPEC exists: every Acceptance Criterion is covered by at least one Chunk done criterion
+- [ ] Execution mode set (Chunk | Mission)
+- [ ] Human has reviewed and approved the plan
 
 ## Output
-Plan.md im Projekt-Root oder in docs/
+Plan.md in the project root or in docs/
 
-## Weiter zu
-[Phase 2: Building](02-building.md) — pro Chunk ein neuer Thread
+## Next
+[Phase 2: Building](02-building.md) — one new thread per Chunk

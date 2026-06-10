@@ -1,0 +1,69 @@
+# Spec: <FEATURE NAME>
+
+> Formalizes the Phase 0 output before Phase 1 turns it into a plan.
+> Fill in all `<PLACEHOLDERS>`, delete the example lines (_ex:_). Keep every section
+> heading — mark sections that don't apply with "none" instead of deleting them.
+> Background: [spec-driven-development.md](https://github.com/Liohtml/agentic-blueprint/blob/master/docs/spec-driven-development.md).
+
+**Date:** <YYYY-MM-DD> · **Author:** <HUMAN> · **Status:** <draft | approved>
+**Phase 0 source:** <LINK TO ISSUE / TICKET / NOTES>
+
+---
+
+## Problem & Goal
+
+<ONE PARAGRAPH — the problem being solved and the goal state. No solution details.>
+_ex: Teammates have no shared view of token spend during a run; leads notice budget
+overruns only after the fact. Goal: live cost visibility per agent during a session._
+
+## In Scope
+
+- <CAPABILITY THAT IS PART OF THIS FEATURE>
+- _ex: Per-agent token counts, updated at least every 10 seconds_
+
+## Out of Scope
+
+- <EXPLICITLY EXCLUDED — anything a reasonable reader might assume is included>
+- _ex: Historical reporting across past sessions (separate feature)_
+
+## Behavior
+
+> Numbered, testable statements: "When X, the system does Y." Each one becomes
+> verifiable in Phase 2/4 — no vague verbs ("handles", "supports").
+
+1. When <TRIGGER / INPUT>, the system <OBSERVABLE RESULT>.
+2. When <ERROR / EDGE CASE>, the system <OBSERVABLE RESULT>.
+3. _ex: When a teammate emits a usage event, the dashboard row updates within 10 s._
+4. _ex: When the transcript file is malformed, the parser skips the line and logs a warning._
+
+## Constraints
+
+- **Tech stack:** <LANGUAGES / FRAMEWORKS / VERSIONS, or "none" — e.g. "Node 20 + TypeScript">
+- **Forbidden:** <WHAT MUST NOT BE USED OR CHANGED, or "none" — e.g. "no new runtime dependencies">
+- **Performance:** <MEASURABLE BOUND, or "none" — e.g. "parse 10 MB transcript < 2 s">
+- _ex: Forbidden: no Express; only Node stdlib http_
+
+## Acceptance Criteria
+
+> Binary-checkable only — each line is pass/fail with no judgment call, and states
+> how to check it. These become the Success Criteria of the Phase 1 plan, and each
+> one must be covered by at least one Chunk's done criterion (checked at the Phase 1
+> gate); in the Cloud Execution Profile, that plan then becomes the outcome rubric.
+
+- [ ] <CRITERION — a command, an observable state, a measurable number — plus how to check it>
+- [ ] _ex: `npm test && npm run typecheck` exit 0_
+- [ ] _ex: Dashboard shows one row per agent of a running 3-agent team (check: start `scripts/observe.sh`, row count == 3)_
+
+## Open Questions
+
+> Decisions the human still has to make. The spec is not `approved` while any
+> question here is unresolved — resolve or explicitly defer to Out of Scope.
+
+- <QUESTION> — Owner: <HUMAN> — Decision: <pending | RESOLUTION>
+- _ex: Poll the transcript files or watch via fs events? — Owner: Alex — Decision: pending_
+
+---
+
+**Approval checklist** (checked as part of the existing Phase 0 gate — this is
+not an additional gate): all Open Questions resolved, every Acceptance Criterion
+binary-checkable, human has set Status to `approved`.

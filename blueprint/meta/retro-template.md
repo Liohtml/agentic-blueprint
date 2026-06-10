@@ -1,55 +1,67 @@
 # Post-Feature Retro
 
-> Fuehre diese Retro nach jedem groesseren Feature oder Sprint durch.
-> Ziel: Blueprint kontinuierlich verbessern.
+> Run this retro after every larger feature or sprint.
+> Goal: continuously improve the Blueprint.
 
-**Feature:** <Name>
-**Datum:** <YYYY-MM-DD>
-**Beteiligte Agents:** <Claude Code, Antigravity, ...>
-**Dauer:** <Wie lange hat das Feature gedauert>
+**Feature:** <name>
+**Date:** <YYYY-MM-DD>
+**Agents involved:** <Claude Code, teammates, ...>
+**Duration:** <how long the feature took>
 
 ---
 
-## Was lief gut?
+## What Went Well?
 
-- <Was hat auf Anhieb funktioniert?>
-- <Welche Prompts waren effektiv?>
-- <Wo war die Chunk-Groesse genau richtig?>
+- <What worked right away?>
+- <Which prompts were effective?>
+- <Where was the Chunk size exactly right?>
 
-## Was lief schlecht?
+## What Went Badly?
 
-- <Wo hat der Agent geloopt ohne Fortschritt?>
-- <Wo war der Kontext zu viel oder zu wenig?>
-- <Welche Phase hat unerwartet lange gedauert?>
-- <Gab es Kollisionen zwischen Agents?>
+- <Where did the agent loop without progress?>
+- <Where was the context too much or too little?>
+- <Which phase took unexpectedly long?>
+- <Were there collisions between agents?>
 
-## Ueberraschungen
+## Surprises
 
-- <Was war unerwartet — positiv oder negativ?>
-- <Welche Annahmen waren falsch?>
+- <What was unexpected — positive or negative?>
+- <Which assumptions were wrong?>
 
-## Zahlen
+## Numbers
 
-| Metrik | Wert |
-|--------|------|
-| Chunks geplant | |
-| Chunks ausgefuehrt | |
-| Build-Test-Loop Durchschnitt (Iterationen) | |
-| Cleanup-Verify-Loop Durchschnitt | |
-| Review-Fix-Loop Durchschnitt | |
-| Eskalationen an Mensch | |
-| Finale Review-Scores | |
+| Metric | Value |
+|--------|-------|
+| Chunks planned | |
+| Chunks executed | |
+| Build-Test Loop average (iterations) | |
+| Cleanup-Verify Loop average | |
+| Review-Fix Loop average | |
+| Escalations to the human | |
+| Final review scores | |
+| Total cost (USD, from the Observer) | |
+| Model mix (share Fable/Opus/Sonnet/Haiku) | |
 
-## Blueprint-Anpassungen
+## Blueprint Adjustments
 
-> Was sollte am Blueprint geaendert werden basierend auf dieser Erfahrung?
+> What should be changed in the Blueprint based on this experience?
 
-- [ ] Prompt-Templates anpassen: <welche, warum>
-- [ ] Loop-Limits anpassen: <welcher Loop, neues Limit, warum>
-- [ ] Gate-Checklisten anpassen: <welches Gate, was hinzufuegen/entfernen>
-- [ ] Agent-Rollen schaerfen: <welcher Agent, was aendern>
-- [ ] Neue Phase/Loop noetig? <beschreiben>
+- [ ] Adjust prompt templates: <which, why>
+- [ ] Adjust loop limits: <which loop, new limit, why>
+- [ ] Adjust Gate checklists: <which Gate, what to add/remove>
+- [ ] Sharpen agent roles: <which agent, what to change>
+- [ ] New phase/loop needed? <describe>
 
-## Fazit
+## Persisting Learnings
 
-<1-2 Saetze: Was ist die wichtigste Erkenntnis?>
+> Learnings that should influence future runs do not belong only in this doc —
+> they must land where agents read them automatically.
+
+- [ ] `CLAUDE.md` / `AGENTS.md` updated (project-specific rules)
+- [ ] Blueprint change proposed as a PR (framework-wide rules)
+- [ ] Agent memory updated (memory tool or memory store), so agents
+      find the learnings themselves in the next session
+
+## Conclusion
+
+<1-2 sentences: What is the most important insight?>

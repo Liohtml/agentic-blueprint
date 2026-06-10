@@ -1,37 +1,37 @@
 # Phase 5: Merge & Validate
 
-## Zweck
-Finaler menschlicher Check, Merge und Validierung dass nichts kaputt gegangen ist.
+## Purpose
+Final human check, merge, and validation that nothing broke.
 
-## Wer
-- **Mensch:** Gibt finales Go und merged
-- **Agent:** Pre-Merge Checks, Post-Merge Validierung
+## Who
+- **Human:** Gives the final go and merges
+- **Agent:** Pre-merge checks, post-merge validation
 
-## Eingang
-- PR mit Review-Score 5/5 aus Phase 4
+## Input
+- PR with review score 5/5 from Phase 4
 
-## Prozess
+## Process
 
-1. **Mensch reviewed PR final** — letzter Blick auf den Diff
-2. **Pre-Merge Checks durch Agent:**
-   - CI gruen?
-   - Branch up-to-date mit Main?
-   - Keine Merge-Konflikte?
-3. **Mensch merged** — Agent macht das NICHT eigenstaendig
-4. **Post-Merge Validierung:**
-   - Deployment erfolgreich? (wenn applicable)
-   - Keine Regressionen in Monitoring/Logs?
-   - Feature funktioniert in Staging/Production?
+1. **Human reviews the PR one last time** — final look at the diff
+2. **Pre-merge checks by the agent:**
+   - CI green?
+   - Branch up-to-date with main?
+   - No merge conflicts?
+3. **Human merges** — the agent does NOT do this on its own
+4. **Post-merge validation:**
+   - Deployment successful? (if applicable)
+   - No regressions in monitoring/logs?
+   - Feature works in staging/production?
 
 ## Gate
-- [ ] PR gemerged
-- [ ] Deployment erfolgreich (wenn applicable)
-- [ ] Keine Regressionen in Monitoring/Logs
-- [ ] Feature funktioniert wie erwartet
+- [ ] PR merged
+- [ ] Deployment successful (if applicable)
+- [ ] No regressions in monitoring/logs
+- [ ] Feature works as expected
 
 ## Output
-Shipped Feature
+Shipped feature
 
-## Danach
-- [Retro durchfuehren](../meta/retro-template.md) (empfohlen nach jedem groesseren Feature)
-- Blueprint anpassen wenn noetig (siehe [how-to-adapt.md](../meta/how-to-adapt.md))
+## Afterwards
+- [Run a retro](../meta/retro-template.md) (recommended after every larger feature)
+- Adapt the Blueprint if needed (see [how-to-adapt.md](../meta/how-to-adapt.md))

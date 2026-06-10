@@ -1,34 +1,33 @@
-# {{PROJEKTNAME}}
+# {{PROJECT_NAME}}
 
-## Projekt
-{{BESCHREIBUNG}}
+## Project
+{{DESCRIPTION}}
 
-## Tech-Stack
+## Tech Stack
 {{TECH_STACK}}
 
 ## Blueprint
-Dieses Projekt nutzt das Agentic Engineering Blueprint.
-Lies zuerst: [AGENTIC-BLUEPRINT.md](AGENTIC-BLUEPRINT.md)
+This project uses the Agentic Engineering Blueprint.
+Read first: [AGENTIC-BLUEPRINT.md](AGENTIC-BLUEPRINT.md)
 
-## Aktuelle Phase
-> Aktualisiere diesen Block wenn du die Phase wechselst.
+## Current Phase
+> Update this block when you switch phases.
 
-Aktive Phase: **Phase {{PHASE_NR}}: {{PHASE_NAME}}**
-Aktiver Chunk: **Chunk {{CHUNK_NR}}**
-Plan: [Plan.md]({{PLAN_PFAD}})
+Active phase: **Phase {{PHASE_NO}}: {{PHASE_NAME}}**
+Active Chunk: **Chunk {{CHUNK_NO}}**
+Plan: [Plan.md]({{PLAN_PATH}})
 
-## Context-Regeln
-- Lade NUR die Dateien die der aktuelle Chunk benoetigt
-- Max 30% des Kontextfensters mit Kontext fuellen
-- Ab 70% Fuellstand: neuer Thread
-- Dependencies referenzieren unter `open-source/repos/` wenn verfuegbar
+## Context Rules
+- Load ONLY the files the current Chunk needs
+- New thread on phase transitions, topic changes, or when you get imprecise — precise context beats large context
+- Dependencies: read the source directly (grep/read in `node_modules`, web_fetch); `open-source/repos/` as fallback
 
-## Sicherheit
-- Keine Packages installieren die juenger als 14 Tage sind
-- Keine hartcodierten Secrets/Credentials
-- Kein Merge ohne menschliches Approval
+## Safety
+- Do not install packages younger than 14 days
+- No hardcoded secrets/credentials
+- No merge without human approval
 
 ## Dependency Source Code
 {{#DEPENDENCIES}}
-- `open-source/repos/github.com/{{ORG}}/{{REPO}}/` — {{ZWECK}}
+- `open-source/repos/github.com/{{ORG}}/{{REPO}}/` — {{PURPOSE}}
 {{/DEPENDENCIES}}

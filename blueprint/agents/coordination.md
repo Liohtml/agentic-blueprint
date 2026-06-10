@@ -1,63 +1,67 @@
-# Multi-Agent Koordinationsprotokoll
+# Multi-Agent Coordination Protocol
 
-## Grundregel
-Der Mensch ist der Dirigent. Agents arbeiten autonom innerhalb ihrer Chunks, aber der Mensch weist Arbeit zu und trifft Entscheidungen bei Konflikten.
+> Applies to any multi-agent setup: teammates in an Agent Team (see
+> [agent-teams.md](agent-teams.md)) or a second Claude Code agent in a
+> separate session.
 
-## Kollisions-Vermeidung
+## Ground Rule
+The human is the conductor. Agents work autonomously within their Chunks, but the human assigns work and makes decisions on conflicts.
 
-### Verzeichnis-Grenzen
-Jeder Agent hat zugewiesene Verzeichnisse (definiert in config.md).
-Ein Agent arbeitet NIE in den Verzeichnissen eines anderen Agents.
+## Collision Avoidance
+
+### Directory boundaries
+Every agent has assigned directories (defined in config.md).
+An agent NEVER works in another agent's directories.
 
 ### Shared Contracts
-- Shared Types und API-Interfaces werden in Phase 1 definiert
-- Waehrend Phase 2 sind sie READ-ONLY
-- Aenderungen an Shared Contracts erfordern: STOPP aller Agents, Mensch entscheidet, Neustart der betroffenen Chunks
+- Shared types and API interfaces are defined in Phase 1
+- During Phase 2 they are READ-ONLY
+- Changes to Shared Contracts require: STOP all agents, human decides, restart of the affected Chunks
 
-### Branch-Konventionen
-- Format: `feature/<chunk-nr>-<agent>-<beschreibung>`
-- Beispiele:
+### Branch conventions
+- Format: `feature/<chunk-no>-<agent>-<description>`
+- Examples:
   - `feature/01-claude-code-api-endpoints`
-  - `feature/02-antigravity-dashboard-ui`
+  - `feature/02-teammate-ui-dashboard-ui`
   - `feature/03-claude-code-auth-logic`
 
-### File-Locking (implizit)
-Kein technisches Locking, aber:
-- Der Plan definiert welcher Agent welche Dateien beruehrt
-- Wenn zwei Chunks dieselbe Datei brauchen: sie sind NICHT parallelisierbar
-- Der Plan muss das in Phase 1 explizit markieren
+### File locking (implicit)
+No technical locking, but:
+- The plan defines which agent touches which files
+- If two Chunks need the same file: they are NOT parallelizable
+- The plan must mark this explicitly in Phase 1
 
-## Uebergabe-Artefakte
+## Handoff Artifacts
 
-Wenn ein Agent Output produziert den ein anderer Agent braucht:
+When an agent produces output that another agent needs:
 
-1. **API-Contracts:** JSON-Schema oder TypeScript-Interface
-2. **Shared Types:** TypeScript Types/Interfaces in shared Verzeichnis
-3. **Status-Updates:** Agent meldet "Chunk X fertig" an den Mensch
-4. **Blocker:** Agent meldet "Chunk X blockiert wegen Y" an den Mensch
+1. **API contracts:** JSON schema or TypeScript interface
+2. **Shared types:** TypeScript types/interfaces in a shared directory
+3. **Status updates:** Agent reports "Chunk X done" to the human
+4. **Blockers:** Agent reports "Chunk X blocked because of Y" to the human
 
-## Eskalations-Kette
+## Escalation Chain
 
 ```
-Agent hat Blocker
+Agent has a blocker
     |
     v
-Agent dokumentiert Blocker (was, warum, was versucht)
+Agent documents the blocker (what, why, what was tried)
     |
     v
-Agent STOPPT
+Agent STOPS
     |
     v
-Mensch entscheidet:
-    ├── Scope reduzieren
-    ├── Ansatz aendern
-    ├── Manuell fixen
-    └── Anderen Agent beauftragen
+Human decides:
+    ├── Reduce scope
+    ├── Change approach
+    ├── Fix manually
+    └── Assign another agent
 ```
 
-## Reihenfolge bei Konflikten
+## Order of Precedence on Conflicts
 
-1. Shared Contract muss geaendert werden? → Alle Agents stoppen, Mensch entscheidet
-2. Zwei Agents brauchen dieselbe Datei? → Chunks sind sequentiell, nicht parallel
-3. Agent kommt nicht weiter? → Eskalation, nicht endlos loopen
-4. Widerspruch zwischen Agents? → Mensch entscheidet, nicht der "staerkere" Agent
+1. Shared Contract needs to change? → All agents stop, human decides
+2. Two agents need the same file? → Chunks are sequential, not parallel
+3. Agent is stuck? → Escalation, no endless looping
+4. Contradiction between agents? → Human decides, not the "stronger" agent
