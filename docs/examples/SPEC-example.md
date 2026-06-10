@@ -4,7 +4,7 @@
 > [SPEC.md.template](../../blueprint/templates/SPEC.md.template). The project
 > (`tally`, a small expense-tracker CLI) is fictional but realistic.
 
-**Date:** 2026-06-10 · **Author:** Lionel · **Status:** approved
+**Date:** 2026-06-10 · **Author:** Alex · **Status:** approved
 **Phase 0 source:** Phase 0 sparring transcript (see [worked-example.md](worked-example.md#phase-0--ideation--scoping))
 
 ---
@@ -59,14 +59,15 @@ expense data to a file the user names, optionally restricted to one month.
       exits 0
 - [ ] With a pre-existing target file, `export` exits 1 and `cmp` confirms the
       file content is byte-identical to before the run
-- [ ] On a store seeded with expenses in 2026-04 and 2026-05,
-      `export --json /tmp/may.json --month 2026-05` produces an array containing
-      only the 2026-05 records (check: parse and inspect `date` fields)
+- [ ] On a store seeded with expenses in 2026-04 and 2 expenses in 2026-05,
+      `export --json /tmp/may.json --month 2026-05` exits 0 and
+      `node -e "const a=JSON.parse(require('fs').readFileSync('/tmp/may.json'));process.exit(a.length===2&&a.every(e=>/^2026-05/.test(e.date))?0:1)"`
+      exits 0
 
 ## Open Questions
 
 - Amounts are stored as integer cents. Export raw cents or a formatted decimal
-  string? — Owner: Lionel — Decision: **raw cents**. The export is
+  string? — Owner: Alex — Decision: **raw cents**. The export is
   machine-oriented; formatting is the importer's job. Documented in the README
   so nobody mistakes `1250` for €1250.
 

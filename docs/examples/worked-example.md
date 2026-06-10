@@ -90,7 +90,7 @@ New thread. Context given: the SPEC and the planning prompt from
 
 **Human:**
 
-> Analyze the requirement: docs/examples/SPEC-example.md
+> Analyze the requirement: docs/SPEC-export-json.md
 >
 > Create a plan with numbered Chunks.
 > Each Chunk must:
@@ -101,7 +101,10 @@ New thread. Context given: the SPEC and the planning prompt from
 >
 > If the plan has more than 8 Chunks: propose how to reduce the scope.
 > Mark dependencies between Chunks. Mark which Chunks are parallelizable.
-> Also propose the execution mode (Chunk vs Mission) with one sentence of reasoning.
+> Also propose the execution mode (Chunk | Mission) with a one-sentence rationale.
+
+*(The SPEC path is the one inside the fictional tally repo; in this repository
+the artifact lives at [SPEC-example.md](SPEC-example.md).)*
 
 **Agent (abridged):**
 
@@ -112,7 +115,7 @@ New thread. Context given: the SPEC and the planning prompt from
 > expense record shape from `src/store.js` and the service signature
 > `exportExpenses(expenses, { month? }) -> string`, both read-only in Phase 2.
 >
-> **Mode: Chunk Mode.** Three chunks across ~6 files is below the point where
+> **Mode: Chunk Mode.** Three chunks across 7 files is below the point where
 > Mission Mode pays off — the coordination overhead of two thread switches is
 > cheaper than Fable 5's 2× price premium for a feature this size.
 
@@ -127,6 +130,9 @@ exists-check belongs next to the error message"). Result: [PLAN-example.md](PLAN
 - [x] Each Chunk has a clear done criterion
 - [x] Dependencies are marked (1 → 2 → 3)
 - [x] Shared Contracts are defined (record shape, service signature)
+- [x] If a SPEC exists: every Acceptance Criterion is covered by at least one
+      Chunk done criterion (AC 1 → Chunk 2 "full suite green", AC 2–4 → Chunk 3
+      e2e checks)
 - [x] Execution mode set (Chunk)
 - [x] Human has reviewed and approved the plan
 
@@ -140,7 +146,7 @@ full because its build-test loop did not pass on the first try.**
 
 **Human (new thread):**
 
-> Implement Chunk 2 from the plan: docs/examples/PLAN-example.md
+> Implement Chunk 2 from the plan: docs/PLAN-export-json.md
 >
 > Reference: src/cli.js, src/commands/list.js (for the dispatch pattern),
 > src/services/export.js (Chunk 1 output — read-only), the Shared Contracts
@@ -155,6 +161,9 @@ full because its build-test loop did not pass on the first try.**
 > - No hardcoded secrets
 > - If you are stuck after 5 attempts: STOP and report the blocker
 
+*(Again the path inside the fictional tally repo; in this repository the
+artifact lives at [PLAN-example.md](PLAN-example.md).)*
+
 **Agent — build-test loop, iteration 1 (abridged):**
 
 > Implemented `src/commands/export.js` (arg parsing, exists-check, write) and
@@ -168,6 +177,7 @@ full because its build-test loop did not pass on the first try.**
 >     AssertionError: expected exit code 1, got 0
 > ✔ writes [] for an empty store
 > ✔ rejects malformed --month with usage message
+> [...]
 > # tests 13, pass 12, fail 1
 > ```
 >
@@ -189,15 +199,17 @@ full because its build-test loop did not pass on the first try.**
 >
 > Suite green. Loop exit after 2 iterations (1 failed). Done criterion met.
 
-Chunk 3 (README section incl. the raw-cents note, e2e test executing the four
-acceptance-criteria check commands against a temp `HOME`) passed on the first
-iteration — not shown.
+Chunk 3 (README section incl. the raw-cents note, e2e test executing the three
+command-level AC checks — AC 2–4 — against a temp `HOME`; AC 1 *is* `npm test`
+and cannot run itself from inside the suite) passed on the first iteration —
+not shown.
 
 **Gate (Phase 2, after Chunk 3):**
 
 - [x] Done criteria of all chunks fulfilled
 - [x] All new functions have at least one test
-- [x] All tests green (`npm test`: 19 pass / 0 fail)
+- [x] All tests green (`npm test`: 16 pass / 0 fail — 13 from Chunks 1–2 plus
+      the three command-level e2e AC checks from Chunk 3)
 - [x] No hardcoded secrets/credentials
 - [x] No packages younger than 14 days installed (no packages at all)
 - [x] Feature works locally (e2e test + manual run)
@@ -228,7 +240,7 @@ This phase is never skipped, and here it found something real.
 
 **Agent — cleanup-verify loop, iteration 1:**
 
-> Extracted `filterByMonth`, replaced both call sites. `npm test`: 19 pass /
+> Extracted `filterByMonth`, replaced both call sites. `npm test`: 16 pass /
 > 0 fail. No further duplicates found in the diff. Loop exit after 1 iteration.
 
 **Gate (Phase 3):**
@@ -238,14 +250,17 @@ This phase is never skipped, and here it found something real.
 - [x] All existing tests still green
 - [x] Diff touches at most the files from the Chunk plan — **checked with one
       documented exception:** `src/commands/list.js`, explicitly approved by the
-      human above
+      human above. Strictly read, this item fails; the gate text knows no
+      exception — the human override at the escalation above is what clears it.
 - [x] No functionality change — structure only
 
 ---
 
 ## Phase 4 — Review Loop
 
-PR opened from `feature/export-json` (+212 / −9 across 7 files), PR template
+PR opened from `feature/export-json` (+212 / −9 across 9 files — the 7 from the
+chunk plan plus `src/services/filters.js` and `src/commands/list.js` from the
+Phase 3 cleanup), PR template
 filled. Review by a **second Claude Code agent in its own thread** (Option B in
 [04-review-loop.md](../../blueprint/phases/04-review-loop.md)) — the build agent
 never reviews itself.
@@ -269,7 +284,7 @@ never reviews itself.
 > error convention (one-line stderr + exit 1) clearly covers it. Fixed: wrapped
 > the write in try/catch, print `error: cannot write <file>: <reason>`, set
 > `process.exitCode = 1`; added a test using a nonexistent target directory.
-> Suite: 20 pass / 0 fail. Pushed.
+> Suite: 17 pass / 0 fail. Pushed.
 >
 > Finding 2 — **rejected, with comment on the PR:** the store is one small JSON
 > file that every existing command already reads fully into memory; the SPEC
@@ -283,11 +298,28 @@ never reviews itself.
 > Fix for finding 1 verified (code + new test). Rejection of finding 2 is
 > well-reasoned and consistent with the SPEC's scope. **Score: 5/5.**
 
+**Build agent — Success Criteria check on the assembled branch:**
+
+> Re-running the plan's Success Criteria (= the SPEC's Acceptance Criteria) on
+> the full assembled result, not just per chunk:
+>
+> - [x] AC 1: `npm test` exits 0 — 17 pass / 0 fail
+> - [x] AC 2: store seeded with 3 expenses, `node src/cli.js export --json
+>       /tmp/out.json` exits 0; the `node -e` array-length check
+>       (`a.length===3`) exits 0
+> - [x] AC 3: pre-existing target file — `export` exits 1, `cmp` confirms the
+>       file is byte-identical to before the run
+> - [x] AC 4: store seeded with 2026-04 and 2026-05 records, `export --json
+>       /tmp/may.json --month 2026-05` exits 0; the `node -e` check
+>       (`a.length===2 && a.every(e=>/^2026-05/.test(e.date))`) exits 0
+
 **Gate (Phase 4):**
 
 - [x] Review score 5/5
 - [x] CI pipeline green
 - [x] No open review comments left unanswered (finding 2 answered, not ignored)
+- [x] The plan's Success Criteria (and the SPEC's Acceptance Criteria) verified
+      as passing on the assembled result (block above)
 - [x] Branch is up-to-date with main
 
 ---
@@ -297,7 +329,7 @@ never reviews itself.
 **Agent (pre-merge checks):** CI green · branch up-to-date with main · no merge
 conflicts.
 
-**Human:** read the final diff one last time (+218 / −9, 8 files — small enough
+**Human:** read the final diff one last time (+218 / −9, 9 files — small enough
 to actually read, which is the point of chunking), then merged. The agent does
 not merge on its own.
 
@@ -311,7 +343,7 @@ not merge on its own.
 
 - [x] PR merged
 - [x] Deployment successful — n/a (local CLI)
-- [x] No regressions (full suite on main: 20 pass / 0 fail)
+- [x] No regressions (full suite on main: 17 pass / 0 fail)
 - [x] Feature works as expected (manual post-merge run above)
 
 ---
@@ -333,9 +365,10 @@ not merge on its own.
   was declined in one paragraph — defensible only because the SPEC's Out of
   Scope section had already drawn that line. Without it, the rejection is just
   an opinion.
-- **Human time concentrated at the gates.** Roughly 25 minutes total across five
-  gates (sparring, SPEC read, plan trim, cleanup approval, final diff + merge);
-  everything between gates ran in loops with hard iteration limits.
+- **Human time concentrated at the gates.** Well under an hour of human
+  attention across five gates (sparring, SPEC read, plan trim, cleanup
+  approval, final diff + merge); everything between gates ran in loops with
+  hard iteration limits.
 
 **Next step after a run like this:** a short retro with
 [retro-template.md](../../blueprint/meta/retro-template.md) — e.g. "the exit-code

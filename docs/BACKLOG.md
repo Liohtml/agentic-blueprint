@@ -26,9 +26,7 @@
 
 ## In progress
 
-- [ ] **Cycle 3 (worked example):** implemented (docs/examples/ — full 6-phase run on a
-  fictional expense-tracker CLI, incl. one failed build-test iteration and one rejected
-  review finding); **DA review running**, fixes to follow per verdict.
+(nothing — next cycle starts on the next heartbeat)
 
 > Note for the PR: absolute GitHub links from blueprint/ files to docs/ (SDD page,
 > pricing.ts) point at `master` and 404 until PR #7 merges — intentional, they serve
@@ -36,6 +34,13 @@
 
 ## Done
 
+- [x] **2026-06-10 (cycle 3):** End-to-end worked example (docs/examples/): full 6-phase
+  run on a fictional expense-tracker CLI with filled SPEC/PLAN artifacts, one failed
+  build-test iteration, one rejected review finding. DA verdict: 3× approve-with-fixes,
+  2× approve — all 16 fixes applied, incl. the headline finding (the example now walks
+  through the new Phase 1/Phase 4 gate items and checks off the SPEC criteria on the
+  assembled result) and two DA-legitimized canonical gaps closed: Execution Mode
+  section added to PLAN.md.template, mode-proposal line added to the Phase 1 prompt.
 - [x] **2026-06-09/10 (cycle 2):** SPEC.md.template + docs/spec-driven-development.md
   (Blueprint ↔ SDD mapping, SPEC → PLAN → rubric chain), phase 0/1 cross-links,
   glossary entries (Acceptance Criteria, SPEC, SDD). Full DA review (after the

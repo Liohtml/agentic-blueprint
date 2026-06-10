@@ -16,7 +16,7 @@ no overwrite of existing files, behavior statements 1–5 of the SPEC. Nothing e
 
 ## Success Criteria
 
-Taken verbatim from the SPEC's Acceptance Criteria:
+Condensed from the SPEC's Acceptance Criteria (full check commands live in the SPEC):
 
 - `npm test` exits 0, including new tests covering behaviors 1–5
 - Seeded store (3 expenses) exports to a parseable JSON array of length 3, exit 0
@@ -25,7 +25,7 @@ Taken verbatim from the SPEC's Acceptance Criteria:
 
 ## Execution Mode
 
-**Chunk Mode.** Three chunks across ~6 files is below the threshold where
+**Chunk Mode.** Three chunks across 7 files is below the threshold where
 Mission Mode pays off: the coordination overhead (two thread switches, two small
 context reloads) is cheaper than Fable 5's 2× price premium for a feature this size.
 
@@ -47,7 +47,7 @@ context reloads) is cheaper than Fable 5's 2× price premium for a feature this 
 **Files:** `src/services/export.js`, `test/export-service.test.js`
 **Agent:** Claude Code
 **Depends on:** none
-**Parallelizable:** yes
+**Parallelizable:** no
 **Done criterion:** `exportExpenses` returns a JSON array string for a given
 expense list; honors the optional month filter; returns `[]` for empty/no-match
 input; unit tests for all three cases green.
@@ -69,8 +69,9 @@ exit 1 with a one-line stderr message.
 **Depends on:** Chunk 2
 **Parallelizable:** no
 **Done criterion:** README documents the command and the raw-cents convention;
-e2e test runs the real CLI against a temp `HOME` and executes the four
-Acceptance Criteria check commands; suite green.
+e2e test runs the real CLI against a temp `HOME` and executes the three
+command-level Acceptance Criteria checks (AC 2–4; AC 1 is `npm test` itself
+and is verified by the suite being green); suite green.
 
 ---
 

@@ -38,6 +38,7 @@ If the plan has more than 8 Chunks: propose how to reduce the scope.
 
 Mark dependencies between Chunks.
 Mark which Chunks are parallelizable.
+Also propose the execution mode (Chunk | Mission) with a one-sentence rationale.
 ```
 
 ## Chunk Format
