@@ -36,11 +36,14 @@
 
 ## Done
 
-- [x] **2026-06-09 (cycle 2):** SPEC.md.template + docs/spec-driven-development.md
+- [x] **2026-06-09/10 (cycle 2):** SPEC.md.template + docs/spec-driven-development.md
   (Blueprint ↔ SDD mapping, SPEC → PLAN → rubric chain), phase 0/1 cross-links,
-  glossary entries (Acceptance Criteria, SPEC, SDD). Devil's-advocate review applied:
-  no phantom gate, non-circular when-to-spec heuristic, honest Spec Kit description,
-  Phase 3 correctly placed inside Implement, PLAN terminology aligned (Success Criteria).
+  glossary entries (Acceptance Criteria, SPEC, SDD). Full DA review (after the
+  session-limit interruption): 5× approve-with-fixes, no reject — all fixes applied:
+  binary AC example, SPEC threshold aligned with the chunk rule (>1 chunk / ~5 files),
+  SPEC-wins conflict rule, traceability now **gate-enforced** (new Phase 1 gate item:
+  every AC covered by a chunk done criterion; new Phase 4 gate item: criteria
+  verified on the assembled result), DoD terminology aligned, hardcoded name removed.
 - [x] **2026-06-09 (cycle 1, v1.4):** English-first release. Research agent (15 sourced
   ideas) + devil's advocate (10 findings, 2 blockers) + 3 implementation agents:
   "first 10 minutes" quickstart, GETTING-STARTED (non-technical + developer tracks),
