@@ -3,7 +3,7 @@
 > Formalizes the Phase 0 output before Phase 1 turns it into a plan.
 > Fill in all `<PLACEHOLDERS>`, delete the example lines (_ex:_). Keep every section
 > heading — mark sections that don't apply with "none" instead of deleting them.
-> Background: [docs/spec-driven-development.md](../../docs/spec-driven-development.md).
+> Background: [spec-driven-development.md](https://github.com/Liohtml/agentic-blueprint/blob/master/docs/spec-driven-development.md).
 
 **Date:** <YYYY-MM-DD> · **Author:** <HUMAN> · **Status:** <draft | approved>
 **Phase 0 source:** <LINK TO ISSUE / TICKET / NOTES>

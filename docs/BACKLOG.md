@@ -26,7 +26,12 @@
 
 ## In progress
 
-(nothing — next cycle starts on the next heartbeat)
+- [ ] **Cycle 2 (SPEC + SDD):** implemented and committed; the devil's-advocate review
+  was interrupted by a session usage limit — **DA verdict outstanding**, re-run it
+  before building anything on top of the SPEC template. Orchestrator self-review
+  done (one copy-breaking relative link found and fixed).
+- [ ] **Cycle 3 (worked example):** queued — agent spawn failed on the session limit,
+  restart after the limit resets.
 
 ## Done
 
