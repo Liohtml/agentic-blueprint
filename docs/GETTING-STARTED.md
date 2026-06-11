@@ -147,6 +147,18 @@ And generate your project-specific agent file:
 
 See [docs/docker-sandbox.md](docker-sandbox.md) to run agents safely in a container — recommended before giving agents autonomy.
 
+### Step 2.5 — Optimize your terminal (optional, 5 min)
+
+If you spend a lot of time in the terminal, a nice prompt and shell aliases speed up daily work.
+
+[Terminal Setup](../../terminal-setup/README.md) covers:
+- **Fast prompt** (Starship): shows git status, Node version, etc. at a glance
+- **Fonts**: Nerd Fonts render glyphs correctly (git icons, symbols, etc.)
+- **Shell aliases**: `clady` shortcut for `claude code --dangerously-skip-permissions`
+- **Editor integration**: guides for Vim, Helix, Emacs, Micro
+
+This is entirely optional — Claude Code works just as well in plain bash. But if you like a polished terminal experience, give it a try. ([Quick start in 5 minutes.](../../terminal-setup/QUICKSTART.md))
+
 ### Step 3 — First win: plan a mini feature (≈8 min)
 
 Pick a small real feature from your backlog (or invent one). Then:

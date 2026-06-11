@@ -34,6 +34,9 @@ English-first. All content, commits, and docs in English. (Maintainer decision
 - The setup wizard prompt exists twice (README.md +
   blueprint/templates/setup-wizard-prompt.md) — any change must update both;
   verify with a diff.
+- **Terminal setup is opt-in.** Developers may customize shells/editors via
+  `terminal-setup/` — it's not required for the blueprint itself, but useful
+  for daily workflow optimization.
 
 ## Linking Conventions
 - Links **between files inside `blueprint/`**: relative paths.

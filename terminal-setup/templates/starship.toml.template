@@ -1,0 +1,60 @@
+# Starship Configuration Template
+# Location: ~/.config/starship.toml
+
+# Character module - the main prompt symbol
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+# Git branch - shows current branch
+[git_branch]
+symbol = " "
+truncation_length = 20
+truncation_symbol = "…"
+
+# Git status - shows uncommitted changes
+[git_status]
+ahead = "⬆ "
+behind = "⬇ "
+diverged = "⬍ "
+disabled = false
+
+# Node.js - shows Node version when in a Node project
+[nodejs]
+symbol = " "
+format = "via [$symbol($version)]($style) "
+
+# Python - shows Python version
+[python]
+symbol = " "
+format = "via [$symbol($version)]($style) "
+
+# Rust - shows Rust version
+[rust]
+symbol = " "
+format = "via [$symbol($version)]($style) "
+
+# Git metrics - shows commit counts (optional, may slow things down)
+[git_metrics]
+disabled = true
+
+# Package - shows package version
+[package]
+symbol = " "
+disabled = true
+
+# Line break - adds newline before path
+[line_break]
+disabled = false
+
+# Prompt format - shows the complete prompt
+format = """
+$character$git_branch$git_status$nodejs$python$rust
+$directory
+"""
+
+# Directory styling
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+style = "bold cyan"
