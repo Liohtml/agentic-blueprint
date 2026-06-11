@@ -1,0 +1,35 @@
+# PowerShell Alias Snippets for $PROFILE
+# Copy and paste these aliases into your PowerShell profile
+
+# Claude Code aliases
+Set-Alias -Name cls -Value 'claude code'
+Set-Alias -Name clady -Value 'claude code --dangerously-skip-permissions'
+
+# Directory navigation
+function ll { Get-ChildItem -Force $args }
+function la { Get-ChildItem -Attributes Hidden $args }
+
+# Git shortcuts
+function gitstatus { git status }
+function gitlog { git log --oneline -10 }
+function gitdiff { git diff }
+function gitadd { git add $args }
+function gitcommit { git commit -m $args }
+
+# Useful utilities
+function h { Get-History }
+function c { Clear-Host }
+
+# Reload config
+function reload { & $PROFILE }
+
+# To use these aliases:
+# 1. Open PowerShell
+# 2. Type: notepad $PROFILE
+# 3. Copy the aliases above to the end of the file
+# 4. Save and exit
+# 5. Restart PowerShell or run: . $PROFILE
+# 6. Test: clady --help (should work)
+
+# If $PROFILE doesn't exist, create it:
+# New-Item -Path $PROFILE -Type File -Force | Out-Null

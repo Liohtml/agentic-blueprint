@@ -10,6 +10,7 @@
   <a href="#quick-start-developers">Quick Start</a> &bull;
   <a href="#clone--go--agent-teams">Agent Teams</a> &bull;
   <a href="#run-agents-safely--docker-sandbox">Docker Sandbox</a> &bull;
+  <a href="terminal-setup/README.md">Terminal Setup</a> &bull;
   <a href="#how-it-works">How It Works</a> &bull;
   <a href="#project-structure">Structure</a> &bull;
   <a href="CONTRIBUTING.md">Contributing</a>

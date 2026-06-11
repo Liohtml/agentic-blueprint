@@ -1,0 +1,35 @@
+# Shell Alias Snippets for ~/.config/fish/config.fish
+# Copy and paste these aliases into your ~/.config/fish/config.fish file
+
+# Claude Code aliases
+alias cls='claude code'                              # Quick launch
+alias clady='claude code --dangerously-skip-permissions'  # Skip permission prompts
+
+# Directory navigation
+alias ll='ls -lah'        # List all files with details
+alias la='ls -A'          # List hidden files
+alias ..='cd ..'          # Go up one directory
+alias ...='cd ../..'      # Go up two directories
+
+# Git shortcuts
+alias gitstatus='git status'                         # Full status
+alias gitlog='git log --oneline -10'                # Recent commits
+alias gitdiff='git diff'                            # Show changes
+alias gitadd='git add'                              # Stage files
+alias gitcommit='git commit -m'                     # Quick commit
+
+# Useful utilities
+alias grep='grep --color=auto'                      # Colored grep
+alias less='less -R'                                # Preserve colors
+alias h='history'                                   # History shortcut
+alias c='clear'                                     # Clear screen
+
+# Reload config
+alias reload='source ~/.config/fish/config.fish'    # Reload fish config
+
+# To use these aliases:
+# 1. Create ~/.config/fish/config.fish if it doesn't exist
+# 2. Copy the aliases you want to the end of the file
+# 3. Save and exit
+# 4. Fish reloads automatically on next shell start
+# 5. Test: clady --help (should work)
