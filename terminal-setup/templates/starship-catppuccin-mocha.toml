@@ -1,0 +1,148 @@
+# Starship Catppuccin Mocha Configuration
+# Beautiful terminal prompt with Powerline-style pill segments
+# Colors from Catppuccin Mocha palette
+
+# Catppuccin Mocha Colors
+# https://github.com/catppuccin/catppuccin
+# rosewater: #f5e0dc
+# flamingo:  #f2cdcd
+# pink:      #f5c2e7 (username)
+# mauve:     #cba6f7
+# red:       #f38ba8
+# maroon:    #eba0ac
+# peach:     #fab387 (directory)
+# yellow:    #f9e2af
+# green:     #a6e3a1 (git)
+# teal:      #94e2d5 (nodejs)
+# sky:       #89dceb
+# sapphire:  #74c7ec
+# blue:      #89b4fa
+# lavender:  #b4befe (time)
+
+format = """
+$os\
+$username\
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$time\
+$character
+"""
+
+# Character module - the main prompt symbol
+[character]
+success_symbol = "[❯](bold lavender)"
+error_symbol = "[❯](bold red)"
+
+# OS icon at the start
+[os]
+disabled = false
+format = "[$symbol]($style)"
+style = "bold pink"
+
+[os.symbols]
+Ubuntu = "🐧"
+Macos = "🍎"
+Windows = "🪟"
+
+# Username with pill styling
+[username]
+disabled = false
+format = "[  $user]($style)"
+style = "bg:pink fg:black bold"
+show_always = true
+
+# Directory with peach pill
+[directory]
+disabled = false
+truncation_length = 3
+truncation_symbol = "…/"
+format = "[  $path]($style)"
+style = "bg:peach fg:black bold"
+home_symbol = "~"
+
+[[directory.substitutions]]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+# Git branch with green pill
+[git_branch]
+disabled = false
+symbol = " "
+format = "[  $symbol$branch]($style)"
+style = "bg:green fg:black bold"
+truncation_length = 20
+truncation_symbol = "…"
+
+# Git status with green styling
+[git_status]
+disabled = false
+format = "([\\[$all_status$ahead_behind\\]]($style) )"
+style = "bg:green fg:black bold"
+ahead = "⬆ "
+behind = "⬇ "
+diverged = "⬍ "
+conflicted = "💥"
+deleted = "✖ "
+renamed = "» "
+modified = "! "
+staged = "+ "
+untracked = "? "
+
+# Node.js version with teal pill
+[nodejs]
+disabled = false
+symbol = " "
+version_format = "v${raw}"
+format = "[  $symbol$version]($style)"
+style = "bg:teal fg:black bold"
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+detect_folders = ["node_modules"]
+
+# Time with lavender pill
+[time]
+disabled = false
+time_format = "%H:%M"
+format = "[  $time]($style)"
+style = "bg:lavender fg:black bold"
+
+# Line break for second line
+[line_break]
+disabled = false
+
+# Second line with just the directory and prompt
+# Useful for clarity - path on its own line
+format = "$directory$character "
+
+# Additional modules (disabled by default, enable as needed)
+
+# Python version (if needed)
+[python]
+disabled = true
+symbol = " "
+format = "[$symbol$version]($style)"
+style = "bg:blue fg:black bold"
+
+# Rust version (if needed)
+[rust]
+disabled = true
+symbol = " "
+format = "[$symbol$version]($style)"
+style = "bg:red fg:black bold"
+
+# Package version (if needed)
+[package]
+disabled = true
+symbol = " "
+format = "[$symbol$version]($style)"
+style = "bg:yellow fg:black bold"
+
+# Command execution time (shows if command took > 2 seconds)
+[cmd_duration]
+disabled = false
+min_time = 2000
+format = "[$duration]($style) "
+style = "fg:yellow"

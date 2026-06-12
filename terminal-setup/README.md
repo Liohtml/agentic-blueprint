@@ -124,8 +124,9 @@ terminal-setup/
 │   ├── install-starship.sh
 │   ├── install-fonts.sh
 │   └── configure-clady.sh
-├── templates/                     (config examples)
+├── templates/                     (config examples & presets)
 │   ├── starship.toml.template
+│   ├── starship-catppuccin-mocha.toml  (✨ beautiful Mocha theme)
 │   ├── .bashrc-snippet.template
 │   ├── .zshrc-snippet.template
 │   ├── .fish-snippet.template

@@ -273,6 +273,59 @@ format = "via [$symbol($version)]($style) "
 disabled = false
 ```
 
+### Catppuccin Mocha with Powerline Pills ✨
+
+A beautiful **theme with Powerline-style pill segments** using the Catppuccin Mocha palette:
+- 💗 Pink: username
+- 🍑 Peach: directory
+- 💚 Green: git
+- 🩵 Teal: Node.js version
+- 💜 Lavender: time
+
+**Visual preview:**
+```
+🐧  user  ~/projects/my-app   main   v20.10.0  14:32  ❯
+```
+
+**To use this preset:**
+
+1. Copy the template:
+   ```bash
+   cp terminal-setup/templates/starship-catppuccin-mocha.toml ~/.config/starship.toml
+   ```
+
+2. Or manually: replace your `~/.config/starship.toml` with the content below
+
+3. Restart your terminal
+
+**Configuration (show/hide modules as needed):**
+
+The template includes: OS icon, username, directory, git branch/status, Node.js version, time, and custom prompt character. You can disable modules by setting `disabled = true` in the `[module_name]` section.
+
+For example, to disable the time display:
+```toml
+[time]
+disabled = true
+```
+
+**Customize colors:**
+
+The preset uses these Catppuccin Mocha color hex codes:
+- `pink` = #f5c2e7
+- `peach` = #fab387
+- `green` = #a6e3a1
+- `teal` = #94e2d5
+- `lavender` = #b4befe
+
+To change colors, edit the `style` or `format` lines in `~/.config/starship.toml`. Example:
+
+```toml
+[username]
+style = "bg:pink fg:black bold"     # Change "pink" to another Catppuccin color
+```
+
+Available Catppuccin Mocha colors: rosewater, flamingo, pink, mauve, red, maroon, peach, yellow, green, teal, sky, sapphire, blue, lavender
+
 ---
 
 ## Next Steps

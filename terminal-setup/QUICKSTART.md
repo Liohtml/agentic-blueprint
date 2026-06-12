@@ -58,6 +58,14 @@ After restarting your terminal, you should see:
 
 (Instead of just `$` or `%`)
 
+**Want a more beautiful theme?** Try the Catppuccin Mocha preset with colorful pill segments:
+```bash
+cp terminal-setup/templates/starship-catppuccin-mocha.toml ~/.config/starship.toml
+# Restart terminal to see the new theme
+```
+
+See [Starship Configuration](guides/starship-configuration.md#catppuccin-mocha-with-powerline-pills-) for details.
+
 If you see **boxes or broken glyphs** (e.g., `□` instead of `git` icon), you're missing the font. Go to Step 2.
 
 #### Step 2 Expected Output
