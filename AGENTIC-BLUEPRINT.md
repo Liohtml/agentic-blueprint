@@ -1,4 +1,4 @@
-# Agentic Engineering Blueprint v1.6
+# Agentic Engineering Blueprint v1.7
 
 > This document is the central working instruction for all agents in this project.
 > It is loaded automatically and defines principles, phases, and roles.
@@ -61,6 +61,13 @@ becomes the outcome rubric, an independent grader evaluates every iteration
 with a clear Definition of Done.
 Detail: [managed-agents.md](blueprint/agents/managed-agents.md)
 
+### Orchestration (deterministic multi-agent patterns)
+Running multi-agent work as a deterministic procedure instead of ad-hoc prompting:
+fan-out/pipeline, adversarial verification, judge panels, loop-until-dry, and
+structured result contracts (research finding / DA verdict / implementation report)
+between pipeline stages.
+Detail: [orchestration.md](blueprint/agents/orchestration.md)
+
 ### Model Tiering (since Fable 5, 06/2026)
 Four tiers: **Fable 5** (Lead, Mission Chunks, critical migrations) > **Opus**
 (hard logic) > **Sonnet** (standard) > **Haiku** (explore, bulk edits).
@@ -85,6 +92,14 @@ for subagents. Decision tree and current price anchors: [decision-trees.md](blue
 | Build-Test | 2 | 5 | Report blocker |
 | Cleanup-Verify | 3 | 3 | Rollback |
 | Review-Fix | 4 | 7 | Human takes over |
+| Improvement | meta* | 1-3 items per cycle* | Maintainer stop / empty backlog |
+
+\* The Improvement Loop runs on the **system itself**, between features, not inside a
+phase: backlog → research → devil's-advocate review → implement → test → push →
+backlog update. "1-3 items per cycle" is an item count, not an iteration cap — cycles
+are unbounded until an abort condition fires; inside a cycle the three feature loops
+keep their own hard limits. Its durable state is the backlog file, which makes it
+resumable after any interruption. Detail: [improvement-loop.md](blueprint/loops/improvement-loop.md)
 
 Optionally in addition: **Task Budgets** (`output_config.task_budget`, beta) as a soft
 token limit per loop run — the model sees the countdown and moderates itself.
@@ -112,7 +127,7 @@ Bootstrapping guide: [how-to-adapt.md](blueprint/meta/how-to-adapt.md)
 
 ## Meta
 
-- **Version:** 1.6
+- **Version:** 1.7
 - **Changelog:** [changelog.md](blueprint/meta/changelog.md)
 - **Retro template:** [retro-template.md](blueprint/meta/retro-template.md)
 - **Decision trees:** [decision-trees.md](blueprint/meta/decision-trees.md)

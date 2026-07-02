@@ -26,17 +26,45 @@
 
 ## Loop status
 
-**The continuous-improvement loop ended on 2026-06-10** (maintainer decision): all
-planned autonomous work is done, PR #7 is merged, Antigravity is removed (v1.5).
-Remaining open items are community-reserved (good-first-issues) or maintainer-gated
-(repo settings, demo GIF, observer data shapes) — see Open above. A new loop can be
-started any time by re-running the orchestrator prompt.
+**Loop restarted 2026-07-02 by maintainer go** for one v1.7 cycle ("free hand —
+make the repo ultra strong for agent systems in the loop"); the cycle is complete
+and the loop is idle again pending the next maintainer go. (Mid-cycle, commit
+a4a5fda was pushed with a transparent "verification DA pending" note — the loop's
+own interruption protocol in action; the verification DA then returned
+approve-with-fixes and all fixes landed in the closing commit.) Before that, the loop
+had ended on 2026-06-10 (maintainer decision) with PR #7 merged and Antigravity
+removed (v1.5). Remaining open items are community-reserved (good-first-issues) or
+maintainer-gated (repo settings, demo GIF, observer data shapes) — see Open above.
+A new loop can be started any time with
+[blueprint/prompts/improvement-orchestrator.md](../blueprint/prompts/improvement-orchestrator.md).
 
 > Note for the PR: absolute GitHub links from blueprint/ files to docs/ (SDD page,
 > pricing.ts) point at `master` and 404 until PR #7 merges — intentional, they serve
 > the copy-into-your-project use case after the merge.
 
 ## Done
+
+- [x] **2026-07-02 (v1.7, loop-codification cycle):** The Improvement Loop shipped
+  as a first-class framework component — the loop this repo ran on itself is now a
+  spec (`blueprint/loops/improvement-loop.md`, incl. the canonical interruption &
+  resumption protocol and an honest "Running it unattended" section), plus
+  deterministic orchestration patterns for Fable 5
+  (`blueprint/agents/orchestration.md`: fan-out/pipeline, adversarial verification,
+  judge panels, loop-until-dry, structured result contracts), the loop's working
+  memory as a template (`blueprint/templates/BACKLOG.md.template`), and the
+  previously missing orchestrator prompt
+  (`blueprint/prompts/improvement-orchestrator.md`). Item entered Open via the
+  maintainer go of 2026-07-02 (decision log) and shipped the same cycle. Two DA
+  passes: design DA before implementation (approve-with-fixes — 2 blockers: loop
+  bookkeeping self-application, continuity mechanisms attributed to the wrong
+  layer; 7 major, 4 minor; all applied, package cut from 5 files to 4) and a
+  verification DA on the shipped artifacts (approve-with-fixes — 1 major: an
+  unbacked "scheduled deployments" claim, removed; 3 minor: template link that
+  would break on copy-out, README table semantics footnote, auditability of the
+  dry-run claim; all applied). Orchestrator prompt dry-run-tested: a fresh
+  session with only the prompt and a simulated "DA pending" backlog correctly
+  prioritized the pending review over new items; its finding (pin the WIP commit
+  hash in Loop status) was applied to prompt + template.
 
 - [x] **2026-06-10 (v1.6, user-testing cycle):** Onboarding hardening after a real
   non-technical tester failed at setup. Setup wizard prompt (agent does the whole
@@ -87,6 +115,7 @@ started any time by re-running the orchestrator prompt.
 | 2026-06-09 | Positioning | ✅ Honest "Built for Claude Code"; core principles may be noted as transferable |
 | 2026-06-10 | Remove Antigravity entirely | ✅ Removed in v1.5 — roles covered by teammates / second Claude Code agent |
 | 2026-06-10 | Finish planned work, merge PR #7, end the loop | ✅ Executed — see Loop status |
+| 2026-07-02 | Restart the loop for a Fable 5 rework, "free hand to make the repo ultra strong for agent systems in the loop" | ✅ Maintainer go — v1.7 cycle: codify the improvement loop + orchestration patterns (see Done) |
 
 ## Loop rules (short version)
 
