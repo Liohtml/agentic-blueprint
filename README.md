@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.6-blue" alt="Version 1.6">
+  <img src="https://img.shields.io/badge/version-1.7-blue" alt="Version 1.7">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License MIT">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs Welcome">
 </p>
@@ -163,8 +163,9 @@ Drop it into any project. Your agents know what to do.
 - **Automated Feedback Loops** — Build-Test, Cleanup-Verify, and Review-Fix loops with defined iteration limits
 - **Quality Gates** — Binary pass/fail checks between every phase
 - **Context Engineering** — Rules for keeping agent context minimal and precise
-- **Templates** — Ready-to-use templates for CLAUDE.md, AGENTS.md, plans, and PRs
-- **Self-Evolving** — Built-in retro template to improve the blueprint after each feature
+- **Templates** — Ready-to-use templates for CLAUDE.md, AGENTS.md, plans, backlogs, and PRs
+- **Self-Evolving** — A first-class [Improvement Loop](blueprint/loops/improvement-loop.md): backlog → research → devil's-advocate review → implement → test → push, resumable from its backlog file after any interruption — plus the retro template for per-feature learnings
+- **Deterministic Orchestration** — [Multi-agent patterns](blueprint/agents/orchestration.md) for Fable 5: fan-out pipelines, adversarial verification, judge panels, and structured result contracts between agents
 
 ---
 
@@ -308,6 +309,7 @@ Each loop has a hard iteration limit. When reached, the agent stops and escalate
 | Build-Test | Building | 5 | Report blocker |
 | Cleanup-Verify | Cleanup | 3 | Rollback to original |
 | Review-Fix | Review | 7 | Human takes over |
+| [Improvement](blueprint/loops/improvement-loop.md) | Between features (system-level) | 1-3 backlog items per cycle | Maintainer stop / empty backlog |
 
 ### Multi-Agent Coordination
 
@@ -353,6 +355,7 @@ your-project/
 |   |-- agents/                   # Role definitions
 |   |   |-- claude-code.md        #   Primary engineering agent
 |   |   |-- coordination.md       #   Multi-agent protocol
+|   |   |-- orchestration.md      #   Deterministic multi-agent patterns (pipelines, adversarial verify, judge panels)
 |   |   |-- agent-teams.md        #   Live teammates in tmux split-panes (setup + runbook)
 |   |   |-- managed-agents.md     #   Cloud execution profile (Managed Agents + Outcome rubrics)
 |   |
@@ -360,13 +363,20 @@ your-project/
 |   |   |-- build-test-loop.md
 |   |   |-- cleanup-verify-loop.md
 |   |   |-- review-fix-loop.md
+|   |   |-- improvement-loop.md   #   System-level loop: backlog -> research -> DA review -> ship
 |   |
 |   |-- templates/                # Copy-paste ready templates
 |   |   |-- setup-wizard-prompt.md
 |   |   |-- CLAUDE.md.template
 |   |   |-- AGENTS.md.template
 |   |   |-- PLAN.md.template
+|   |   |-- BACKLOG.md.template
 |   |   |-- PR-TEMPLATE.md
+|   |
+|   |-- prompts/                  # Ready-to-paste agent prompts
+|   |   |-- improvement-orchestrator.md  # Start/resume the improvement loop in any project
+|   |   |-- repo-guardian-agent.md       # Persistent in-repo reviewer persona
+|   |   |-- repo-health-agent.md         # Scheduled multi-repo audit routine
 |   |
 |   |-- meta/                     # Self-improvement tools
 |       |-- how-to-adapt.md       #   Bootstrapping guide for new projects

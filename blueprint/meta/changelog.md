@@ -1,5 +1,57 @@
 # Blueprint Changelog
 
+## v1.7 — 2026-07-02
+
+The Improvement Loop — the self-improving system the repo ran on itself in June
+2026, codified as a first-class framework component. Maintainer-initiated cycle
+("free hand to make the repo ultra strong for agent systems in the loop"),
+devil's-advocate-reviewed before implementation (approve-with-fixes: 2 blockers,
+7 major, 4 minor — all applied, including shrinking the package from 5 files to 4).
+
+### New
+- **Improvement Loop** (`blueprint/loops/improvement-loop.md`): the 4th feedback
+  loop, operating on the system itself — backlog → research → DA review →
+  implement → test → push → backlog update. Standard loop skeleton, the
+  devil's-advocate gate, the canonical interruption & resumption protocol
+  (continuity from persisted state + re-entry, never from long-lived processes),
+  and a "Running it unattended" section with honest mechanism attribution:
+  external schedulers (cron / GitHub Actions) are the portable baseline;
+  in-session mechanisms (interval skills, PR-activity subscriptions) cannot
+  revive a dead session; state-based resumption is the guaranteed layer.
+- **Orchestration patterns** (`blueprint/agents/orchestration.md`): deterministic
+  multi-agent patterns for Fable 5 — fan-out/pipeline (barriers only when a stage
+  needs all results), adversarial verification (N independent refuters), judge
+  panels, loop-until-dry, the improvement-cycle pipeline, plus structured result
+  contracts (research finding / DA verdict / implementation report JSON envelopes)
+  as the canonical machine contracts between pipeline stages.
+- **`blueprint/templates/BACKLOG.md.template`**: the loop's working memory —
+  Open / Loop status / Done / Decision log / Loop rules — generalized from this
+  repo's own `docs/BACKLOG.md`. The file IS the loop state; a fresh session
+  resumes from it alone.
+- **`blueprint/prompts/improvement-orchestrator.md`**: the copy-paste prompt that
+  starts or RESUMES the loop in any blueprint project (the backlog referenced
+  "re-running the orchestrator prompt" — the prompt now actually exists).
+  Non-negotiables at the top (no-git subagents, DA gate, file ownership, test
+  gate, maintainer escalations), first action = resume pending DA reviews from
+  the backlog. Dry-run-tested in a fresh session against a simulated
+  "DA pending" state before shipping.
+
+### Changed
+- `AGENTIC-BLUEPRINT.md`: version 1.7; Improvement Loop row in the feedback-loop
+  table (with item-count-vs-iteration-cap semantics footnote); Orchestration role
+  section.
+- README: version badge 1.7; the "Self-Evolving" claim now points at the real
+  mechanism (improvement loop + orchestrator prompt) instead of only the retro
+  template; project-structure tree now includes `blueprint/prompts/`.
+- `docs/BACKLOG.md`: v1.7 cycle recorded per the loop's own bookkeeping rules
+  (maintainer go in the decision log, item through Open → Done) — the shipped
+  backlog is itself a valid instance of the loop it documents.
+
+### Version decision
+Additive (new loop, new docs, new template, new prompt); no phase/gate/loop-semantics
+changes, no restructure → minor bump to 1.7, consistent with the v1.6 precedent.
+2.0 would falsely signal breakage to projects that copied `blueprint/`.
+
 ## v1.6 — 2026-06-10
 
 Onboarding hardening — driven by real user testing (a non-technical tester

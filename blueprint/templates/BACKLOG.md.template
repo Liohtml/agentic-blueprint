@@ -1,0 +1,73 @@
+<!--
+  BACKLOG.md — working memory of the Improvement Loop.
+
+  This file IS the loop's durable state: the single source of truth a fresh
+  session resumes from. Not a process, a file. Agents read it FIRST at cycle
+  start and update it LAST before the cycle ends — every cycle, no exceptions.
+  If the session dies, this file is what survives.
+
+  Loop spec: ../loops/improvement-loop.md
+  Lived example: the backlog this template was generalized from —
+  https://github.com/Liohtml/agentic-blueprint/blob/master/docs/BACKLOG.md
+-->
+
+# Backlog — Continuous Improvement Loop
+
+> Each cycle: pull 1-3 items from "Open" → research → devil's-advocate review →
+> implement → fix → test → push → **update this file**. Strategic direction
+> questions go to the maintainer — they are never guessed.
+
+## Open (prioritized)
+
+<!-- One checkbox per item: WHAT + WHY + any maintainer gate. Delete the examples. -->
+
+- [ ] **<ITEM — e.g. "Quickstart section for the README">** — <WHY — e.g. "first-time
+  visitors bounce without one">. <GATE — e.g. "none" / "needs maintainer go (outward-facing)">
+- [ ] **(example, delete) Enable repo Discussions** — community funnel; repo setting
+  only the maintainer can flip → maintainer-gated.
+
+## Loop status
+
+**Status:** <running | paused | ended-by-maintainer>
+**Current cycle:** <N>
+**Pending:** <NONE | e.g. "cycle 3 committed unreviewed — DA pending">
+
+> If Pending is not NONE, the next session completes that review FIRST,
+> before pulling anything new from Open.
+
+## Done
+
+<!-- One dated entry per cycle: items shipped, DA verdict summary, fixes applied.
+     Newest first. Delete the example. -->
+
+- [x] **<DATE> (cycle <N>):** <ITEMS SHIPPED>. DA verdict: <e.g. "2× approve-with-fixes,
+  1× approve">. Fixes applied: <e.g. "all 6, incl. broken relative links">.
+- [x] **(example, delete) 2026-06-09 (cycle 1):** Glossary + getting-started guide.
+  DA verdict: approve-with-fixes (2 blockers). Fixes applied: both — dead links
+  repaired, hardcoded name removed.
+
+## Decision log (maintainer)
+
+<!-- Strategic questions land here — scope, deletions, structure, branding,
+     outward-facing actions. Never guessed, always logged. Delete the example rows. -->
+
+| Date | Question | Decision |
+|---|---|---|
+| <DATE> | <QUESTION — e.g. "Delete legacy docs/ folder?"> | <✅/❌ DECISION — e.g. "❌ Keep, don't advertise"> |
+| (example, delete) 2026-06-09 | Primary repo language | ✅ English; German later as a translation |
+
+## Loop rules (short version)
+
+1. Nothing ships without a devil's-advocate review.
+2. Strict file ownership per implementation agent — no two agents on the same file
+   in the same cycle.
+3. Implementation agents run **no git commands** — the orchestrator commits.
+4. Project test gate green before every push: `<TEST COMMAND — e.g. "npx vitest run">`.
+5. Small, clean commits. No force-push. No merge without the human.
+6. A maintainer stop is final until a new explicit go.
+
+---
+
+*This file tracks cycle state and the roadmap. Persistent LEARNINGS (a
+project-memory pattern) are a separate template — an open community task, see
+<https://github.com/Liohtml/agentic-blueprint/blob/master/docs/community/good-first-issues.md>.*
