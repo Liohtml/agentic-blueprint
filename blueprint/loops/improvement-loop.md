@@ -122,9 +122,9 @@ best-effort on top of it — pick mechanisms by what they can actually survive:
   can wake a *running* session on review comments or CI events
   (environment-dependent). Useful for tightening a live loop, useless once the
   session dies — never rely on them as the only scheduler.
-- **Cloud:** managed-agent sessions for overnight single missions, and scheduled
-  deployments where available (beta) — see
-  [managed-agents.md](../agents/managed-agents.md).
+- **Cloud:** managed-agent outcome sessions for overnight single missions —
+  fire-and-forget runs, externally triggered (e.g. from the cron/Actions baseline
+  above) — see [managed-agents.md](../agents/managed-agents.md).
 
 **Hard rails for unattended cycles:**
 

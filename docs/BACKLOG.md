@@ -27,11 +27,11 @@
 ## Loop status
 
 **Loop restarted 2026-07-02 by maintainer go** for one v1.7 cycle ("free hand —
-make the repo ultra strong for agent systems in the loop"). **Cycle in progress —
-committed with post-implementation DA review pending** (design-stage DA is done:
-approve-with-fixes, all fixes applied; the verification DA of the shipped artifacts
-is outstanding and is the first action before the cycle closes). Once it passes,
-the loop is idle again pending the next maintainer go. Before that, the loop
+make the repo ultra strong for agent systems in the loop"); the cycle is complete
+and the loop is idle again pending the next maintainer go. (Mid-cycle, commit
+a4a5fda was pushed with a transparent "verification DA pending" note — the loop's
+own interruption protocol in action; the verification DA then returned
+approve-with-fixes and all fixes landed in the closing commit.) Before that, the loop
 had ended on 2026-06-10 (maintainer decision) with PR #7 merged and Antigravity
 removed (v1.5). Remaining open items are community-reserved (good-first-issues) or
 maintainer-gated (repo settings, demo GIF, observer data shapes) — see Open above.
@@ -54,12 +54,17 @@ A new loop can be started any time with
   memory as a template (`blueprint/templates/BACKLOG.md.template`), and the
   previously missing orchestrator prompt
   (`blueprint/prompts/improvement-orchestrator.md`). Item entered Open via the
-  maintainer go of 2026-07-02 (decision log) and shipped the same cycle. DA review
-  of the design BEFORE implementation: approve-with-fixes — 2 blockers (loop
-  bookkeeping self-application; continuity mechanisms attributed to the wrong
-  layer), 7 major, 4 minor; all fixes applied, package cut from 5 files to 4.
-  Orchestrator prompt dry-run-tested in a fresh session against a simulated
-  "DA pending" backlog state before push.
+  maintainer go of 2026-07-02 (decision log) and shipped the same cycle. Two DA
+  passes: design DA before implementation (approve-with-fixes — 2 blockers: loop
+  bookkeeping self-application, continuity mechanisms attributed to the wrong
+  layer; 7 major, 4 minor; all applied, package cut from 5 files to 4) and a
+  verification DA on the shipped artifacts (approve-with-fixes — 1 major: an
+  unbacked "scheduled deployments" claim, removed; 3 minor: template link that
+  would break on copy-out, README table semantics footnote, auditability of the
+  dry-run claim; all applied). Orchestrator prompt dry-run-tested: a fresh
+  session with only the prompt and a simulated "DA pending" backlog correctly
+  prioritized the pending review over new items; its finding (pin the WIP commit
+  hash in Loop status) was applied to prompt + template.
 
 - [x] **2026-06-10 (v1.6, user-testing cycle):** Onboarding hardening after a real
   non-technical tester failed at setup. Setup wizard prompt (agent does the whole

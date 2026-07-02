@@ -33,8 +33,11 @@ devil's-advocate-reviewed before implementation (approve-with-fixes: 2 blockers,
   "re-running the orchestrator prompt" — the prompt now actually exists).
   Non-negotiables at the top (no-git subagents, DA gate, file ownership, test
   gate, maintainer escalations), first action = resume pending DA reviews from
-  the backlog. Dry-run-tested in a fresh session against a simulated
-  "DA pending" state before shipping.
+  the backlog. Dry-run-tested before shipping: a fresh session with no memory,
+  given only the prompt and a simulated "DA pending" backlog, correctly
+  reconstructed the cycle state and prioritized the pending review over new
+  items; its one finding (pin the WIP commit hash in Loop status) is applied
+  in the prompt's interruption protocol and the template's Pending line.
 
 ### Changed
 - `AGENTIC-BLUEPRINT.md`: version 1.7; Improvement Loop row in the feedback-loop

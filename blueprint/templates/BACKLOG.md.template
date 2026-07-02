@@ -6,7 +6,8 @@
   start and update it LAST before the cycle ends — every cycle, no exceptions.
   If the session dies, this file is what survives.
 
-  Loop spec: ../loops/improvement-loop.md
+  Loop spec (absolute URL — this template gets copied out of blueprint/, e.g. to docs/):
+  https://github.com/Liohtml/agentic-blueprint/blob/master/blueprint/loops/improvement-loop.md
   Lived example: the backlog this template was generalized from —
   https://github.com/Liohtml/agentic-blueprint/blob/master/docs/BACKLOG.md
 -->
@@ -30,7 +31,7 @@
 
 **Status:** <running | paused | ended-by-maintainer>
 **Current cycle:** <N>
-**Pending:** <NONE | e.g. "cycle 3 committed unreviewed — DA pending">
+**Pending:** <NONE | e.g. "cycle 3 committed unreviewed — DA pending (commit <HASH>)">
 
 > If Pending is not NONE, the next session completes that review FIRST,
 > before pulling anything new from Open.

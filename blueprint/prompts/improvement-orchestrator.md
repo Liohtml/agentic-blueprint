@@ -79,7 +79,9 @@ or DA reject without a fix path: stop and report — never restart on your own.
 If a session limit or timeout hits mid-cycle:
 
 1. Commit work-in-progress with an explicit "unreviewed, DA pending" note in
-   BOTH the commit message AND the backlog's Loop status.
+   BOTH the commit message AND the backlog's Loop status — and pin the WIP
+   commit hash in Loop status, so the next session finds the exact diff to
+   review without searching the git log.
 2. That pending review is the first action of the next session (see FIRST
    ACTION above) — before any new item is touched.
 

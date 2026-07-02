@@ -309,7 +309,9 @@ Each loop has a hard iteration limit. When reached, the agent stops and escalate
 | Build-Test | Building | 5 | Report blocker |
 | Cleanup-Verify | Cleanup | 3 | Rollback to original |
 | Review-Fix | Review | 7 | Human takes over |
-| [Improvement](blueprint/loops/improvement-loop.md) | Between features (system-level) | 1-3 backlog items per cycle | Maintainer stop / empty backlog |
+| [Improvement](blueprint/loops/improvement-loop.md) | Between features (system-level) | 1-3 backlog items per cycle\* | Maintainer stop / empty backlog |
+
+\* The Improvement Loop's "1-3 items" is a per-cycle item count, not an iteration cap — cycles end on maintainer stop or an empty backlog, and the maintainer (not iteration exhaustion) is the abort authority.
 
 ### Multi-Agent Coordination
 
