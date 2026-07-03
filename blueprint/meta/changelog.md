@@ -1,5 +1,39 @@
 # Blueprint Changelog
 
+## v1.8 — 2026-07-03
+
+Viral README restructure — the fold rebuilt around a visible one-message entry
+and "gated autonomy" positioning, grounded in a sourced research pass over five
+breakout agent-repo READMEs (browser-use, spec-kit, OpenHands, cline, OpenClaw)
+and DA-reviewed against overclaiming (approve-with-fixes: 2 blockers, 6 major,
+8 minor — all applied). Maintainer decision: version bump to 1.8 per the v1.6
+precedent (onboarding/README work carries a version).
+
+### New
+- **README fold**: one-message paste entry (raw URL, works on first fetch) with
+  a beginner explainer, safety hook in the tagline ("Autonomous agents. Human
+  gates."), "Start in 60 Seconds" uncollapsed, Level 2 one-paste for the
+  Improvement Loop, "Vibe coding vs. Blueprint" before/after table, "What this
+  is NOT" honesty block (incl. "not enforced by a runtime — the human with the
+  merge button is the enforcement mechanism"), Level 3 (teams/observer/sandbox)
+  compressed, structure tree and alternative starts collapsed. Live stars badge
+  replaces the static PRs-welcome shield.
+- **Orchestrator bootstrap** (`blueprint/prompts/improvement-orchestrator.md`):
+  FIRST ACTION now covers the first run in a fresh project — if the backlog file
+  doesn't exist, create it from BACKLOG.md.template, record the maintainer go,
+  ask for the first Open items (DA blocker: the Level 2 paste previously pointed
+  at a file the wizard never creates).
+
+### Changed
+- Claims aligned with the corpus's own hedging: "survives any crash" →
+  "designed to resume from a single backlog file"; claude.ai path honestly
+  labeled "a guided walkthrough, not the full setup"; footer "95%" replaced
+  with "nearly all" + commit-history receipt.
+- `docs/BACKLOG.md`: maintainer repo-settings virality checklist (topics,
+  social preview, template button, Discussions, star-history only >500 stars).
+- Hero demo GIF: placeholder + recording spec in the README source
+  (maintainer-gated — needs a real session recording).
+
 ## v1.7 — 2026-07-02
 
 The Improvement Loop — the self-improving system the repo ran on itself in June

@@ -6,12 +6,6 @@
 
 ## Open (prioritized)
 
-- [ ] **v1.8: Viral README restructure** — hero section that passes the 5-second
-  test, one-sentence copy-paste entry (wizard + orchestrator via URL), before/after
-  comparison table, the Improvement Loop as the headline (incl. "this repo was
-  built by its own loop" proof), progressive disclosure (depth moves to docs/),
-  honest human-gates positioning. Maintainer go 2026-07-03 (decision log). GIF
-  recording and repo settings stay maintainer-gated.
 - [ ] **Create the good-first-issues on GitHub** — drafts live in
   `docs/community/good-first-issues.md`; needs maintainer go (outward-facing).
 - [ ] **Enable GitHub Discussions** (Show and Tell / Q&A / Ideas) and mark the repo as a
@@ -20,7 +14,8 @@
   set ~8 topics (`ai-agents`, `claude`, `claude-code`, `agentic-workflow`,
   `developer-tools`, `prompt-engineering`, `multi-agent`, `ai-engineering`); verify
   `assets/social-preview.png` is uploaded under Settings → Social preview (1280×640,
-  <1MB — the README no longer doubles as its host); consider tagged releases per
+  <1MB — the README banner is not the social preview; it must be uploaded in Settings
+  separately); consider tagged releases per
   blueprint version as a growth cadence. **Star-history chart: do NOT add until
   >500 stars** — a flat line signals the opposite of traction.
 - [ ] **Demo GIF for the README** — animated Observer/agent-team banner (the single
@@ -41,8 +36,10 @@
 
 **Loop restarted 2026-07-02 by maintainer go** for one v1.7 cycle ("free hand —
 make the repo ultra strong for agent systems in the loop"); that cycle is complete.
-**v1.8 cycle running since 2026-07-03** (maintainer go: viral README restructure —
-see Open and the decision log). Before that, the loop was idle. (Mid-cycle, commit
+**The v1.8 cycle (viral README restructure, maintainer go 2026-07-03) is complete**
+— the loop is idle again pending the next maintainer go. Mid-cycle, commit c29944a
+was pushed with a transparent "unreviewed, DA pending" note (interruption protocol);
+the DA then returned approve-with-fixes and all fixes landed in the closing commit. (Mid-cycle, commit
 a4a5fda was pushed with a transparent "verification DA pending" note — the loop's
 own interruption protocol in action; the verification DA then returned
 approve-with-fixes and all fixes landed in the closing commit.) Before that, the loop
@@ -57,6 +54,20 @@ A new loop can be started any time with
 > the copy-into-your-project use case after the merge.
 
 ## Done
+
+- [x] **2026-07-03 (v1.8, viral-README cycle):** README rebuilt for the 5-second
+  test — visible one-message paste entry (raw URLs), "gated autonomy" tagline with
+  the safety hook in the hero, "Vibe coding vs. Blueprint" before/after table,
+  Improvement Loop as Level 2 with its own one-paste, "What this is NOT" honesty
+  block, progressive disclosure (structure tree + alternative starts collapsed),
+  live stars badge. Research: 15 sourced findings verified against five breakout
+  agent-repo READMEs. DA on the concrete diff: approve-with-fixes — 2 blockers
+  (Level-2 paste pointed at a backlog file the wizard never creates → orchestrator
+  prompt got a first-run bootstrap branch; "survives any crash" overclaimed past
+  the spec's own hedging → reworded to the honest mechanism), 6 major, 8 minor;
+  all applied. Wizard-prompt sync rule verified byte-identical. Maintainer
+  decisions: version bump to 1.8; GIF recording + repo settings remain
+  maintainer-gated (see Open).
 
 - [x] **2026-07-02 (v1.7, loop-codification cycle):** The Improvement Loop shipped
   as a first-class framework component — the loop this repo ran on itself is now a
@@ -131,6 +142,7 @@ A new loop can be started any time with
 | 2026-06-10 | Finish planned work, merge PR #7, end the loop | ✅ Executed — see Loop status |
 | 2026-07-02 | Restart the loop for a Fable 5 rework, "free hand to make the repo ultra strong for agent systems in the loop" | ✅ Maintainer go — v1.7 cycle: codify the improvement loop + orchestration patterns (see Done) |
 | 2026-07-03 | Rebuild the README for maximum attention/virality — "so simple a primary-schooler can set up an autonomous agent loop" | ✅ Maintainer go — v1.8 cycle; Hugging Face MCP server installed for image generation (needs maintainer HF token for auth) |
+| 2026-07-03 | Bump the blueprint version to 1.8 for the README cycle, or keep 1.7? | ✅ Bump to 1.8 (v1.6 precedent: onboarding/README work carries a version + changelog entry) |
 
 ## Loop rules (short version)
 

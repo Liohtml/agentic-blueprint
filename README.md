@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/social-preview.png" alt="Agentic Blueprint" width="70%">
+  <img src="assets/social-preview.png" alt="Agentic Blueprint" width="58%">
 </p>
 
 <!-- HERO DEMO GIF — replaces the banner above once recorded (maintainer task).
@@ -11,8 +11,9 @@
 
 <p align="center">
   Turn <a href="https://claude.com/claude-code">Claude Code</a> into a disciplined engineering system that plans, builds,
-  reviews itself adversarially, ships — and improves your project in a loop that survives any crash.<br>
-  It's all plain markdown. <b>You don't install it. Your agent does.</b>
+  reviews itself adversarially, ships — and improves your project in a loop designed to resume
+  from a single backlog file after crashes and session limits.<br>
+  <b>You don't install it. Your agent does.</b>
 </p>
 
 <p align="center">
@@ -25,7 +26,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.7-blue" alt="Version 1.7">
+  <img src="https://img.shields.io/badge/version-1.8-blue" alt="Version 1.8">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License MIT">
   <a href="https://github.com/Liohtml/agentic-blueprint/stargazers"><img src="https://img.shields.io/github/stars/Liohtml/agentic-blueprint?style=flat&color=yellow" alt="GitHub stars"></a>
 </p>
@@ -34,18 +35,20 @@
 
 ## Start in 60 Seconds
 
-Open [Claude Code](https://claude.com/claude-code) in any folder — an existing project or a brand-new empty one — and paste this **one sentence**:
+Open [Claude Code](https://claude.com/claude-code) in any folder — an existing project or a brand-new empty one — and paste this **one message**:
 
 ```text
-Read https://github.com/Liohtml/agentic-blueprint/blob/master/blueprint/templates/setup-wizard-prompt.md
+Read https://raw.githubusercontent.com/Liohtml/agentic-blueprint/master/blueprint/templates/setup-wizard-prompt.md
 and follow it as my setup wizard. I may not be technical — one question at a time, plain language.
 ```
+
+*(New to Claude Code? Install it from the link above, then in a terminal: `cd your-folder` and `claude` — or open the folder in VS Code and open the Claude panel.)*
 
 That's it. Your agent fetches the blueprint, interviews you (every question comes with a suggested default — if unsure, take it), and sets everything up. **You should see at the end:** a plain-language summary plus a ready-to-copy prompt for your first feature.
 
 > **Works with an empty folder. Never overwrites your files without asking. A human approves every merge.**
 
-No terminal? The same workflow runs in a plain [claude.ai](https://claude.ai) chat, and the full wizard prompt is available inline — see [Other ways to start](#other-ways-to-start) below.
+No terminal? You can try the workflow in a plain [claude.ai](https://claude.ai) chat — a guided walkthrough, not the full setup — and the full wizard prompt is available inline: see [Other ways to start](#other-ways-to-start) below.
 
 ---
 
@@ -53,7 +56,7 @@ No terminal? The same workflow runs in a plain [claude.ai](https://claude.ai) ch
 
 Agentic Blueprint is a structured playbook for building software with AI agents: **6 phases, binary quality gates, feedback loops with hard iteration limits, and multi-agent coordination rules — all as plain markdown files** your agent reads and follows. Built for [Claude Code](https://claude.com/claude-code); the principles transfer to other agents.
 
-We call the approach **gated autonomy**: agents work autonomously *inside* each phase, and every phase ends at a gate where a human decides. That's the whole trick — and post-2026, it's the difference between an agent system you can trust and one you have to babysit.
+We call the approach **gated autonomy**: agents work autonomously *inside* each phase, and every phase ends at a gate where a human decides. That's the whole trick.
 
 | | Vibe coding | With the Blueprint |
 |---|---|---|
@@ -68,16 +71,19 @@ We call the approach **gated autonomy**: agents work autonomously *inside* each 
 
 ## Level 2 — The Improvement Loop
 
-The part that makes this more than a prompt collection: a **system-level loop** in which agents improve your project continuously — research → adversarial devil's-advocate review → implement → test → ship → repeat. Its entire state lives in one backlog file, so it **resumes after any crash, session limit, or dead process**. Start it (or schedule it via cron/GitHub Actions) with one paste:
+The part that makes this more than a prompt collection: a **system-level loop** in which agents improve your project continuously — research → adversarial devil's-advocate review → implement → test → ship → repeat. Its entire state lives in one backlog file, so a fresh session can resume it after a crash, session limit, or dead process — **nothing depends on a long-lived process**. Start it (or schedule it via cron/GitHub Actions) with one paste:
 
 ```text
-Read https://github.com/Liohtml/agentic-blueprint/blob/master/blueprint/prompts/improvement-orchestrator.md
-and follow it. Backlog: docs/BACKLOG.md. Test gate: <your test command>.
+Read https://raw.githubusercontent.com/Liohtml/agentic-blueprint/master/blueprint/prompts/improvement-orchestrator.md
+and follow it. Backlog: docs/BACKLOG.md (create it from the template if missing).
+Test gate: <your test command>.
 ```
+
+*(Replace the placeholder first. First run? The orchestrator creates the backlog from the template and asks you for the first items.)*
 
 Autonomous, not reckless — the loop's non-negotiables: nothing ships without a devil's-advocate review, implementation agents never touch git, strategic decisions go to you, and **you** remain the only one who merges.
 
-**Proof it works: this repository is built by its own loop.** The Improvement Loop spec, the orchestration patterns, this README — all shipped through backlog → DA review → implementation cycles, with the verdicts on the record: [the backlog](docs/BACKLOG.md) · [the retro, including honest failures](docs/retros/2026-06-10-continuous-loop-retro.md) · [the loop spec it produced](blueprint/loops/improvement-loop.md).
+**Evidence, not claims: this repository is built by its own loop.** The Improvement Loop spec, the orchestration patterns, this README — all shipped through backlog → DA review → implementation cycles, with the verdicts on the record: [the backlog](docs/BACKLOG.md) · [the retro, including honest failures](docs/retros/2026-06-10-continuous-loop-retro.md) · [the loop spec it produced](blueprint/loops/improvement-loop.md).
 
 Under the hood: [deterministic orchestration patterns](blueprint/agents/orchestration.md) — fan-out pipelines, adversarial verification, judge panels, structured result contracts between agents — with a 4-tier model strategy (Fable 5 → Opus → Sonnet → Haiku) to keep costs sane.
 
@@ -122,7 +128,8 @@ The full rulebook lives in [`AGENTIC-BLUEPRINT.md`](AGENTIC-BLUEPRINT.md) and th
 
 - **Not a library, CLI, or runtime.** Markdown files and prompts. No dependencies, nothing to keep updated.
 - **Not "fire and forget" autonomy.** Agents stop at gates. A human approves every merge, every scope change, every deletion. If you want an agent with root access and no questions asked, this is the wrong repo.
-- **No benchmark scores, no "100x" claims.** The honest pitch: fewer disasters, less babysitting, a process that improves itself. Judge it by the [worked example](docs/examples/worked-example.md) and this repo's own [commit history](https://github.com/Liohtml/agentic-blueprint/commits/master).
+- **Not enforced by a runtime.** The gates and iteration caps are conventions your agent follows and *you* hold — the human with the merge button is the enforcement mechanism. That's deliberate.
+- **No benchmark scores, no "100x" claims.** (Yes, we know what the podcast in the credits is called — that's the pitch we're *not* making.) The honest pitch: fewer disasters, less babysitting, a process that improves itself. Judge it by the [worked example](docs/examples/worked-example.md) and this repo's own [commit history](https://github.com/Liohtml/agentic-blueprint/commits/master).
 
 ---
 
@@ -132,11 +139,14 @@ When one agent isn't enough (requires tmux ≥ 3.x, Node.js ≥ 20, git, Claude 
 
 ```bash
 git clone https://github.com/Liohtml/agentic-blueprint.git && cd agentic-blueprint
+./scripts/bootstrap.sh           # one-time: installs observer deps, checks your environment
 ./scripts/start-team.sh          # env checks in plain language, tmux, agent team — one command
 ./scripts/start-team.sh --observer <team-name>   # + live dashboard at http://localhost:4317
 ```
 
 Multiple Claude Code agents in tmux split panes with strict file ownership, a shared task graph, and the **[Agent Observer](observer/README.md)** streaming live token counts, costs, and task progress per agent. Fill in [`blueprint/templates/team-prompt.md`](blueprint/templates/team-prompt.md) and paste it. Full runbook with troubleshooting: [`blueprint/agents/agent-teams.md`](blueprint/agents/agent-teams.md).
+
+Daily-driver terminal comfort (Starship, fonts, shell aliases, editor setups) is an opt-in extra: [`terminal-setup/`](terminal-setup/README.md).
 
 Want agents contained? The repo ships a ready **[Docker sandbox](docs/docker-sandbox.md)** (Dev Container + plain-docker paths, with an honest list of what it does *not* protect):
 
@@ -394,5 +404,5 @@ The agentic engineering community on X/Twitter, whose daily experiments, debates
 ---
 
 <p align="center">
-  <sub>Built with structured agent collaboration — through this repo's own Improvement Loop. Agents wrote 95% of this. A human made sure it was right.</sub>
+  <sub>Built with structured agent collaboration — through this repo's own Improvement Loop. Agents wrote nearly all of this (<a href="https://github.com/Liohtml/agentic-blueprint/commits/master">the receipts</a>). A human made sure it was right.</sub>
 </p>
