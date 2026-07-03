@@ -57,18 +57,19 @@ Details: [coordination.md](../agents/coordination.md).
 
 For current prices see [decision-trees.md](../meta/decision-trees.md).
 
-| Model | When to use |
-|---|---|
-| **Fable 5** | Lead/coordinator, Mission Chunks, architecture-critical tasks (2× the Opus price — use deliberately) |
-| **Opus** | Hard logic, parsers, algorithms, aggregation with correctness risk |
-| **Sonnet** | Scaffold, UI, CRUD, tests, docs, everything else |
-| **Haiku** | Explore/research subagents, mechanical bulk edits |
+| Model | Role | When to use |
+|---|---|---|
+| **Fable 5** | Brain | Judgment moments: DA/review teammate, architecture-critical decisions, Mission Chunks (2× the Opus price — call it, don't park it) |
+| **Opus 4.8** | Orchestrator | The Lead role, plus hard logic: parsers, algorithms, aggregation with correctness risk |
+| **Sonnet 5** | Worker / Researcher | Scaffold, UI, CRUD, tests, docs, research — everything else |
+| **Haiku 4.5** | Scout | Explore/research subagents, mechanical bulk edits |
 
 ```
-Agent(team_name: "<TEAM>", name: "<LEAD-AGENT>", model: "fable",  …)
-Agent(team_name: "<TEAM>", name: "<HARD-AGENT>", model: "opus",   …)
-Agent(team_name: "<TEAM>", name: "<REST-AGENT>", model: "sonnet", …)
-Agent(team_name: "<TEAM>", name: "<SCOUT-AGENT>", model: "haiku", …)
+Agent(team_name: "<TEAM>", name: "<LEAD-AGENT>",   model: "opus",   …)
+Agent(team_name: "<TEAM>", name: "<REVIEW-AGENT>", model: "fable",  …)
+Agent(team_name: "<TEAM>", name: "<HARD-AGENT>",   model: "opus",   …)
+Agent(team_name: "<TEAM>", name: "<REST-AGENT>",   model: "sonnet", …)
+Agent(team_name: "<TEAM>", name: "<SCOUT-AGENT>",  model: "haiku",  …)
 ```
 
 Spawn **on demand**: T1 first on its own, only after T1 is green the rest.

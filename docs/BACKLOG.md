@@ -6,13 +6,11 @@
 
 ## Open (prioritized)
 
-- [ ] **v1.9: Brain/Orchestrator/Worker retiering** — maintainer vision: Fable 5 as
-  the *brain* (judgment moments: architecture, DA reviews, judge/verify stages,
-  mission chunks), Opus 4.8 as the *orchestrator* (loop mechanics, hard logic),
-  Sonnet 5 as *worker/researcher* (volume), Haiku 4.5 as *scout*. Inverts "Lead
-  belongs on Fable". Canonical rework in decision-trees.md; orchestration.md gets a
-  model-per-stage section; root doc, agent-teams tiering table, team-prompt, config
-  aligned. Maintainer go 2026-07-03 (decision log).
+- [ ] **Maintainer decision needed: glossary "Model Tiering" one-line correction** —
+  after v1.9 the entry "Fable 5 for the lead" (docs/glossary.md) contradicts the
+  canonical doctrine. The glossary is community-reserved (good-first-issue 3), so
+  the loop did not touch it; the DA recommends a single-row maintenance correction
+  with an explicit maintainer go (the interactive ask was unavailable mid-cycle).
 - [ ] **Create the good-first-issues on GitHub** — drafts live in
   `docs/community/good-first-issues.md`; needs maintainer go (outward-facing).
 - [ ] **Enable GitHub Discussions** (Show and Tell / Q&A / Ideas) and mark the repo as a
@@ -43,8 +41,10 @@
 
 **Loop restarted 2026-07-02 by maintainer go** for one v1.7 cycle ("free hand —
 make the repo ultra strong for agent systems in the loop"); that cycle is complete.
-**The v1.8 cycle (viral README restructure, maintainer go 2026-07-03) is complete**
-— the loop is idle again pending the next maintainer go. Mid-cycle, commit c29944a
+**The v1.9 cycle (Brain/Orchestrator/Worker retiering, maintainer go 2026-07-03) is
+complete** — the loop is idle again pending the next maintainer go; one
+maintainer-gated follow-up sits in Open (glossary one-liner). The v1.8 cycle
+(viral README restructure) completed earlier the same day. Mid-cycle, commit c29944a
 was pushed with a transparent "unreviewed, DA pending" note (interruption protocol);
 the DA then returned approve-with-fixes and all fixes landed in the closing commit. (Mid-cycle, commit
 a4a5fda was pushed with a transparent "verification DA pending" note — the loop's
@@ -61,6 +61,20 @@ A new loop can be started any time with
 > the copy-into-your-project use case after the merge.
 
 ## Done
+
+- [x] **2026-07-03 (v1.9, retiering cycle):** Role-based model doctrine shipped —
+  "judgment up, volume down": Fable 5 = Brain (DA/judge/verify, architecture,
+  Missions), Opus 4.8 = Orchestrator (Lead, loop cycles, hard logic), Sonnet 5 =
+  Worker/Researcher, Haiku 4.5 = Scout. Canonical rework in decision-trees.md
+  (incl. escalation rule + Sonnet 5 cost anchors with intro-pricing/tokenizer
+  caveats), "Model per stage — the brain pattern" in orchestration.md, alignment
+  across root doc/agent-teams/team-prompt/config/README/review-fix-loop, and the
+  orchestrator prompt's model recommendation corrected (DA blocker). Observer:
+  claude-sonnet-5 pricing entry + test. DA on the design: approve-with-fixes —
+  1 blocker, 5 major (incl. "~80% mechanics" overclaim dropped; changelog states
+  the reversal of the 2026-06-09 evaluation explicitly), 4 minor; all applied
+  except the glossary one-liner (maintainer-gated, see Open). Prices/IDs verified
+  against the current API reference.
 
 - [x] **2026-07-03 (v1.8, viral-README cycle):** README rebuilt for the 5-second
   test — visible one-message paste entry (raw URLs), "gated autonomy" tagline with

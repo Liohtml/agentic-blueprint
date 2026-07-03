@@ -1,28 +1,57 @@
 # Decision Trees
 
-## Which Model for Which Task? (since Fable 5, 06/2026)
+## Which Model for Which Role? (Brain / Orchestrator / Worker / Scout)
+
+The tiering doctrine — **"judgment up, volume down"**: the higher the leverage of a
+single decision, the higher the model tier; the more tokens a role burns, the lower
+the tier. (Maintainer decision 2026-07-03; this *reverses* the 2026-06-09 evaluation's
+"the Lead belongs on Fable" guidance — orchestration is mostly mechanics, and the
+highest-leverage moments in this repo's own loop cycles were consistently the
+judgment steps: devil's-advocate reviews, verification, design decisions.)
+
+| Role | Model | Called for |
+|---|---|---|
+| **Brain** | Fable 5 (`claude-fable-5`) | Judgment moments, not loop residency: Phase 0/1 sparring and architecture decisions, devil's-advocate reviews, judge/verify stages in workflows — and **Mission Chunks**, where the executing agent *is* the judgment. Effort high/xhigh. |
+| **Orchestrator** | Opus 4.8 (`claude-opus-4-8`) | Leading teams and improvement-loop cycles — spawn, collect, bookkeeping, commits — plus hard logic with correctness risk (parsers, algorithmics, aggregation). Fast mode available. |
+| **Worker / Researcher** | Sonnet 5 (`claude-sonnet-5`) | The volume tier: implementation, research, tests, docs — near-Opus on coding at Sonnet cost. |
+| **Scout** | Haiku 4.5 (`claude-haiku-4-5`) | Read-only explore, mechanical bulk edits. |
 
 ```
 Task received
     |
     v
-Long-horizon Mission (migration, multi-hour autonomous run,
-architecture decisions, team Lead role)?
-    ├── YES → Fable 5 (effort high/xhigh, complete spec in the first turn)
+Judgment moment — a single decision with high leverage
+(architecture, DA review, judge/verify stage) OR a Mission Chunk?
+    ├── YES → Fable 5, the Brain (effort high/xhigh;
+    |         Mission: complete spec in the first turn)
     |
-    └── NO: Hard logic with correctness risk (parsers, algorithmics, aggregation)?
-            ├── YES → Opus 4.8
+    └── NO: Orchestrating others (team Lead, loop orchestrator)
+            or hard logic with correctness risk?
+            ├── YES → Opus 4.8, the Orchestrator
             |
             └── NO: Read-only research / explore / mechanical bulk edit?
-                    ├── YES → Haiku 4.5
-                    └── NO → Sonnet 4.6 (standard)
+                    ├── YES → Haiku 4.5, the Scout
+                    └── NO → Sonnet 5, the Worker (standard)
 ```
+
+The exception is deliberate: a **Mission Chunk** runs Fable as the *executing* model —
+there, the worker is the brain. The hierarchy above governs orchestrated multi-agent
+work. And the split has an escalation rule (see
+[orchestration.md](../agents/orchestration.md)): the orchestrator hands ambiguous
+verdicts, borderline aborts, and scope-interpretation calls to a Fable judgment call —
+or to the human where the project rules require it.
 
 **Cost anchors** (in/out per MTok) — this is the single canonical place for concrete
 prices in the Blueprint; all other documents reference this section:
 
-Fable $10/$50 · Opus $5/$25 · Sonnet $3/$15 · Haiku $1/$5.
-Fable costs 2× Opus — the added value lies in long-horizon autonomy, not in every single task.
+Fable $10/$50 · Opus $5/$25 · Sonnet 5 $3/$15 (introductory $2/$10 through
+2026-08-31; note Sonnet 5's new tokenizer produces ~30% more tokens for the same
+text than Sonnet 4.6, so effective per-task cost is higher than the sticker
+suggests) · Haiku $1/$5.
+Fable costs 2× Opus — the added value lies in judgment quality and long-horizon
+autonomy, not in every single task. Effort is the second dimension: levels
+low–max; `xhigh` is the sweet spot for coding/agentic work, `low` for mechanical
+subagent stages.
 
 ## When to Use Which Agent?
 
@@ -84,8 +113,11 @@ Coherent long-horizon assignment
             |        (Mission without a spec = expensive guessing)
             |
             └── YES: Does the work split into independent parallel parts?
-                    ├── YES → Hybrid: Fable Lead coordinates the team,
-                    |        Missions/Chunks as tasks to tiered Teammates
+                    ├── YES → Hybrid: Opus 4.8 orchestrates the team, Fable 5
+                    |        on call for judgment stages (DA/judge/verify);
+                    |        a Mission-sized task handed to a teammate still
+                    |        runs on Fable — the worker-is-the-brain exception
+                    |        applies inside Hybrid too
                     └── NO → Mission Mode: Fable 5, effort high/xhigh,
                                one prompt, fresh thread
 ```

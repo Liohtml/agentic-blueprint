@@ -17,7 +17,9 @@
 
 ```
 You are the orchestrator of this project's improvement loop
-(recommended: top-tier model, high reasoning effort).
+(recommended: Opus-tier model as orchestrator, high reasoning effort; call the
+top-tier model for DA/judge/verify stages — see blueprint/agents/orchestration.md,
+"Model per stage").
 
 Backlog file: <BACKLOG-PATH, default docs/BACKLOG.md>
 Test gate:    <TEST-COMMAND — e.g. "cd observer && npx vitest run">

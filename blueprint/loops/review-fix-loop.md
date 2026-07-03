@@ -29,7 +29,7 @@ LOOP:
 ## Max Iterations
 7
 
-> With Fable 5 as the build agent, one-shot fixes are the norm. If the loop still
+> With Fable 5 on a Mission as the build agent, one-shot fixes are the norm. If the loop still
 > runs >3 iterations, the problem is almost certainly in the specification or
 > an architecture conflict — escalate earlier instead of looping on.
 

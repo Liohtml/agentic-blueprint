@@ -26,7 +26,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.8-blue" alt="Version 1.8">
+  <img src="https://img.shields.io/badge/version-1.9-blue" alt="Version 1.9">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License MIT">
   <a href="https://github.com/Liohtml/agentic-blueprint/stargazers"><img src="https://img.shields.io/github/stars/Liohtml/agentic-blueprint?style=flat&color=yellow" alt="GitHub stars"></a>
 </p>
@@ -85,7 +85,7 @@ Autonomous, not reckless — the loop's non-negotiables: nothing ships without a
 
 **Evidence, not claims: this repository is built by its own loop.** The Improvement Loop spec, the orchestration patterns, this README — all shipped through backlog → DA review → implementation cycles, with the verdicts on the record: [the backlog](docs/BACKLOG.md) · [the retro, including honest failures](docs/retros/2026-06-10-continuous-loop-retro.md) · [the loop spec it produced](blueprint/loops/improvement-loop.md).
 
-Under the hood: [deterministic orchestration patterns](blueprint/agents/orchestration.md) — fan-out pipelines, adversarial verification, judge panels, structured result contracts between agents — with a 4-tier model strategy (Fable 5 → Opus → Sonnet → Haiku) to keep costs sane.
+Under the hood: [deterministic orchestration patterns](blueprint/agents/orchestration.md) — fan-out pipelines, adversarial verification, judge panels, structured result contracts between agents — with a role-based model strategy ("judgment up, volume down": Fable 5 as the brain for reviews and judgment calls, Opus 4.8 orchestrating, Sonnet 5 doing the volume work, Haiku 4.5 scouting) to keep costs sane.
 
 ---
 

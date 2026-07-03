@@ -1,4 +1,4 @@
-# Agentic Engineering Blueprint v1.8
+# Agentic Engineering Blueprint v1.9
 
 > This document is the central working instruction for all agents in this project.
 > It is loaded automatically and defines principles, phases, and roles.
@@ -68,11 +68,16 @@ structured result contracts (research finding / DA verdict / implementation repo
 between pipeline stages.
 Detail: [orchestration.md](blueprint/agents/orchestration.md)
 
-### Model Tiering (since Fable 5, 06/2026)
-Four tiers: **Fable 5** (Lead, Mission Chunks, critical migrations) > **Opus**
-(hard logic) > **Sonnet** (standard) > **Haiku** (explore, bulk edits).
-Effort as a second dimension: `xhigh` for Mission Chunks, `high` standard, `low`
-for subagents. Decision tree and current price anchors: [decision-trees.md](blueprint/meta/decision-trees.md)
+### Model Tiering — Brain / Orchestrator / Worker / Scout (since 07/2026)
+"Judgment up, volume down": **Fable 5** is the *Brain* — called at judgment
+moments (architecture, devil's-advocate reviews, judge/verify stages) and for
+Mission Chunks, not parked in the loop. **Opus 4.8** is the *Orchestrator* —
+leads teams and loop cycles, owns hard logic. **Sonnet 5** is the
+*Worker/Researcher* — the volume tier. **Haiku 4.5** is the *Scout* — explore
+and bulk edits. Effort as a second dimension: `xhigh` for Missions and
+judgment stages, `high` standard, `low` for mechanical subagents.
+Decision tree, escalation rule, and current price anchors:
+[decision-trees.md](blueprint/meta/decision-trees.md)
 
 ---
 
@@ -127,7 +132,7 @@ Bootstrapping guide: [how-to-adapt.md](blueprint/meta/how-to-adapt.md)
 
 ## Meta
 
-- **Version:** 1.8
+- **Version:** 1.9
 - **Changelog:** [changelog.md](blueprint/meta/changelog.md)
 - **Retro template:** [retro-template.md](blueprint/meta/retro-template.md)
 - **Decision trees:** [decision-trees.md](blueprint/meta/decision-trees.md)

@@ -15,7 +15,7 @@
 - **Primary agent:** Claude Code
 - **Secondary agent (optional):** <second Claude Code agent (separate session or teammate) | none>
 - **Review tool:** </code-review skill + second Claude Code agent | Greptile | manual>
-- **Model Tiering:** Fable 5 (Lead/Mission) · Opus (hard logic) · Sonnet (standard) · Haiku (explore) — for current prices see `blueprint/meta/decision-trees.md`
+- **Model Tiering:** Fable 5 (Brain: judgment/DA/Mission) · Opus 4.8 (Orchestrator: Lead + hard logic) · Sonnet 5 (Worker/Researcher) · Haiku 4.5 (Scout) — doctrine and current prices: `blueprint/meta/decision-trees.md`
 - **Default effort:** <xhigh for Mission Chunks | high standard | low for subagents>
 
 ## Directory Assignments

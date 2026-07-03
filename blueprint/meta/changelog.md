@@ -1,5 +1,45 @@
 # Blueprint Changelog
 
+## v1.9 — 2026-07-03
+
+Model retiering to a role-based doctrine — **"judgment up, volume down"**:
+**Fable 5 = Brain** (judgment moments: architecture, devil's-advocate reviews,
+judge/verify stages, Mission Chunks), **Opus 4.8 = Orchestrator** (team Lead,
+loop cycles, hard logic), **Sonnet 5 = Worker/Researcher** (volume tier),
+**Haiku 4.5 = Scout**. Maintainer vision (decision log 2026-07-03). This
+**reverses** the 2026-06-09 Fable 5 evaluation's "the Lead belongs on Fable"
+guidance — the rationale is qualitative maintainer judgment plus the observed
+pattern across this repo's loop cycles that the DA/verify steps, not
+orchestration, were consistently the highest-leverage moments.
+
+### Changed
+- `blueprint/meta/decision-trees.md` (canonical): role-based tree with the
+  escalation rule; cost anchors gain Sonnet 5 (incl. dated intro pricing and
+  the new-tokenizer caveat) and the effort-levels line; Hybrid tree now "Opus
+  orchestrates, Fable on call" with the worker-is-the-brain exception kept for
+  Missions (incl. Mission-sized teammate tasks).
+- `blueprint/agents/orchestration.md`: new "Model per stage — the brain
+  pattern" section with a tiered pipeline skeleton and the **escalation rule**
+  (ambiguous verdicts, borderline aborts, and scope-interpretation calls go to
+  a brain judgment call or the human — the orchestrator never settles them).
+- `blueprint/prompts/improvement-orchestrator.md`: orchestrator model
+  recommendation corrected from "top-tier" to Opus-tier + brain-on-call (DA
+  blocker: the repo's most-executed prompt contradicted the new doctrine).
+- Tiering language aligned in `AGENTIC-BLUEPRINT.md` (v1.9),
+  `blueprint/agents/agent-teams.md` (table, spawn example, rule of thumb,
+  Observer example), `blueprint/templates/team-prompt.md`,
+  `blueprint/config.md`, README; `blueprint/loops/review-fix-loop.md` one-shot
+  note rescoped to Missions.
+- `observer/src/collector/pricing.ts` + test: `claude-sonnet-5` entry added
+  ($3/$15 standard; comment notes the intro window) so the Observer prices the
+  recommended volume tier without the unknown-model fallback warning.
+
+### Known inconsistency (maintainer-gated)
+- `docs/glossary.md` "Model Tiering" entry still says "Fable 5 for the lead" —
+  the glossary is community-reserved (good-first-issue 3) and the interactive
+  maintainer ask was unavailable this cycle; logged in the backlog for an
+  explicit one-line-correction decision.
+
 ## v1.8 — 2026-07-03
 
 Viral README restructure — the fold rebuilt around a visible one-message entry
