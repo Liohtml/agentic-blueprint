@@ -1,47 +1,156 @@
 <p align="center">
-  <img src="assets/social-preview.png" alt="Agentic Blueprint" width="100%">
+  <img src="assets/social-preview.png" alt="Agentic Blueprint" width="70%">
 </p>
 
-<h3 align="center">A framework for autonomous AI-driven engineering workflows</h3>
+<!-- HERO DEMO GIF — replaces the banner above once recorded (maintainer task).
+     Spec: 10-15s, <2MB, terminal session: paste the one-line prompt below →
+     agent fetches the blueprint and starts the interview → a phase gate fires.
+     Record with e.g. asciinema + agg, or a screen recorder + gifski. -->
+
+<h3 align="center">Autonomous agents. Human gates. Nothing merges without your Go.</h3>
 
 <p align="center">
-  <a href="#your-first-10-minutes">First 10 Minutes</a> &bull;
-  <a href="docs/GETTING-STARTED.md">Getting Started</a> &bull;
-  <a href="#quick-start-developers">Quick Start</a> &bull;
-  <a href="#clone--go--agent-teams">Agent Teams</a> &bull;
-  <a href="#run-agents-safely--docker-sandbox">Docker Sandbox</a> &bull;
-  <a href="terminal-setup/README.md">Terminal Setup</a> &bull;
+  Turn <a href="https://claude.com/claude-code">Claude Code</a> into a disciplined engineering system that plans, builds,
+  reviews itself adversarially, ships — and improves your project in a loop that survives any crash.<br>
+  It's all plain markdown. <b>You don't install it. Your agent does.</b>
+</p>
+
+<p align="center">
+  <a href="#start-in-60-seconds">Start in 60 Seconds</a> &bull;
+  <a href="#level-2--the-improvement-loop">The Loop</a> &bull;
   <a href="#how-it-works">How It Works</a> &bull;
-  <a href="#project-structure">Structure</a> &bull;
+  <a href="docs/GETTING-STARTED.md">Getting Started</a> &bull;
+  <a href="#level-3--agent-teams-live-dashboard-sandbox">Agent Teams</a> &bull;
   <a href="CONTRIBUTING.md">Contributing</a>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.7-blue" alt="Version 1.7">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License MIT">
-  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs Welcome">
+  <a href="https://github.com/Liohtml/agentic-blueprint/stargazers"><img src="https://img.shields.io/github/stars/Liohtml/agentic-blueprint?style=flat&color=yellow" alt="GitHub stars"></a>
 </p>
 
 ---
 
-Agentic Blueprint is a structured playbook for building software with AI agents: phases, quality gates, feedback loops, and coordination rules — all as plain markdown files. It is **built for [Claude Code](https://claude.com/claude-code)**; the core principles (phases, gates, loops) are tool-agnostic and transfer to other agents, but everything here is tested with and written for Claude Code.
+## Start in 60 Seconds
+
+Open [Claude Code](https://claude.com/claude-code) in any folder — an existing project or a brand-new empty one — and paste this **one sentence**:
+
+```text
+Read https://github.com/Liohtml/agentic-blueprint/blob/master/blueprint/templates/setup-wizard-prompt.md
+and follow it as my setup wizard. I may not be technical — one question at a time, plain language.
+```
+
+That's it. Your agent fetches the blueprint, interviews you (every question comes with a suggested default — if unsure, take it), and sets everything up. **You should see at the end:** a plain-language summary plus a ready-to-copy prompt for your first feature.
+
+> **Works with an empty folder. Never overwrites your files without asking. A human approves every merge.**
+
+No terminal? The same workflow runs in a plain [claude.ai](https://claude.ai) chat, and the full wizard prompt is available inline — see [Other ways to start](#other-ways-to-start) below.
 
 ---
 
-## Your First 10 Minutes
+## What you just installed
 
-The blueprint is **just folders and text files — no code required**. And you don't set it up yourself: **the agent does the setup for you.**
+Agentic Blueprint is a structured playbook for building software with AI agents: **6 phases, binary quality gates, feedback loops with hard iteration limits, and multi-agent coordination rules — all as plain markdown files** your agent reads and follows. Built for [Claude Code](https://claude.com/claude-code); the principles transfer to other agents.
 
-### With Claude Code (recommended)
+We call the approach **gated autonomy**: agents work autonomously *inside* each phase, and every phase ends at a gate where a human decides. That's the whole trick — and post-2026, it's the difference between an agent system you can trust and one you have to babysit.
 
-[Claude Code](https://claude.com/claude-code) is Anthropic's AI coding agent — a program that reads and edits the files in a folder for you; install it from that link if you don't have it yet. To "open it in your project folder": in a terminal, type `cd path/to/your/project` and then `claude` — or, if you use the VS Code extension, open the folder in VS Code and open the Claude panel.
+| | Vibe coding | With the Blueprint |
+|---|---|---|
+| **Planning** | "Build me X" and hope | Scoped chunks with binary done-criteria you approve first |
+| **While it works** | Watch every keystroke, or look away and pray | Autonomous inside the phase; hard-capped feedback loops (5/3/7 iterations) |
+| **Review** | You read 2,000 lines of diff | A second agent reviews adversarially — an agent never reviews itself |
+| **When it goes wrong** | Endless "try again" spiral | Loop hits its cap, stops, escalates to you with a report |
+| **Merging** | Autopilot YOLO | Nothing merges without your explicit Go |
+| **Over time** | Same mistakes every session | An [Improvement Loop](blueprint/loops/improvement-loop.md) that ships fixes to its own process |
 
-1. **Open Claude Code in your project folder.** An existing project works; a brand-new empty folder works too. *(You should see: Claude Code running, waiting for your message.)*
-2. **Paste the setup wizard prompt below** — it's one message. (Also available as a file: [`blueprint/templates/setup-wizard-prompt.md`](blueprint/templates/setup-wizard-prompt.md).)
-3. **Answer the questions.** One at a time, in plain language, each with a suggested default — if you're unsure, take the suggestion. *(You should see at the end: a plain-language summary plus a ready-to-copy Phase 0 prompt for your first feature.)*
+---
+
+## Level 2 — The Improvement Loop
+
+The part that makes this more than a prompt collection: a **system-level loop** in which agents improve your project continuously — research → adversarial devil's-advocate review → implement → test → ship → repeat. Its entire state lives in one backlog file, so it **resumes after any crash, session limit, or dead process**. Start it (or schedule it via cron/GitHub Actions) with one paste:
+
+```text
+Read https://github.com/Liohtml/agentic-blueprint/blob/master/blueprint/prompts/improvement-orchestrator.md
+and follow it. Backlog: docs/BACKLOG.md. Test gate: <your test command>.
+```
+
+Autonomous, not reckless — the loop's non-negotiables: nothing ships without a devil's-advocate review, implementation agents never touch git, strategic decisions go to you, and **you** remain the only one who merges.
+
+**Proof it works: this repository is built by its own loop.** The Improvement Loop spec, the orchestration patterns, this README — all shipped through backlog → DA review → implementation cycles, with the verdicts on the record: [the backlog](docs/BACKLOG.md) · [the retro, including honest failures](docs/retros/2026-06-10-continuous-loop-retro.md) · [the loop spec it produced](blueprint/loops/improvement-loop.md).
+
+Under the hood: [deterministic orchestration patterns](blueprint/agents/orchestration.md) — fan-out pipelines, adversarial verification, judge panels, structured result contracts between agents — with a 4-tier model strategy (Fable 5 → Opus → Sonnet → Haiku) to keep costs sane.
+
+---
+
+## How It Works
+
+```
+Phase 0        Phase 1        Phase 2        Phase 3        Phase 4        Phase 5
+IDEATION  -->  PLANNING  -->  BUILDING  -->  CLEANUP   -->  REVIEW   -->  MERGE
+  You +          You +         Agent(s)       Agent          Review         You
+  Agent          Agent         autonomously   cleans up      Agent +        approve
+  brainstorm     create plan   build chunks   duplicates     Build Agent    & merge
+                                                             loop to 5/5
+```
+
+| # | Principle | What It Means |
+|---|-----------|---------------|
+| 1 | **Human thinks, Agent builds** | You make architecture decisions. Agents execute. |
+| 2 | **Context is King, less is more** | Never load the entire codebase. Reference specific files only. |
+| 3 | **Code is the best documentation** | Load dependency source code directly, not prose docs. |
+| 4 | **Build small, merge often** | Max 3-5 files per chunk — or one well-specified Fable 5 mission. |
+| 5 | **Structure after every feature** | Cleanup phase is never skipped. |
+| 6 | **Automated feedback loops** | Agents loop with defined abort conditions. No endless spinning. |
+
+Every loop has a defined abort condition — when it fires, the agent stops and escalates to you:
+
+| Loop | Phase | Max Iterations | On Abort |
+|------|-------|---------------|----------|
+| Build-Test | Building | 5 | Report blocker |
+| Cleanup-Verify | Cleanup | 3 | Rollback to original |
+| Review-Fix | Review | 7 | Human takes over |
+| [Improvement](blueprint/loops/improvement-loop.md) | Between features (system-level) | 1-3 backlog items per cycle\* | Maintainer stop / empty backlog |
+
+\* A per-cycle item count, not an iteration cap — cycles end on maintainer stop or an empty backlog, and the maintainer (not iteration exhaustion) is the abort authority.
+
+The full rulebook lives in [`AGENTIC-BLUEPRINT.md`](AGENTIC-BLUEPRINT.md) and the [`blueprint/`](blueprint/) folder — phases, loops, agent roles, templates, decision trees.
+
+---
+
+## What this is NOT
+
+- **Not a library, CLI, or runtime.** Markdown files and prompts. No dependencies, nothing to keep updated.
+- **Not "fire and forget" autonomy.** Agents stop at gates. A human approves every merge, every scope change, every deletion. If you want an agent with root access and no questions asked, this is the wrong repo.
+- **No benchmark scores, no "100x" claims.** The honest pitch: fewer disasters, less babysitting, a process that improves itself. Judge it by the [worked example](docs/examples/worked-example.md) and this repo's own [commit history](https://github.com/Liohtml/agentic-blueprint/commits/master).
+
+---
+
+## Level 3 — Agent Teams, Live Dashboard, Sandbox
+
+When one agent isn't enough (requires tmux ≥ 3.x, Node.js ≥ 20, git, Claude Code CLI):
+
+```bash
+git clone https://github.com/Liohtml/agentic-blueprint.git && cd agentic-blueprint
+./scripts/start-team.sh          # env checks in plain language, tmux, agent team — one command
+./scripts/start-team.sh --observer <team-name>   # + live dashboard at http://localhost:4317
+```
+
+Multiple Claude Code agents in tmux split panes with strict file ownership, a shared task graph, and the **[Agent Observer](observer/README.md)** streaming live token counts, costs, and task progress per agent. Fill in [`blueprint/templates/team-prompt.md`](blueprint/templates/team-prompt.md) and paste it. Full runbook with troubleshooting: [`blueprint/agents/agent-teams.md`](blueprint/agents/agent-teams.md).
+
+Want agents contained? The repo ships a ready **[Docker sandbox](docs/docker-sandbox.md)** (Dev Container + plain-docker paths, with an honest list of what it does *not* protect):
+
+```bash
+docker build -t agent-sandbox sandbox/
+docker run -it --rm -v "$PWD":/workspace -w /workspace agent-sandbox
+```
+
+---
+
+## Other ways to start
 
 <details>
-<summary><b>📋 Click to show the wizard prompt (copy everything inside the box)</b></summary>
+<summary><b>The full wizard prompt inline</b> (if you'd rather not have the agent fetch a URL)</summary>
 
 <!-- KEEP IN SYNC: this prompt exists in README.md and blueprint/templates/setup-wizard-prompt.md — change both -->
 ```text
@@ -108,9 +217,8 @@ question at a time."
 
 </details>
 
-### No terminal? Use claude.ai
-
-If you don't use Claude Code, you can still try the workflow in a plain chat:
+<details>
+<summary><b>No terminal? Use claude.ai</b></summary>
 
 1. **Get the files.** Click the green **Code** button on GitHub and choose **Download ZIP** (or use **"Use this template"** if you want your own copy on GitHub). Unzip it.
 2. **Upload `AGENTIC-BLUEPRINT.md`** to a new chat at [claude.ai](https://claude.ai).
@@ -128,60 +236,12 @@ If you don't use Claude Code, you can still try the workflow in a plain chat:
 > **Prompt 4 — get a reviewable plan:**
 > "Phase 0 is done. Move to Phase 1 and draft a plan with small chunks I can approve one by one."
 
-That's the whole loop: the agent reads the rules, you make the decisions, it does the work in disciplined phases. For a guided end-to-end walkthrough, continue with [Getting Started](docs/GETTING-STARTED.md).
+For a guided end-to-end walkthrough, continue with [Getting Started](docs/GETTING-STARTED.md).
 
----
+</details>
 
-## Choose Your Path
-
-| | Path | Start here |
-|---|------|------------|
-| 🟢 | **Beginner / non-technical** — you've never used a terminal, or you just want the workflow without any setup | [Track A in Getting Started](docs/GETTING-STARTED.md#-track-a--im-not-technical) — a guided "first win" in under 15 minutes, no terminal needed |
-| 🔵 | **Developer / expert** — you want the blueprint in your own repo, or a full multi-agent team with a live dashboard | [Quick Start](#quick-start-developers) and [Clone & Go — Agent Teams](#clone--go--agent-teams) |
-
-New terms (Phase, Gate, Chunk, Mission Mode, ...) are defined in the [Glossary](docs/glossary.md).
-
----
-
-## What is Agentic Blueprint?
-
-Agentic Blueprint is a **reusable, modular framework** that defines how AI agents autonomously engineer software. Instead of ad-hoc prompting, it gives your agents a structured playbook: phases, quality gates, feedback loops, and coordination protocols.
-
-Drop it into any project. Your agents know what to do.
-
-**This is not a library or CLI tool.** It's a set of markdown files that guide AI agents through a disciplined development workflow — from ideation to merge.
-
-### Key Features
-
-- **6-Phase Development Model** — Ideation, Planning, Building, Cleanup, Review, Merge
-- **Agent-Driven Setup** — One copy-paste [wizard prompt](blueprint/templates/setup-wizard-prompt.md) and the agent installs and configures the blueprint in your project itself
-- **One-Command Agent Teams** — [`scripts/start-team.sh`](scripts/start-team.sh) checks your environment in plain language, starts tmux, and launches the team
-- **Docker Sandbox** — Ready-to-use [container template](docs/docker-sandbox.md) so agents can work autonomously without touching your host system
-- **Mission Mode (Fable 5)** — Long-horizon autonomous runs: full spec up front, binary definition of done, quality gates unchanged
-- **4-Tier Model Strategy** — Fable 5 for the lead and mission-critical work, Opus for hard logic, Sonnet as standard, Haiku for scouting — with effort as the second cost dimension
-- **Multi-Agent Coordination** — Claude Code agents (plus an optional secondary agent) working in parallel without conflicts
-- **Automated Feedback Loops** — Build-Test, Cleanup-Verify, and Review-Fix loops with defined iteration limits
-- **Quality Gates** — Binary pass/fail checks between every phase
-- **Context Engineering** — Rules for keeping agent context minimal and precise
-- **Templates** — Ready-to-use templates for CLAUDE.md, AGENTS.md, plans, backlogs, and PRs
-- **Self-Evolving** — A first-class [Improvement Loop](blueprint/loops/improvement-loop.md): backlog → research → devil's-advocate review → implement → test → push, resumable from its backlog file after any interruption — plus the retro template for per-feature learnings
-- **Deterministic Orchestration** — [Multi-agent patterns](blueprint/agents/orchestration.md) for Fable 5: fan-out pipelines, adversarial verification, judge panels, and structured result contracts between agents
-
----
-
-## Quick Start (Developers)
-
-### Recommended: let the agent set it up
-
-1. Open Claude Code in your project folder (existing repo or empty directory — both work).
-2. Paste the **setup wizard prompt** — shown inline in [Your First 10 Minutes](#your-first-10-minutes), or copy it from [`blueprint/templates/setup-wizard-prompt.md`](blueprint/templates/setup-wizard-prompt.md).
-3. Answer the interview questions.
-
-The wizard detects your tech stack, fetches `AGENTIC-BLUEPRINT.md` + `blueprint/` from this repo, fills out `blueprint/config.md` with you, and generates `CLAUDE.md` + `AGENTS.md` — without overwriting anything you already have.
-
-### Manual setup (alternative)
-
-If you'd rather do it by hand:
+<details>
+<summary><b>Manual setup</b> (clone + copy by hand)</summary>
 
 ```bash
 # Clone the blueprint
@@ -196,145 +256,16 @@ Then edit `blueprint/config.md` (name, tech stack, secondary agent, review tool)
 
 > "Read `blueprint/config.md` and `blueprint/templates/CLAUDE.md.template`. Generate a project-specific `CLAUDE.md` based on the configuration."
 
-### Start building
+</details>
 
-Begin every feature with:
-
-> "Read `AGENTIC-BLUEPRINT.md`. I want to build [feature]. Start with Phase 0."
-
-The agent follows the phases automatically.
-
----
-
-## Clone & Go — Agent Teams
-
-Spin up a full Claude Code agent team — multiple agents working in parallel, each in
-its own terminal pane — with **one command**.
-
-**Requirements (this path only):** [tmux](https://github.com/tmux/tmux/wiki) ≥ 3.x · Node.js ≥ 20 · git · [Claude Code CLI](https://claude.com/claude-code)
-
-### 1. Clone once
-
-```bash
-git clone https://github.com/Liohtml/agentic-blueprint.git
-cd agentic-blueprint
-./scripts/bootstrap.sh   # installs observer deps, checks your environment
-```
-
-### 2. Start the team — one command
-
-```bash
-./scripts/start-team.sh
-```
-
-The script checks everything (git, node, claude, tmux — every missing piece gets a
-plain-language install hint), enables the experimental agent-teams flag, starts tmux
-for you, and launches Claude Code in **your current folder**. Options: `--check`
-(checks only), `--observer <team>` (adds a live dashboard pane), `--help`.
-
-**You should see:** five ✓ lines, a three-line tmux crash course, then Claude Code
-inside a tmux pane (green status bar at the bottom).
-
-### 3. Paste your team prompt
-
-Fill in [`blueprint/templates/team-prompt.md`](blueprint/templates/team-prompt.md)
-and paste it into Claude. The template covers every rule the team needs: shared contract
-first, strict file-ownership, model-tiering (Fable 5 for the lead and mission-critical
-work, Opus for hard logic, Sonnet for the rest, Haiku for scouting),
-task-graph with `blocks`/`blockedBy`, build-test-loop max 5 iterations, no self-review,
-and no merge without your Go.
-
-### 4. Watch the team live
-
-```bash
-./scripts/start-team.sh --observer <team-name>   # or in a new pane: ./scripts/observe.sh --team <name>
-```
-
-Open **http://localhost:4317** — the **[Agent Observer](observer/README.md)** streams live
-token counts, costs, tool activity, and task progress for every pane — built with these
-exact same team rules.
-
-> Manual steps (what the script does under the hood), a "Type this → You should see"
-> walkthrough, and a troubleshooting table live in
-> [`blueprint/agents/agent-teams.md`](blueprint/agents/agent-teams.md).
-
----
-
-## Run Agents Safely — Docker Sandbox
-
-Before giving agents real autonomy, put them in a container: inside it they cannot
-touch your host files, keys, or other projects. The repo ships a ready-to-use template:
-
-```bash
-docker build -t agent-sandbox sandbox/
-docker run -it --rm -v "$PWD":/workspace -w /workspace agent-sandbox
-```
-
-Two paths — **VS Code Dev Container** (beginner-friendly, click "Reopen in Container")
-and **plain Docker** — plus an honest list of what the sandbox does *not* protect:
-**[docs/docker-sandbox.md](docs/docker-sandbox.md)**.
-
----
-
-## How It Works
-
-### The 6 Phases
-
-```
-Phase 0        Phase 1        Phase 2        Phase 3        Phase 4        Phase 5
-IDEATION  -->  PLANNING  -->  BUILDING  -->  CLEANUP   -->  REVIEW   -->  MERGE
-  You +          You +         Agent(s)       Agent          Review         You
-  Agent          Agent         autonomously   cleans up      Agent +        approve
-  brainstorm     create plan   build chunks   duplicates     Build Agent    & merge
-                                                             loop to 5/5
-```
-
-### The Core Principles
-
-| # | Principle | What It Means |
-|---|-----------|---------------|
-| 1 | **Human thinks, Agent builds** | You make architecture decisions. Agents execute. |
-| 2 | **Context is King, less is more** | Never load the entire codebase. Reference specific files only. |
-| 3 | **Code is the best documentation** | Load dependency source code directly, not prose docs. |
-| 4 | **Build small, merge often** | Max 3-5 files per chunk — or one well-specified Fable 5 mission. More than 8 chunks = reduce scope. |
-| 5 | **Structure after every feature** | Cleanup phase is never skipped. |
-| 6 | **Automated feedback loops** | Agents loop with defined abort conditions. No endless spinning. |
-
-### Feedback Loops
-
-Each loop has a hard iteration limit. When reached, the agent stops and escalates to you.
-
-| Loop | Phase | Max Iterations | On Abort |
-|------|-------|---------------|----------|
-| Build-Test | Building | 5 | Report blocker |
-| Cleanup-Verify | Cleanup | 3 | Rollback to original |
-| Review-Fix | Review | 7 | Human takes over |
-| [Improvement](blueprint/loops/improvement-loop.md) | Between features (system-level) | 1-3 backlog items per cycle\* | Maintainer stop / empty backlog |
-
-\* The Improvement Loop's "1-3 items" is a per-cycle item count, not an iteration cap — cycles end on maintainer stop or an empty backlog, and the maintainer (not iteration exhaustion) is the abort authority.
-
-### Multi-Agent Coordination
-
-```
-    YOU (Conductor)
-    /             \
-   /               \
-Claude Code      Second Claude Code agent
-(Engineering)    (teammate or separate session:
-   |              UI, review, parallel chunks)
-   |                |
-   |-- src/lib/     |-- src/components/
-   |-- src/api/     |-- src/ui/
-   |-- tests/       |-- src/layouts/
-   |                |
-   \--- src/types/ (shared, read-only in build phase) ---/
-```
-
-Agents never touch the same files. Shared contracts are defined in planning and locked during building.
+New terms (Phase, Gate, Chunk, Mission Mode, ...) are defined in the [Glossary](docs/glossary.md). Non-technical? Start with [Track A in Getting Started](docs/GETTING-STARTED.md#-track-a--im-not-technical) — a guided first win in under 15 minutes, no terminal needed.
 
 ---
 
 ## Project Structure
+
+<details>
+<summary><b>What's in the box</b> (click to expand the full tree)</summary>
 
 ```
 your-project/
@@ -415,26 +346,18 @@ your-project/
     |-- fixtures/                 #   Anonymized test fixtures for vitest
 ```
 
----
-
-## Who Is This For?
-
-- **Solo developers** using AI agents to ship faster — gives your agents structure instead of chaos
-- **Small teams** with multiple agents running in parallel — prevents conflicts and ensures quality
-- **Anyone moving from vibe coding to agentic engineering** — start with the [no-terminal track](docs/GETTING-STARTED.md) if you're not technical; the framework enforces discipline without slowing you down
+</details>
 
 ## Requirements
 
-The requirements depend on which path you take:
-
 | Path | What you need |
 |------|---------------|
-| **Blueprint only** (phases, gates, loops, templates) | An AI coding agent — built for [Claude Code](https://claude.com/claude-code), principles transfer to others — and a git-based workflow. No dependencies, no installation, no runtime. |
-| **Agent Teams + Observer** (optional) | [tmux](https://github.com/tmux/tmux/wiki) ≥ 3.x, Node.js ≥ 20, git, Claude Code CLI, and the experimental agent-teams flag (see [Clone & Go](#clone--go--agent-teams)). |
+| **Blueprint + Improvement Loop** (phases, gates, loops, templates) | An AI coding agent — built for [Claude Code](https://claude.com/claude-code), principles transfer to others — and a git-based workflow. No dependencies, no installation, no runtime. |
+| **Agent Teams + Observer** (optional, Level 3) | [tmux](https://github.com/tmux/tmux/wiki) ≥ 3.x, Node.js ≥ 20, git, Claude Code CLI, and the experimental agent-teams flag. |
 
 ## Roadmap
 
-Planned improvements live in [docs/BACKLOG.md](docs/BACKLOG.md) — the working document of the project's continuous-improvement loop.
+Planned improvements live in [docs/BACKLOG.md](docs/BACKLOG.md) — the working document of the project's own Improvement Loop.
 
 ---
 
@@ -471,5 +394,5 @@ The agentic engineering community on X/Twitter, whose daily experiments, debates
 ---
 
 <p align="center">
-  <sub>Built with structured agent collaboration. Agents wrote 95% of this. A human made sure it was right.</sub>
+  <sub>Built with structured agent collaboration — through this repo's own Improvement Loop. Agents wrote 95% of this. A human made sure it was right.</sub>
 </p>

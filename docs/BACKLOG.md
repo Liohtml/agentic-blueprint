@@ -16,6 +16,13 @@
   `docs/community/good-first-issues.md`; needs maintainer go (outward-facing).
 - [ ] **Enable GitHub Discussions** (Show and Tell / Q&A / Ideas) and mark the repo as a
   **Template Repository** — both are repo settings only the maintainer can flip.
+- [ ] **Repo-settings virality checklist (maintainer-only, from research cycle v1.8):**
+  set ~8 topics (`ai-agents`, `claude`, `claude-code`, `agentic-workflow`,
+  `developer-tools`, `prompt-engineering`, `multi-agent`, `ai-engineering`); verify
+  `assets/social-preview.png` is uploaded under Settings → Social preview (1280×640,
+  <1MB — the README no longer doubles as its host); consider tagged releases per
+  blueprint version as a growth cadence. **Star-history chart: do NOT add until
+  >500 stars** — a flat line signals the opposite of traction.
 - [ ] **Demo GIF for the README** — animated Observer/agent-team banner (the single
   biggest README conversion lever per the AFFiNE playbook). Needs a recorded session.
 - [ ] **New blueprint templates from research cycle 1:** RUBRIC.md.template (outcome-graded
