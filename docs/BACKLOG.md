@@ -6,6 +6,13 @@
 
 ## Open (prioritized)
 
+- [ ] **v1.9: Brain/Orchestrator/Worker retiering** — maintainer vision: Fable 5 as
+  the *brain* (judgment moments: architecture, DA reviews, judge/verify stages,
+  mission chunks), Opus 4.8 as the *orchestrator* (loop mechanics, hard logic),
+  Sonnet 5 as *worker/researcher* (volume), Haiku 4.5 as *scout*. Inverts "Lead
+  belongs on Fable". Canonical rework in decision-trees.md; orchestration.md gets a
+  model-per-stage section; root doc, agent-teams tiering table, team-prompt, config
+  aligned. Maintainer go 2026-07-03 (decision log).
 - [ ] **Create the good-first-issues on GitHub** — drafts live in
   `docs/community/good-first-issues.md`; needs maintainer go (outward-facing).
 - [ ] **Enable GitHub Discussions** (Show and Tell / Q&A / Ideas) and mark the repo as a
@@ -143,6 +150,7 @@ A new loop can be started any time with
 | 2026-07-02 | Restart the loop for a Fable 5 rework, "free hand to make the repo ultra strong for agent systems in the loop" | ✅ Maintainer go — v1.7 cycle: codify the improvement loop + orchestration patterns (see Done) |
 | 2026-07-03 | Rebuild the README for maximum attention/virality — "so simple a primary-schooler can set up an autonomous agent loop" | ✅ Maintainer go — v1.8 cycle; Hugging Face MCP server installed for image generation (needs maintainer HF token for auth) |
 | 2026-07-03 | Bump the blueprint version to 1.8 for the README cycle, or keep 1.7? | ✅ Bump to 1.8 (v1.6 precedent: onboarding/README work carries a version + changelog entry) |
+| 2026-07-03 | Model-tiering doctrine: Fable 5 as brain, Opus 4.8 as orchestrator, Sonnet 5 as worker/researcher ("judgment up, volume down") — inverts "Lead belongs on Fable" | ✅ Maintainer vision, v1.9 cycle go |
 
 ## Loop rules (short version)
 
