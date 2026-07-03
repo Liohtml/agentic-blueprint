@@ -6,6 +6,12 @@
 
 ## Open (prioritized)
 
+- [ ] **v1.8: Viral README restructure** — hero section that passes the 5-second
+  test, one-sentence copy-paste entry (wizard + orchestrator via URL), before/after
+  comparison table, the Improvement Loop as the headline (incl. "this repo was
+  built by its own loop" proof), progressive disclosure (depth moves to docs/),
+  honest human-gates positioning. Maintainer go 2026-07-03 (decision log). GIF
+  recording and repo settings stay maintainer-gated.
 - [ ] **Create the good-first-issues on GitHub** — drafts live in
   `docs/community/good-first-issues.md`; needs maintainer go (outward-facing).
 - [ ] **Enable GitHub Discussions** (Show and Tell / Q&A / Ideas) and mark the repo as a
@@ -27,8 +33,9 @@
 ## Loop status
 
 **Loop restarted 2026-07-02 by maintainer go** for one v1.7 cycle ("free hand —
-make the repo ultra strong for agent systems in the loop"); the cycle is complete
-and the loop is idle again pending the next maintainer go. (Mid-cycle, commit
+make the repo ultra strong for agent systems in the loop"); that cycle is complete.
+**v1.8 cycle running since 2026-07-03** (maintainer go: viral README restructure —
+see Open and the decision log). Before that, the loop was idle. (Mid-cycle, commit
 a4a5fda was pushed with a transparent "verification DA pending" note — the loop's
 own interruption protocol in action; the verification DA then returned
 approve-with-fixes and all fixes landed in the closing commit.) Before that, the loop
@@ -116,6 +123,7 @@ A new loop can be started any time with
 | 2026-06-10 | Remove Antigravity entirely | ✅ Removed in v1.5 — roles covered by teammates / second Claude Code agent |
 | 2026-06-10 | Finish planned work, merge PR #7, end the loop | ✅ Executed — see Loop status |
 | 2026-07-02 | Restart the loop for a Fable 5 rework, "free hand to make the repo ultra strong for agent systems in the loop" | ✅ Maintainer go — v1.7 cycle: codify the improvement loop + orchestration patterns (see Done) |
+| 2026-07-03 | Rebuild the README for maximum attention/virality — "so simple a primary-schooler can set up an autonomous agent loop" | ✅ Maintainer go — v1.8 cycle; Hugging Face MCP server installed for image generation (needs maintainer HF token for auth) |
 
 ## Loop rules (short version)
 
