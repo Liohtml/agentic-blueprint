@@ -1,11 +1,7 @@
 <p align="center">
-  <img src="assets/social-preview.png" alt="Agentic Blueprint" width="58%">
+  <img src="assets/demo.gif" alt="One paste spawns a tmux agent team that works an improvement-loop cycle: DA review, fixes, tests green, push" width="72%"><br>
+  <sub>Stylized demo of a real loop cycle — the flow, roles, and gates are exactly how it runs.</sub>
 </p>
-
-<!-- HERO DEMO GIF — replaces the banner above once recorded (maintainer task).
-     Spec: 10-15s, <2MB, terminal session: paste the one-line prompt below →
-     agent fetches the blueprint and starts the interview → a phase gate fires.
-     Record with e.g. asciinema + agg, or a screen recorder + gifski. -->
 
 <h3 align="center">Autonomous agents. Human gates. Nothing merges without your Go.</h3>
 
