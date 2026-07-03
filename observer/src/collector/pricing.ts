@@ -59,6 +59,14 @@ export const PRICING_TABLE: Record<string, ModelPricing> = {
     cacheWritePerMTok:  3.75,  // 1.25× input
     cacheReadPerMTok:   0.30,  // 0.10× input
   },
+  // Standard rates; an introductory $2/$10 applies through 2026-08-31 —
+  // estimates overstate cost during that window. VERIFY PRICES.
+  'claude-sonnet-5': {
+    inputPerMTok:       3.00,
+    outputPerMTok:     15.00,
+    cacheWritePerMTok:  3.75,  // 1.25× input
+    cacheReadPerMTok:   0.30,  // 0.10× input
+  },
   'claude-haiku-4-5': {
     inputPerMTok:       1.00,
     outputPerMTok:      5.00,

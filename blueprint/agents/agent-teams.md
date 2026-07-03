@@ -165,29 +165,32 @@ The three most common failure pictures:
 
 ## Model Tiering (cost control)
 
-Teammates are tiered per role at spawn time — expensive model only for the tricky
-parts, standard model for the rest. Since Fable 5 (06/2026) there are four tiers
-(for current prices see [decision-trees.md](../meta/decision-trees.md)):
+Teammates are tiered per role at spawn time — "judgment up, volume down": the
+expensive model only where a single decision carries the run, the volume model for
+the rest (for current prices and the full doctrine see
+[decision-trees.md](../meta/decision-trees.md)):
 
-| Model | When to use |
-|---|---|
-| **Fable 5** (`fable`) | Lead/coordinator, Mission Chunks, architecture-critical migrations, final review. 2× the Opus price — use deliberately, not broadly. |
-| **Opus** (`opus`) | Hard logic: parsers, algorithms, aggregation with correctness risk |
-| **Sonnet** (`sonnet`) | Standard: scaffold, UI, CRUD, tests, docs |
-| **Haiku** (`haiku`) | Explore/research subagents, mechanical bulk edits |
+| Model | Role | When to use |
+|---|---|---|
+| **Fable 5** (`fable`) | Brain | Judgment moments: DA/review teammate, architecture-critical decisions — and Mission Chunks (there the executing agent is the judgment). 2× the Opus price — call it, don't park it. |
+| **Opus 4.8** (`opus`) | Orchestrator | The Lead/coordinator role, plus hard logic: parsers, algorithms, aggregation with correctness risk |
+| **Sonnet 5** (`sonnet`) | Worker / Researcher | The volume tier: scaffold, UI, CRUD, tests, docs, research |
+| **Haiku 4.5** (`haiku`) | Scout | Explore/research subagents, mechanical bulk edits |
 
 ```
-Agent(team_name: "<team>", name: "lead",   model: "fable",  ...)   # Mission coordination
-Agent(team_name: "<team>", name: "parser", model: "opus",   ...)   # hard logic
-Agent(team_name: "<team>", name: "ui",     model: "sonnet", ...)   # standard
-Agent(team_name: "<team>", name: "scout",  model: "haiku",  ...)   # explore/research
+Agent(team_name: "<team>", name: "lead",    model: "opus",   ...)   # orchestration
+Agent(team_name: "<team>", name: "reviewer",model: "fable",  ...)   # DA/judge (brain on call)
+Agent(team_name: "<team>", name: "parser",  model: "opus",   ...)   # hard logic
+Agent(team_name: "<team>", name: "ui",      model: "sonnet", ...)   # volume work
+Agent(team_name: "<team>", name: "scout",   model: "haiku",  ...)   # explore/research
 ```
 
-Rule of thumb: **Fable** only for the Lead and tasks whose failure costs the whole run;
-**Opus** for parsers/aggregation/algorithmics with correctness risk, **Sonnet** for
-scaffold, UI, CRUD, tests, **Haiku** for read-only groundwork. (On the Observer: T5
-transcript parser and T7 aggregator on Opus, all remaining eight on Sonnet — today
-the Lead would run on Fable.)
+Rule of thumb: **Fable** for judgment calls and Mission-sized teammate tasks — not for
+the Lead's plumbing; **Opus** for the Lead and for parsers/aggregation/algorithmics
+with correctness risk, **Sonnet** for scaffold, UI, CRUD, tests, **Haiku** for
+read-only groundwork. (On the Observer: T5 transcript parser and T7 aggregator on
+Opus, all remaining eight on Sonnet — today the Lead would run on Opus 4.8, with
+Fable called in for the review gate.)
 
 ## Cost Notes
 

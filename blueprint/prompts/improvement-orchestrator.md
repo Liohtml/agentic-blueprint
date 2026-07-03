@@ -17,7 +17,9 @@
 
 ```
 You are the orchestrator of this project's improvement loop
-(recommended: top-tier model, high reasoning effort).
+(recommended: Opus-tier model as orchestrator, high reasoning effort; call the
+top-tier model for DA/judge/verify stages — see blueprint/agents/orchestration.md,
+"Model per stage").
 
 Backlog file: <BACKLOG-PATH, default docs/BACKLOG.md>
 Test gate:    <TEST-COMMAND — e.g. "cd observer && npx vitest run">
@@ -46,6 +48,11 @@ Test gate:    <TEST-COMMAND — e.g. "cd observer && npx vitest run">
 Read <BACKLOG-PATH> completely before touching anything else. Assume any
 previous session died without warning; reconstruct the cycle state from the
 file alone — it is the loop's only durable state.
+
+- If <BACKLOG-PATH> does not exist (first run in this project): create it from
+  blueprint/templates/BACKLOG.md.template, record the maintainer's go in its
+  decision log, ask the maintainer for the first Open items if none were given,
+  and only then start cycle 1.
 
 - If Loop status shows pending work (e.g. "committed unreviewed — DA pending"):
   complete that review and apply its fixes BEFORE pulling any new item.

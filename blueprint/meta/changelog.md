@@ -1,5 +1,79 @@
 # Blueprint Changelog
 
+## v1.9 — 2026-07-03
+
+Model retiering to a role-based doctrine — **"judgment up, volume down"**:
+**Fable 5 = Brain** (judgment moments: architecture, devil's-advocate reviews,
+judge/verify stages, Mission Chunks), **Opus 4.8 = Orchestrator** (team Lead,
+loop cycles, hard logic), **Sonnet 5 = Worker/Researcher** (volume tier),
+**Haiku 4.5 = Scout**. Maintainer vision (decision log 2026-07-03). This
+**reverses** the 2026-06-09 Fable 5 evaluation's "the Lead belongs on Fable"
+guidance — the rationale is qualitative maintainer judgment plus the observed
+pattern across this repo's loop cycles that the DA/verify steps, not
+orchestration, were consistently the highest-leverage moments.
+
+### Changed
+- `blueprint/meta/decision-trees.md` (canonical): role-based tree with the
+  escalation rule; cost anchors gain Sonnet 5 (incl. dated intro pricing and
+  the new-tokenizer caveat) and the effort-levels line; Hybrid tree now "Opus
+  orchestrates, Fable on call" with the worker-is-the-brain exception kept for
+  Missions (incl. Mission-sized teammate tasks).
+- `blueprint/agents/orchestration.md`: new "Model per stage — the brain
+  pattern" section with a tiered pipeline skeleton and the **escalation rule**
+  (ambiguous verdicts, borderline aborts, and scope-interpretation calls go to
+  a brain judgment call or the human — the orchestrator never settles them).
+- `blueprint/prompts/improvement-orchestrator.md`: orchestrator model
+  recommendation corrected from "top-tier" to Opus-tier + brain-on-call (DA
+  blocker: the repo's most-executed prompt contradicted the new doctrine).
+- Tiering language aligned in `AGENTIC-BLUEPRINT.md` (v1.9),
+  `blueprint/agents/agent-teams.md` (table, spawn example, rule of thumb,
+  Observer example), `blueprint/templates/team-prompt.md`,
+  `blueprint/config.md`, README; `blueprint/loops/review-fix-loop.md` one-shot
+  note rescoped to Missions.
+- `observer/src/collector/pricing.ts` + test: `claude-sonnet-5` entry added
+  ($3/$15 standard; comment notes the intro window) so the Observer prices the
+  recommended volume tier without the unknown-model fallback warning.
+
+### Known inconsistency (maintainer-gated)
+- `docs/glossary.md` "Model Tiering" entry still says "Fable 5 for the lead" —
+  the glossary is community-reserved (good-first-issue 3) and the interactive
+  maintainer ask was unavailable this cycle; logged in the backlog for an
+  explicit one-line-correction decision.
+
+## v1.8 — 2026-07-03
+
+Viral README restructure — the fold rebuilt around a visible one-message entry
+and "gated autonomy" positioning, grounded in a sourced research pass over five
+breakout agent-repo READMEs (browser-use, spec-kit, OpenHands, cline, OpenClaw)
+and DA-reviewed against overclaiming (approve-with-fixes: 2 blockers, 6 major,
+8 minor — all applied). Maintainer decision: version bump to 1.8 per the v1.6
+precedent (onboarding/README work carries a version).
+
+### New
+- **README fold**: one-message paste entry (raw URL, works on first fetch) with
+  a beginner explainer, safety hook in the tagline ("Autonomous agents. Human
+  gates."), "Start in 60 Seconds" uncollapsed, Level 2 one-paste for the
+  Improvement Loop, "Vibe coding vs. Blueprint" before/after table, "What this
+  is NOT" honesty block (incl. "not enforced by a runtime — the human with the
+  merge button is the enforcement mechanism"), Level 3 (teams/observer/sandbox)
+  compressed, structure tree and alternative starts collapsed. Live stars badge
+  replaces the static PRs-welcome shield.
+- **Orchestrator bootstrap** (`blueprint/prompts/improvement-orchestrator.md`):
+  FIRST ACTION now covers the first run in a fresh project — if the backlog file
+  doesn't exist, create it from BACKLOG.md.template, record the maintainer go,
+  ask for the first Open items (DA blocker: the Level 2 paste previously pointed
+  at a file the wizard never creates).
+
+### Changed
+- Claims aligned with the corpus's own hedging: "survives any crash" →
+  "designed to resume from a single backlog file"; claude.ai path honestly
+  labeled "a guided walkthrough, not the full setup"; footer "95%" replaced
+  with "nearly all" + commit-history receipt.
+- `docs/BACKLOG.md`: maintainer repo-settings virality checklist (topics,
+  social preview, template button, Discussions, star-history only >500 stars).
+- Hero demo GIF: placeholder + recording spec in the README source
+  (maintainer-gated — needs a real session recording).
+
 ## v1.7 — 2026-07-02
 
 The Improvement Loop — the self-improving system the repo ran on itself in June

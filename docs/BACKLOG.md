@@ -10,6 +10,14 @@
   `docs/community/good-first-issues.md`; needs maintainer go (outward-facing).
 - [ ] **Enable GitHub Discussions** (Show and Tell / Q&A / Ideas) and mark the repo as a
   **Template Repository** — both are repo settings only the maintainer can flip.
+- [ ] **Repo-settings virality checklist (maintainer-only, from research cycle v1.8):**
+  set ~8 topics (`ai-agents`, `claude`, `claude-code`, `agentic-workflow`,
+  `developer-tools`, `prompt-engineering`, `multi-agent`, `ai-engineering`); verify
+  `assets/social-preview.png` is uploaded under Settings → Social preview (1280×640,
+  <1MB — the README banner is not the social preview; it must be uploaded in Settings
+  separately); consider tagged releases per
+  blueprint version as a growth cadence. **Star-history chart: do NOT add until
+  >500 stars** — a flat line signals the opposite of traction.
 - [ ] **Demo GIF for the README** — animated Observer/agent-team banner (the single
   biggest README conversion lever per the AFFiNE playbook). Needs a recorded session.
 - [ ] **New blueprint templates from research cycle 1:** RUBRIC.md.template (outcome-graded
@@ -27,8 +35,13 @@
 ## Loop status
 
 **Loop restarted 2026-07-02 by maintainer go** for one v1.7 cycle ("free hand —
-make the repo ultra strong for agent systems in the loop"); the cycle is complete
-and the loop is idle again pending the next maintainer go. (Mid-cycle, commit
+make the repo ultra strong for agent systems in the loop"); that cycle is complete.
+**The v1.9 cycle (Brain/Orchestrator/Worker retiering, maintainer go 2026-07-03) is
+complete** — the loop is idle again pending the next maintainer go (the glossary
+one-liner follow-up got its maintainer go and is done, see the decision log). The
+v1.8 cycle (viral README restructure) completed earlier the same day. Mid-cycle, commit c29944a
+was pushed with a transparent "unreviewed, DA pending" note (interruption protocol);
+the DA then returned approve-with-fixes and all fixes landed in the closing commit. (Mid-cycle, commit
 a4a5fda was pushed with a transparent "verification DA pending" note — the loop's
 own interruption protocol in action; the verification DA then returned
 approve-with-fixes and all fixes landed in the closing commit.) Before that, the loop
@@ -43,6 +56,34 @@ A new loop can be started any time with
 > the copy-into-your-project use case after the merge.
 
 ## Done
+
+- [x] **2026-07-03 (v1.9, retiering cycle):** Role-based model doctrine shipped —
+  "judgment up, volume down": Fable 5 = Brain (DA/judge/verify, architecture,
+  Missions), Opus 4.8 = Orchestrator (Lead, loop cycles, hard logic), Sonnet 5 =
+  Worker/Researcher, Haiku 4.5 = Scout. Canonical rework in decision-trees.md
+  (incl. escalation rule + Sonnet 5 cost anchors with intro-pricing/tokenizer
+  caveats), "Model per stage — the brain pattern" in orchestration.md, alignment
+  across root doc/agent-teams/team-prompt/config/README/review-fix-loop, and the
+  orchestrator prompt's model recommendation corrected (DA blocker). Observer:
+  claude-sonnet-5 pricing entry + test. DA on the design: approve-with-fixes —
+  1 blocker, 5 major (incl. "~80% mechanics" overclaim dropped; changelog states
+  the reversal of the 2026-06-09 evaluation explicitly), 4 minor; all applied
+  except the glossary one-liner (maintainer-gated, see Open). Prices/IDs verified
+  against the current API reference.
+
+- [x] **2026-07-03 (v1.8, viral-README cycle):** README rebuilt for the 5-second
+  test — visible one-message paste entry (raw URLs), "gated autonomy" tagline with
+  the safety hook in the hero, "Vibe coding vs. Blueprint" before/after table,
+  Improvement Loop as Level 2 with its own one-paste, "What this is NOT" honesty
+  block, progressive disclosure (structure tree + alternative starts collapsed),
+  live stars badge. Research: 15 sourced findings verified against five breakout
+  agent-repo READMEs. DA on the concrete diff: approve-with-fixes — 2 blockers
+  (Level-2 paste pointed at a backlog file the wizard never creates → orchestrator
+  prompt got a first-run bootstrap branch; "survives any crash" overclaimed past
+  the spec's own hedging → reworded to the honest mechanism), 6 major, 8 minor;
+  all applied. Wizard-prompt sync rule verified byte-identical. Maintainer
+  decisions: version bump to 1.8; GIF recording + repo settings remain
+  maintainer-gated (see Open).
 
 - [x] **2026-07-02 (v1.7, loop-codification cycle):** The Improvement Loop shipped
   as a first-class framework component — the loop this repo ran on itself is now a
@@ -116,6 +157,10 @@ A new loop can be started any time with
 | 2026-06-10 | Remove Antigravity entirely | ✅ Removed in v1.5 — roles covered by teammates / second Claude Code agent |
 | 2026-06-10 | Finish planned work, merge PR #7, end the loop | ✅ Executed — see Loop status |
 | 2026-07-02 | Restart the loop for a Fable 5 rework, "free hand to make the repo ultra strong for agent systems in the loop" | ✅ Maintainer go — v1.7 cycle: codify the improvement loop + orchestration patterns (see Done) |
+| 2026-07-03 | Rebuild the README for maximum attention/virality — "so simple a primary-schooler can set up an autonomous agent loop" | ✅ Maintainer go — v1.8 cycle; Hugging Face MCP server installed for image generation (needs maintainer HF token for auth) |
+| 2026-07-03 | Bump the blueprint version to 1.8 for the README cycle, or keep 1.7? | ✅ Bump to 1.8 (v1.6 precedent: onboarding/README work carries a version + changelog entry) |
+| 2026-07-03 | Model-tiering doctrine: Fable 5 as brain, Opus 4.8 as orchestrator, Sonnet 5 as worker/researcher ("judgment up, volume down") — inverts "Lead belongs on Fable" | ✅ Maintainer vision, v1.9 cycle go |
+| 2026-07-03 | Glossary "Model Tiering" one-line maintenance correction (entry contradicted v1.9 doctrine; glossary otherwise community-reserved per good-first-issue 3) | ✅ Maintainer go — single row corrected, Issue 3 (extension + cross-links) stays reserved |
 
 ## Loop rules (short version)
 

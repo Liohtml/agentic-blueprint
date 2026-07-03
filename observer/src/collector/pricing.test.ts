@@ -104,6 +104,12 @@ describe('getPricing', () => {
     expect(entry.outputPerMTok).toBe(15.00);
   });
 
+  it('returns sonnet pricing for claude-sonnet-5 (no unknown-model fallback)', () => {
+    const entry = getPricing('claude-sonnet-5');
+    expect(entry.inputPerMTok).toBe(3.00);
+    expect(entry.outputPerMTok).toBe(15.00);
+  });
+
   it('returns haiku pricing for claude-haiku-4-5', () => {
     const entry = getPricing('claude-haiku-4-5');
     expect(entry.inputPerMTok).toBe(1.00);

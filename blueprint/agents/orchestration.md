@@ -178,6 +178,35 @@ phase-handoff documents are a separate, community-reserved template task — see
   the whole panel worthless. For tiers, effort levels, and prices, reference
   [decision-trees.md](../meta/decision-trees.md); they are not restated here.
 
+## Model per stage — the brain pattern
+
+The tiering doctrine ("judgment up, volume down" — canonical in
+[decision-trees.md](../meta/decision-trees.md)) maps directly onto pipelines:
+the **orchestrator** (Opus-tier) runs the script — spawn, collect, bookkeeping,
+commits — and calls the **brain** (top tier, effort xhigh) only at the stages
+where a single decision carries the run. Workers (Sonnet-tier) and scouts
+(Haiku-tier) do the volume.
+
+```
+// the improvement-cycle pipeline, tiered
+scouts   = parallel(AREAS.map(a => () => agent(scan(a),      {model: scout})))       // volume
+findings = parallel(scouts.map(s => () => agent(research(s), {model: worker})))      // volume
+verdict  =                    agent(devils_advocate(findings), {model: brain, effort: "xhigh"})  // judgment
+impl     = parallel(plan.map(p => () => agent(implement(p),  {model: worker})))      // volume
+verified =                    agent(verify(impl, verdict),     {model: brain, effort: "xhigh"})  // judgment
+// orchestrator (Opus-tier) runs this script and commits
+```
+
+**The escalation rule** — the split is not a license for the orchestrator to
+adjudicate: ambiguous verdicts, borderline aborts (is this reject "without a
+viable fix path"?), and scope-interpretation calls go to a **brain judgment
+call** — or to the human where the project rules require it (scope, deletions,
+structure, outward-facing actions). The orchestrator never settles these itself.
+
+**The exception** — a Mission Chunk runs the brain as the *executing* model:
+there, the worker is the judgment. The pattern above governs orchestrated
+multi-stage work.
+
 ## Safety rules
 
 > **Non-negotiable, regardless of pattern:**
