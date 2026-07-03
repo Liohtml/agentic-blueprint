@@ -6,11 +6,6 @@
 
 ## Open (prioritized)
 
-- [ ] **Maintainer decision needed: glossary "Model Tiering" one-line correction** —
-  after v1.9 the entry "Fable 5 for the lead" (docs/glossary.md) contradicts the
-  canonical doctrine. The glossary is community-reserved (good-first-issue 3), so
-  the loop did not touch it; the DA recommends a single-row maintenance correction
-  with an explicit maintainer go (the interactive ask was unavailable mid-cycle).
 - [ ] **Create the good-first-issues on GitHub** — drafts live in
   `docs/community/good-first-issues.md`; needs maintainer go (outward-facing).
 - [ ] **Enable GitHub Discussions** (Show and Tell / Q&A / Ideas) and mark the repo as a
@@ -42,9 +37,9 @@
 **Loop restarted 2026-07-02 by maintainer go** for one v1.7 cycle ("free hand —
 make the repo ultra strong for agent systems in the loop"); that cycle is complete.
 **The v1.9 cycle (Brain/Orchestrator/Worker retiering, maintainer go 2026-07-03) is
-complete** — the loop is idle again pending the next maintainer go; one
-maintainer-gated follow-up sits in Open (glossary one-liner). The v1.8 cycle
-(viral README restructure) completed earlier the same day. Mid-cycle, commit c29944a
+complete** — the loop is idle again pending the next maintainer go (the glossary
+one-liner follow-up got its maintainer go and is done, see the decision log). The
+v1.8 cycle (viral README restructure) completed earlier the same day. Mid-cycle, commit c29944a
 was pushed with a transparent "unreviewed, DA pending" note (interruption protocol);
 the DA then returned approve-with-fixes and all fixes landed in the closing commit. (Mid-cycle, commit
 a4a5fda was pushed with a transparent "verification DA pending" note — the loop's
@@ -165,6 +160,7 @@ A new loop can be started any time with
 | 2026-07-03 | Rebuild the README for maximum attention/virality — "so simple a primary-schooler can set up an autonomous agent loop" | ✅ Maintainer go — v1.8 cycle; Hugging Face MCP server installed for image generation (needs maintainer HF token for auth) |
 | 2026-07-03 | Bump the blueprint version to 1.8 for the README cycle, or keep 1.7? | ✅ Bump to 1.8 (v1.6 precedent: onboarding/README work carries a version + changelog entry) |
 | 2026-07-03 | Model-tiering doctrine: Fable 5 as brain, Opus 4.8 as orchestrator, Sonnet 5 as worker/researcher ("judgment up, volume down") — inverts "Lead belongs on Fable" | ✅ Maintainer vision, v1.9 cycle go |
+| 2026-07-03 | Glossary "Model Tiering" one-line maintenance correction (entry contradicted v1.9 doctrine; glossary otherwise community-reserved per good-first-issue 3) | ✅ Maintainer go — single row corrected, Issue 3 (extension + cross-links) stays reserved |
 
 ## Loop rules (short version)
 
