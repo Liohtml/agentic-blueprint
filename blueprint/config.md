@@ -34,6 +34,21 @@
 - **Commit style:** <conventional commits | freeform>
 - **Max Chunks per plan:** 8
 
+## Autonomous Loops (optional)
+
+> This table holds the **project's instances** — which loops are enabled, at
+> which level, with which ceilings. The **pattern definitions** (format, abort
+> conditions, catalog) live in `blueprint/loops/operations-loops.md`; the level
+> semantics in `blueprint/loops/autonomy-levels.md`. Instances here, patterns
+> there — one owner each.
+> An honest note: an unfilled row enforces nothing — this is a readiness
+> checklist the maintainer applies before installing a schedule, not a gate
+> that fires on its own. A loop whose row can't be filled in isn't ready.
+
+| Loop | Cadence | Current level (starts L1) | Target level | Change scope | Cost ceiling | Clean runs for promotion (default 5) | State file |
+|------|---------|---------------------------|--------------|--------------|--------------|--------------------------------------|------------|
+| <e.g. Dependency Patch Sweeper> | <weekly> | L1 | <L2> | <lockfiles + manifest patch versions> | <$ or tokens per run> | <5> | <path> |
+
 ## Dependencies via Open-Source (Fallback)
 
 > Default: load dependency source directly via grep/read/web_fetch.

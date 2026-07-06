@@ -1,4 +1,4 @@
-# Agentic Engineering Blueprint v1.9
+# Agentic Engineering Blueprint v1.10
 
 > This document is the central working instruction for all agents in this project.
 > It is loaded automatically and defines principles, phases, and roles.
@@ -110,6 +110,15 @@ Optionally in addition: **Task Budgets** (`output_config.task_budget`, beta) as 
 token limit per loop run — the model sees the countdown and moderates itself.
 The iteration limit remains the hard limit.
 
+**Loop classes & autonomy levels (since 1.10):** besides the feature loops and
+the Improvement Loop there is a second class — **Operations Loops**, cadence-driven
+maintenance loops (audits, PR guardianship, dependency patch sweeps) with rate
+limits and abort conditions instead of iteration caps:
+[operations-loops.md](blueprint/loops/operations-loops.md). Every autonomous
+loop runs at a declared **autonomy level** — L1 report / L2 propose (branch/PR
+only) / L3 push (never merge) — with promotion by maintainer decision on a
+clean track record: [autonomy-levels.md](blueprint/loops/autonomy-levels.md).
+
 Detail: [blueprint/loops/](blueprint/loops/)
 
 ---
@@ -120,6 +129,13 @@ Detail: [blueprint/loops/](blueprint/loops/)
 - No hardcoded secrets/credentials
 - An agent never reviews itself
 - No merge without human approval
+- Every unattended (scheduled) loop run declares a **change scope** up front —
+  path + change-type allowlist. Anything outside the scope is escalated, never
+  done. ([autonomy-levels.md](blueprint/loops/autonomy-levels.md))
+- Unattended runs have a **cost ceiling** with a re-entry circuit breaker:
+  each run records its actual spend in the loop's state file; each re-entry
+  reads it first and stops if the ceiling is exceeded. Recording is what arms
+  the breaker — without the record there is no breaker.
 
 ---
 
@@ -132,7 +148,7 @@ Bootstrapping guide: [how-to-adapt.md](blueprint/meta/how-to-adapt.md)
 
 ## Meta
 
-- **Version:** 1.9
+- **Version:** 1.10
 - **Changelog:** [changelog.md](blueprint/meta/changelog.md)
 - **Retro template:** [retro-template.md](blueprint/meta/retro-template.md)
 - **Decision trees:** [decision-trees.md](blueprint/meta/decision-trees.md)

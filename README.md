@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.9-blue" alt="Version 1.9">
+  <img src="https://img.shields.io/badge/version-1.10-blue" alt="Version 1.10">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License MIT">
   <a href="https://github.com/Liohtml/agentic-blueprint/stargazers"><img src="https://img.shields.io/github/stars/Liohtml/agentic-blueprint?style=flat&color=yellow" alt="GitHub stars"></a>
 </p>
@@ -303,6 +303,8 @@ your-project/
 |   |   |-- cleanup-verify-loop.md
 |   |   |-- review-fix-loop.md
 |   |   |-- improvement-loop.md   #   System-level loop: backlog -> research -> DA review -> ship
+|   |   |-- operations-loops.md   #   Maintenance loop class: cadence-driven audits/sweeps
+|   |   |-- autonomy-levels.md    #   L1 report / L2 propose / L3 push - gated autonomy policy
 |   |
 |   |-- templates/                # Copy-paste ready templates
 |   |   |-- setup-wizard-prompt.md
@@ -316,6 +318,7 @@ your-project/
 |   |   |-- improvement-orchestrator.md  # Start/resume the improvement loop in any project
 |   |   |-- repo-guardian-agent.md       # Persistent in-repo reviewer persona
 |   |   |-- repo-health-agent.md         # Scheduled multi-repo audit routine
+|   |   |-- dependency-sweeper-agent.md  # Patch-only dependency updates (operations loop)
 |   |
 |   |-- meta/                     # Self-improvement tools
 |       |-- how-to-adapt.md       #   Bootstrapping guide for new projects

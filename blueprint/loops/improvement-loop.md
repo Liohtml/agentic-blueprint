@@ -2,7 +2,9 @@
 
 The three other loops ([Build-Test](build-test-loop.md), [Cleanup-Verify](cleanup-verify-loop.md),
 [Review-Fix](review-fix-loop.md)) improve a **feature**. This loop improves the
-**project itself** — the framework, its docs, its tooling — cycle by cycle. It is the
+**project itself** — the framework, its docs, its tooling — cycle by cycle.
+(A third class, cadence-driven [operations loops](operations-loops.md),
+maintains the repo on a schedule.) It is the
 codification of the loop this repository ran on itself in June 2026:
 [dogfooding retro](https://github.com/Liohtml/agentic-blueprint/blob/master/docs/retros/2026-06-10-continuous-loop-retro.md),
 [live backlog](https://github.com/Liohtml/agentic-blueprint/blob/master/docs/BACKLOG.md) (the worked example).
@@ -129,12 +131,19 @@ best-effort on top of it — pick mechanisms by what they can actually survive:
 **Hard rails for unattended cycles:**
 
 - The feature loops' iteration caps stay **hard limits**.
-- A per-cycle cost ceiling is a **monitored convention, not an enforced limit** —
-  the orchestrator checks actual usage at cycle end (e.g. via the
-  [Agent Observer](https://github.com/Liohtml/agentic-blueprint/blob/master/observer/README.md))
-  and stops if the ceiling is exceeded.
-- These human gates are **never automated**: merging, scope changes, deletions,
-  anything outward-facing (issues, posts, publishing).
+- A per-cycle cost ceiling with a **re-entry circuit breaker**: each unattended
+  cycle records its actual spend in the backlog's Loop status at cycle end
+  (e.g. via the
+  [Agent Observer](https://github.com/Liohtml/agentic-blueprint/blob/master/observer/README.md)),
+  and each re-entry reads that record first — ceiling exceeded means the run's
+  first action is stop + report. Recording is what arms the breaker; mid-run
+  hard stops remain unenforceable
+  ([autonomy-levels.md](autonomy-levels.md), canonical).
+- The human gates — merging, scope changes, deletions, outward-facing actions —
+  hold as defined canonically in [autonomy-levels.md](autonomy-levels.md)
+  (outward-facing actions only under an explicit, logged maintainer grant).
+- Run unattended, this loop operates at **L3 with a broad scope grant**, logged
+  as a maintainer decision (see autonomy-levels.md).
 
 Every unattended cycle leaves an auditable trail: commits + backlog updates.
 

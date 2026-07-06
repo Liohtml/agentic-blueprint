@@ -1,5 +1,72 @@
 # Blueprint Changelog
 
+## v1.10 — 2026-07-06
+
+Gated autonomy, formalized — an autonomy maturity model and a second loop
+class, adapted from the maturity phases and pattern catalog of
+[loop-engineering](https://github.com/cobusgreyling/loop-engineering)
+(Cobus Greyling) and rebuilt on this blueprint's gate model. Maintainer go
+2026-07-06 ("repo admin free hand" after a sourced research pass over that
+repo). Design DA before implementation: approve-with-fixes — 4 blockers
+(the ops catalog contradicted the "issues are never automated" gate; the
+level model bundled two axes so the repo's own unattended improvement loop
+fit no level; promotion required a track record nothing recorded; the
+re-entry circuit breaker had no data source), 7 major, 7 minor — all applied.
+
+### New
+- **Autonomy Levels** (`blueprint/loops/autonomy-levels.md`, canonical): a
+  single axis — what may happen without a human. **L1 report / L2 propose
+  (branch/PR only) / L3 push (never merge)**; change scope as an orthogonal
+  declaration; human gates owned here (merging always human; outward-facing
+  actions only under an explicit, logged maintainer grant with rate limits);
+  promotion by maintainer decision on a clean track record read from the
+  loop's existing auditable trail (default 5 clean runs, escalations always
+  clean — only unjustified autonomous actions count against a loop); L1
+  violations or repeated violations suspend the loop. **Cost circuit breaker
+  as a pair**: every unattended run records actual spend in its state file,
+  every re-entry reads it first — recording is what arms the breaker; mid-run
+  hard stops remain honestly unenforceable.
+- **Operations Loops** (`blueprint/loops/operations-loops.md`): the second
+  loop class — cadence-driven maintenance with a mandatory pattern format
+  (incl. **abort condition**, satisfying Core Principle 6; rate limits and
+  the breaker replace iteration caps). Installing/changing a schedule is a
+  maintainer decision (cadence analog of the improvement loop's trigger
+  rule). Starter catalog: Repo Health Audit and PR Guardian formalize the
+  two prompts this repo already ships (numbers stay canonical in the
+  prompts), plus a new Dependency Patch Sweeper (target L2, starts L1,
+  patch-only scope, 14-day rule kept, maker/checker verification).
+- **`blueprint/prompts/dependency-sweeper-agent.md`**: the sweeper as a real
+  prompt (L1 report mode by default, L2 only after logged promotion; scope
+  violation = self-suspend).
+
+### Changed
+- `AGENTIC-BLUEPRINT.md` (v1.10): loop classes & autonomy levels paragraph in
+  the Feedback Loops section; two new Safety Rules — declared change scope
+  for unattended runs, and the record-then-read cost circuit breaker.
+- `blueprint/loops/improvement-loop.md`: hard rails updated — the cost
+  ceiling is now the breaker pair (was: "monitored convention"); the
+  human-gates list points at its new canonical owner (autonomy-levels.md);
+  unattended operation classified as L3 with a broad, logged scope grant;
+  opening taxonomy mentions the third loop class.
+- `blueprint/config.md`: "Autonomous Loops" instance table (deployment
+  decisions live here, pattern definitions in operations-loops.md — one
+  owner each; honestly framed as a maintainer checklist, not a self-firing
+  gate).
+- README: version badge 1.10; structure tree gains the two loop specs and
+  the sweeper prompt.
+
+### Explicitly not adopted (logged rationale)
+- STATE.md/run-history template (collides with the community-reserved
+  LEARNINGS.md territory — needs a separate maintainer boundary decision),
+  CLI tooling clones (the Observer is this repo's tooling investment),
+  tool-agnostic starters (contradicts the logged "Built for Claude Code"
+  positioning), a machine-readable pattern registry (three patterns need no
+  index).
+
+### Version decision
+Additive (two loop specs, one prompt, config section); no phase/gate-semantics
+breakage for existing copies → minor bump to 1.10, per the v1.7 precedent.
+
 ## v1.9 — 2026-07-03
 
 Model retiering to a role-based doctrine — **"judgment up, volume down"**:
