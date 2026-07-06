@@ -34,6 +34,25 @@
 
 ## Loop status
 
+**The v1.10 cycle (gated-autonomy formalization, maintainer go 2026-07-06) is
+complete** — design DA approve-with-fixes (18 findings, all applied before
+implementation), verification DA on the shipped diff approve-with-fixes
+(2 blockers, 5 major, 5 minor — all applied in the closing commit; mid-cycle
+commit d0ded9f carried the transparent "verification DA pending" note per the
+interruption protocol). Shipped via this branch's PR — merging stays with the
+maintainer. Attended cycle
+(maintainer-triggered, orchestrator supervised), so the new unattended-run
+spend-recording rule does not bind it; noted here explicitly because the rule
+ships in this cycle and applies from the first unattended run onward. Declared
+change scope of the cycle (self-application of the new scope rule):
+`blueprint/loops/` (2 new specs), `blueprint/prompts/dependency-sweeper-agent.md`
+(new), `AGENTIC-BLUEPRINT.md`, `blueprint/config.md`,
+`blueprint/loops/improvement-loop.md`, `blueprint/meta/changelog.md`,
+`README.md` (badge + structure tree), `docs/BACKLOG.md` — no deletions, no
+observer/ source changes, no outward-facing actions (the PR is the cycle's
+deliverable — an L2/L3 output, not an outward-facing action under the new
+taxonomy). Scope compliance: clean.
+
 **Loop restarted 2026-07-02 by maintainer go** for one v1.7 cycle ("free hand —
 make the repo ultra strong for agent systems in the loop"); that cycle is complete.
 **The v1.9 cycle (Brain/Orchestrator/Worker retiering, maintainer go 2026-07-03) is
@@ -56,6 +75,31 @@ A new loop can be started any time with
 > the copy-into-your-project use case after the merge.
 
 ## Done
+
+- [x] **2026-07-06 (v1.10, gated-autonomy cycle):** Autonomy maturity model +
+  operations-loop class, adapted from
+  [loop-engineering](https://github.com/cobusgreyling/loop-engineering) after a
+  sourced comparison pass (maintainer go: "repo admin free hand"). Shipped:
+  `autonomy-levels.md` (L1 report / L2 propose / L3 push on a single axis;
+  change scope orthogonal; human gates canonically owned there; promotion on
+  auditable track record, default 5 clean runs, escalations always clean;
+  record-then-read cost circuit breaker), `operations-loops.md` (pattern
+  format with mandatory abort condition; catalog formalizing repo-health +
+  repo-guardian with numbers canonical in the prompts; new Dependency Patch
+  Sweeper), `dependency-sweeper-agent.md` prompt, two new Safety Rules in the
+  root doc, improvement-loop hard rails upgraded to the breaker pair,
+  config.md instance table. Design DA: approve-with-fixes — **4 blockers**
+  (ops catalog vs. "issues never automated" contradiction; two-axis level
+  model that fit none of our own loops; promotion track record with no data
+  source; circuit breaker with no data source), 7 major, 7 minor — **all 18
+  applied** before implementation. Deliberately not adopted: STATE.md
+  template (LEARNINGS.md community boundary), CLI clones, tool-agnostic
+  starters, pattern registry. Verification DA on the shipped diff:
+  approve-with-fixes — 2 blockers (L1 table cell vs. grant mechanism;
+  premature "PR open" claim in this file), 5 major (grandfathering,
+  unattended-L1 scope declaration, sweeper single-source, pattern-vs-instance
+  field ownership, L1 operation notes for the legacy prompts), 5 minor —
+  all 12 applied in the closing commit.
 
 - [x] **2026-07-03 (v1.9, retiering cycle):** Role-based model doctrine shipped —
   "judgment up, volume down": Fable 5 = Brain (DA/judge/verify, architecture,
@@ -161,6 +205,8 @@ A new loop can be started any time with
 | 2026-07-03 | Bump the blueprint version to 1.8 for the README cycle, or keep 1.7? | ✅ Bump to 1.8 (v1.6 precedent: onboarding/README work carries a version + changelog entry) |
 | 2026-07-03 | Model-tiering doctrine: Fable 5 as brain, Opus 4.8 as orchestrator, Sonnet 5 as worker/researcher ("judgment up, volume down") — inverts "Lead belongs on Fable" | ✅ Maintainer vision, v1.9 cycle go |
 | 2026-07-03 | Glossary "Model Tiering" one-line maintenance correction (entry contradicted v1.9 doctrine; glossary otherwise community-reserved per good-first-issue 3) | ✅ Maintainer go — single row corrected, Issue 3 (extension + cross-links) stays reserved |
+| 2026-07-06 | Adopt loop-engineering concepts (autonomy levels, operations loops, scope/breaker safety) — "repo admin free hand, deliver maximum value, PRs/merge allowed" | ✅ Maintainer go — v1.10 cycle. Merge still left to the maintainer: the blanket grant predates the content, and "no merge without human approval" reads as approval of the specific change |
+| 2026-07-06 | STATE.md/run-history template vs. community-reserved LEARNINGS.md — where is the boundary? | ⏳ Open — needs an explicit maintainer boundary decision before any run-history template ships (logged, not guessed) |
 
 ## Loop rules (short version)
 
