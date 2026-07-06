@@ -12,6 +12,13 @@ repo). Design DA before implementation: approve-with-fixes — 4 blockers
 level model bundled two axes so the repo's own unattended improvement loop
 fit no level; promotion required a track record nothing recorded; the
 re-entry circuit breaker had no data source), 7 major, 7 minor — all applied.
+A second, verification DA on the shipped diff: approve-with-fixes — 2 blockers
+(an L1 table cell contradicting the grant mechanism in the same file; the
+backlog's exit artifact stating a PR existed before it did), 5 major
+(grandfathering rule for pre-existing loops, scope declaration required for
+unattended L1, single-source for the sweeper's numbers, pattern-vs-instance
+field ownership, L1 operation notes so the two legacy prompts are actually
+runnable at L1), 5 minor — all applied in the closing commit.
 
 ### New
 - **Autonomy Levels** (`blueprint/loops/autonomy-levels.md`, canonical): a
@@ -54,6 +61,9 @@ re-entry circuit breaker had no data source), 7 major, 7 minor — all applied.
   gate).
 - README: version badge 1.10; structure tree gains the two loop specs and
   the sweeper prompt.
+- `docs/BACKLOG.md`: cycle recorded per the loop's own bookkeeping (maintainer
+  go + LEARNINGS-boundary question in the decision log, Done entry, Loop
+  status with the cycle's declared change scope).
 
 ### Explicitly not adopted (logged rationale)
 - STATE.md/run-history template (collides with the community-reserved

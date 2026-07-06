@@ -35,10 +35,12 @@
 ## Loop status
 
 **The v1.10 cycle (gated-autonomy formalization, maintainer go 2026-07-06) is
-implemented, verification DA pending** — design DA passed (approve-with-fixes,
-all 18 findings applied before implementation); the verification DA on the
-shipped diff is running and its fixes land in the closing commit per the
-interruption protocol. Attended cycle
+complete** — design DA approve-with-fixes (18 findings, all applied before
+implementation), verification DA on the shipped diff approve-with-fixes
+(2 blockers, 5 major, 5 minor — all applied in the closing commit; mid-cycle
+commit d0ded9f carried the transparent "verification DA pending" note per the
+interruption protocol). Shipped via this branch's PR — merging stays with the
+maintainer. Attended cycle
 (maintainer-triggered, orchestrator supervised), so the new unattended-run
 spend-recording rule does not bind it; noted here explicitly because the rule
 ships in this cycle and applies from the first unattended run onward. Declared
@@ -47,8 +49,9 @@ change scope of the cycle (self-application of the new scope rule):
 (new), `AGENTIC-BLUEPRINT.md`, `blueprint/config.md`,
 `blueprint/loops/improvement-loop.md`, `blueprint/meta/changelog.md`,
 `README.md` (badge + structure tree), `docs/BACKLOG.md` — no deletions, no
-observer/ source changes, no outward-facing actions beyond the PR (explicitly
-authorized). Scope compliance: clean.
+observer/ source changes, no outward-facing actions (the PR is the cycle's
+deliverable — an L2/L3 output, not an outward-facing action under the new
+taxonomy). Scope compliance: clean.
 
 **Loop restarted 2026-07-02 by maintainer go** for one v1.7 cycle ("free hand —
 make the repo ultra strong for agent systems in the loop"); that cycle is complete.
@@ -91,7 +94,12 @@ A new loop can be started any time with
   source; circuit breaker with no data source), 7 major, 7 minor — **all 18
   applied** before implementation. Deliberately not adopted: STATE.md
   template (LEARNINGS.md community boundary), CLI clones, tool-agnostic
-  starters, pattern registry. Verification DA on the shipped diff: see PR.
+  starters, pattern registry. Verification DA on the shipped diff:
+  approve-with-fixes — 2 blockers (L1 table cell vs. grant mechanism;
+  premature "PR open" claim in this file), 5 major (grandfathering,
+  unattended-L1 scope declaration, sweeper single-source, pattern-vs-instance
+  field ownership, L1 operation notes for the legacy prompts), 5 minor —
+  all 12 applied in the closing commit.
 
 - [x] **2026-07-03 (v1.9, retiering cycle):** Role-based model doctrine shipped —
   "judgment up, volume down": Fable 5 = Brain (DA/judge/verify, architecture,

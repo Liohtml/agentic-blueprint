@@ -44,6 +44,8 @@
 > An honest note: an unfilled row enforces nothing — this is a readiness
 > checklist the maintainer applies before installing a schedule, not a gate
 > that fires on its own. A loop whose row can't be filled in isn't ready.
+> Update the "Current level" cell on every promotion/demotion — on conflict,
+> the decision log wins over this table.
 
 | Loop | Cadence | Current level (starts L1) | Target level | Change scope | Cost ceiling | Clean runs for promotion (default 5) | State file |
 |------|---------|---------------------------|--------------|--------------|--------------|--------------------------------------|------------|

@@ -111,7 +111,7 @@ token limit per loop run — the model sees the countdown and moderates itself.
 The iteration limit remains the hard limit.
 
 **Loop classes & autonomy levels (since 1.10):** besides the feature loops and
-the Improvement Loop there is a second class — **Operations Loops**, cadence-driven
+the Improvement Loop there is a third loop class — **Operations Loops**, cadence-driven
 maintenance loops (audits, PR guardianship, dependency patch sweeps) with rate
 limits and abort conditions instead of iteration caps:
 [operations-loops.md](blueprint/loops/operations-loops.md). Every autonomous

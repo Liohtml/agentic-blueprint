@@ -15,7 +15,7 @@ a single axis: **what may happen without a human present.** Everything else —
 
 | Level | Name | May do without a human | May never do |
 |-------|------|------------------------|--------------|
-| **L1** | Report | Observe, triage, and write a report/draft for the maintainer | Change anything; act outward |
+| **L1** | Report | Observe, triage, and write a report/draft for the maintainer | Change anything; act outward (absent an explicit grant — see the human gates below) |
 | **L2** | Propose | Make changes inside its change scope, verified by an independent checker, delivered as a **branch/PR only** | Push to the working branch; merge |
 | **L3** | Push | Commit and push to the working branch on a schedule, inside its change scope | Merge |
 
@@ -32,15 +32,20 @@ the list (other docs point here):
 
 ## Change Scope (orthogonal to the level)
 
-Every loop at L2 or above declares a **change scope** up front: a path
-allowlist plus allowed change types (e.g. "lockfiles + manifest patch versions
-only", "docs/ only, no deletions"). A scope may be narrow or — by explicit,
-logged maintainer grant — broad. Anything outside the scope is **escalated,
-never done.**
+Every **unattended loop declares a change scope** up front, regardless of
+level — for an L1 loop the scope is "none (report-only)" plus any explicitly
+granted outward actions. At L2 and above the scope is a path allowlist plus
+allowed change types (e.g. "lockfiles + manifest patch versions only",
+"docs/ only, no deletions"). A scope may be narrow or — by explicit, logged
+maintainer grant — broad. Anything outside the scope is **escalated, never
+done.**
 
 ## Promotion and Demotion
 
 - **Every new loop starts at L1**, regardless of its declared *target* level.
+  **Pre-existing loops are classified, not promoted** — assigning a level to a
+  loop that predates this policy is a maintainer decision, logged like a
+  promotion.
 - **Promotion is a maintainer decision**, logged in the decision log. The
   evidence is the loop's **existing auditable trail** — the artifacts it
   already produces (reports, PRs, commits, and its durable state file's run
@@ -57,6 +62,9 @@ never done.**
   any level — **suspends the loop pending maintainer review**.
 
 ## Cost Circuit Breaker (unattended runs)
+
+> This section is the canonical home of the circuit breaker — other docs
+> (including improvement-loop.md) point here.
 
 Unattended runs get a **cost ceiling**, enforced as a pair — the second half
 is what makes the first half real:
@@ -79,7 +87,8 @@ has no circuit breaker, whatever its config says.
 - **Build-Test, Cleanup-Verify, Review-Fix** — run inside human-triggered
   phases and deliver into a PR: **L2 by construction.**
 - **The Improvement Loop, run unattended** — commits and pushes on re-entry:
-  **L3 with a broad scope grant**, logged as a maintainer decision. Attended
+  **L3 with a broad scope grant** — a maintainer decision that must be logged
+  before the first unattended run. Attended
   cycles (maintainer present) are ordinary supervised work; levels govern what
   happens *without* a human.
 - **Operations loops** ([operations-loops.md](operations-loops.md)) — declare
@@ -90,4 +99,5 @@ has no circuit breaker, whatever its config says.
 - [operations-loops.md](operations-loops.md) — the cadence-driven loop class
   that consumes these levels
 - [improvement-loop.md](improvement-loop.md) — interruption/resumption
-  protocol and unattended-run doctrine (canonical)
+  protocol and scheduling baseline (canonical there; the circuit breaker is
+  canonical here)

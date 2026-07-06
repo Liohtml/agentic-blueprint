@@ -15,7 +15,7 @@ maintainer go. Operations loops are triggered by a **schedule** (cron, GitHub
 Actions, a Claude Code routine). Each run is a fresh session that re-enters
 from persisted state — the mechanism is not restated here: the canonical
 scheduling and interruption/resumption doctrine lives in
-[improvement-loop.md](improvement-loop.md) ("Running It Unattended").
+[improvement-loop.md](improvement-loop.md#running-it-unattended).
 
 **Installing or changing a schedule is a maintainer decision — never the
 agent's** (the cadence analog of the improvement loop's trigger rule). Once
@@ -37,6 +37,14 @@ Every operations loop declares all of the following before its first run:
 | **Cost ceiling** | Per-run ceiling, enforced via the [circuit-breaker pair](autonomy-levels.md#cost-circuit-breaker-unattended-runs) |
 | **Durable state** | The file the loop reads on re-entry and writes at run end (run record incl. spend + scope compliance) |
 
+**Field ownership:** Purpose, target level, change scope, rate limits, abort
+condition, and escalation are **pattern fields** — defined in the catalog below
+or canonically in the pattern's prompt. Concrete cadence values, the cost
+ceiling, and the durable state file are **instance fields** — set per project
+in `config.md`'s Autonomous Loops table (patterns give recommendations at
+most). One owner each; the catalog entries below therefore do not repeat
+instance fields.
+
 The mandatory **abort condition** is how this class satisfies Core Principle 6
 ("agents work in loops with defined abort conditions"): rate-limit exhaustion,
 a circuit-breaker trip, and any scope violation are always abort conditions;
@@ -56,7 +64,7 @@ does not restate (two sources of truth would drift).
 
 - **Purpose:** periodic audit across security, bugs, dependencies, tests,
   README, and issue triage.
-- **Cadence:** weekly (daily for actively developed repos).
+- **Cadence (recommendation):** weekly (daily for actively developed repos).
 - **Target level:** L1 — report to the maintainer. Creating `[repo-health]`
   issues and small fix PRs is an **outward-facing/L2 grant** the maintainer
   may add to the change scope; the prompt's own constraints (1-2 files,
@@ -65,43 +73,43 @@ does not restate (two sources of truth would drift).
   [repo-health-agent.md](../prompts/repo-health-agent.md) ("Rules &
   Constraints", "Rate limiting").
 - **Abort condition:** rate limits exhausted, breaker trip, or scope violation.
-- **Status in this repo:** the prompt ships here and has been used ad hoc; no
-  schedule is installed (that installation is a logged maintainer decision).
+- **L1 operation:** the prompt as written assumes the issue/PR grant. At L1,
+  instruct the agent to run the analysis phases only and deliver the Final
+  Summary as a report to the maintainer — skip Phase 5 (Action) until the
+  grant is logged.
 
 ### 2. PR Guardian
 
 - **Purpose:** review every PR, triage every issue, respond to discussion —
   the repo's institutional memory.
-- **Cadence:** daily, or event-driven (PR-activity subscriptions) while a
+- **Cadence (recommendation):** daily, or event-driven (PR-activity subscriptions) while a
   session lives — see the in-session caveat in improvement-loop.md.
 - **Target level:** L1 — reviews and comments are outward-facing and require
   an explicit maintainer grant (the prompt already forbids merging and closing
   without human approval; that stays absolute per
   [autonomy-levels.md](autonomy-levels.md)).
+- **Change scope:** none (L1) — outward actions (reviews, comments) only via
+  the logged grant.
 - **Rate limits, escalation, personality guardrails:** canonical in
   [repo-guardian-agent.md](../prompts/repo-guardian-agent.md).
 - **Abort condition:** rate limits exhausted, breaker trip, or scope violation.
+- **L1 operation:** the prompt as written assumes the comment/review grant. At
+  L1, run the indexing and review phases but deliver the per-repo summary
+  (Phase 4) to the maintainer instead of posting anything.
 
 ### 3. Dependency Patch Sweeper
 
 - **Purpose:** keep dependencies current at **patch level** without human
   babysitting.
-- **Cadence:** weekly.
+- **Cadence (recommendation):** weekly.
 - **Target level:** L2. **L1 form (where it starts):** report available patch
   bumps as a summary for the maintainer — no PRs.
 - **Change scope (L2):** lockfiles + manifest **patch versions only**. No
-  minor/major bumps, no new packages. The blueprint's 14-day package rule
-  applies unchanged: a patch younger than 14 days is reported, not bumped.
-- **Rate limits:** max 3 bump PRs per run, one dependency per PR.
-- **Abort condition:** rate limit exhausted, breaker trip, scope violation, or
-  a failing test suite after a bump (revert the bump, report, stop).
-- **Escalation:** minor/major updates, security advisories, and anything
-  failing verification go into the run report.
-- **Verification (maker/checker):** an independent checker runs the project's
-  test gate on every bump PR before it is opened.
-- **Durable state:** the loop's run-record file (for this repo: the backlog's
-  Loop status section).
-- **Prompt:** [dependency-sweeper-agent.md](../prompts/dependency-sweeper-agent.md)
+  minor/major bumps, no new packages.
+- **Rate limits, abort conditions, 14-day rule, escalation list, maker/checker
+  verification:** canonical in
+  [dependency-sweeper-agent.md](../prompts/dependency-sweeper-agent.md) —
+  as with the other two patterns, the prompt owns its own numbers.
 
 ## See Also
 

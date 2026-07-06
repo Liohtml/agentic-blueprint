@@ -142,8 +142,9 @@ best-effort on top of it — pick mechanisms by what they can actually survive:
 - The human gates — merging, scope changes, deletions, outward-facing actions —
   hold as defined canonically in [autonomy-levels.md](autonomy-levels.md)
   (outward-facing actions only under an explicit, logged maintainer grant).
-- Run unattended, this loop operates at **L3 with a broad scope grant**, logged
-  as a maintainer decision (see autonomy-levels.md).
+- Run unattended, this loop operates at **L3 with a broad scope grant** — a
+  maintainer decision that must be logged in the decision log before the
+  first unattended run (see autonomy-levels.md).
 
 Every unattended cycle leaves an auditable trail: commits + backlog updates.
 
