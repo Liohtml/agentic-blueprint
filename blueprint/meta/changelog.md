@@ -45,6 +45,18 @@ runnable at L1), 5 minor — all applied in the closing commit.
 - **`blueprint/prompts/dependency-sweeper-agent.md`**: the sweeper as a real
   prompt (L1 report mode by default, L2 only after logged promotion; scope
   violation = self-suspend).
+- **Portable skill `skills/setup-autonomous-loop/`**: the gated-autonomy model
+  packaged as an [Agent Skills](https://agentskills.io) open-standard bundle
+  (SKILL.md + reference + LOOP.md template) so it installs into any
+  Agent-Skills-compatible tool (Claude Code, Codex, …), not just projects that
+  copy `blueprint/`. Uses only portable frontmatter fields; canon stays in
+  `blueprint/loops/` with a new CLAUDE.md sync rule binding the two. Its own
+  DA pass (on Opus, Fable at quota): approve-with-fixes — 2 blockers
+  (scope-violation consequence contradicted canon's demote-vs-suspend split;
+  missing sync rule), 2 major (vendor-list overclaim hedged to capability;
+  linking convention extended to copied-out skill bundles), 3 minor — all
+  applied. `skills/` is a new top-level directory (README structure tree +
+  linking conventions updated).
 
 ### Changed
 - `AGENTIC-BLUEPRINT.md` (v1.10): loop classes & autonomy levels paragraph in
@@ -74,8 +86,11 @@ runnable at L1), 5 minor — all applied in the closing commit.
   index).
 
 ### Version decision
-Additive (two loop specs, one prompt, config section); no phase/gate-semantics
-breakage for existing copies → minor bump to 1.10, per the v1.7 precedent.
+Additive (two loop specs, one prompt, config section, one portable skill); no
+phase/gate-semantics breakage for existing copies → minor bump to 1.10, per the
+v1.7 precedent. The `setup-autonomous-loop` skill folds into 1.10 (still
+unreleased) as the portable packaging of the same gated-autonomy work rather
+than minting a separate version.
 
 ## v1.9 — 2026-07-03
 

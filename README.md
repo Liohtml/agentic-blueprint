@@ -333,6 +333,9 @@ your-project/
 |   |-- examples/                 # Worked example: full 6-phase run on one small feature
 |   |-- BACKLOG.md                # Roadmap / continuous-improvement backlog
 |
+|-- skills/                       # Portable Agent Skills (open standard, install into any tool)
+|   |-- setup-autonomous-loop/    #   Scaffold a gated autonomous loop (L1/L2/L3 + scope + breaker)
+|
 |-- sandbox/                      # Docker sandbox template (Dockerfile + devcontainer.json)
 |
 |-- scripts/
