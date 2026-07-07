@@ -116,6 +116,10 @@ Every loop has a defined abort condition — when it fires, the agent stops and 
 
 \* A per-cycle item count, not an iteration cap — cycles end on maintainer stop or an empty backlog, and the maintainer (not iteration exhaustion) is the abort authority.
 
+**Running agents unattended?** Scheduled maintenance loops — a repo-health audit, a PR guardian, a dependency patch sweeper — are a third loop class (feature loops → Improvement Loop → operations loops), guarded by rate limits and a cost circuit breaker instead of iteration caps. Each declares an **autonomy level**: **L1 report** (observe only) → **L2 propose** (branch/PR, never merge) → **L3 push** (still never merge) — plus a declared change scope, with promotion *earned* on a clean track record, never assumed. That's what gated autonomy extends to once a human isn't in the room. Specs: [autonomy levels](blueprint/loops/autonomy-levels.md) · [operations loops](blueprint/loops/operations-loops.md).
+
+Want just this one capability, without adopting the whole framework? It's packaged as a portable [Agent Skill](skills/setup-autonomous-loop/) for any tool that adopts the [Agent Skills](https://agentskills.io) standard — check your tool's docs for whether and how it loads them.
+
 The full rulebook lives in [`AGENTIC-BLUEPRINT.md`](AGENTIC-BLUEPRINT.md) and the [`blueprint/`](blueprint/) folder — phases, loops, agent roles, templates, decision trees.
 
 ---
