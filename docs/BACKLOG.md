@@ -99,7 +99,16 @@ A new loop can be started any time with
   premature "PR open" claim in this file), 5 major (grandfathering,
   unattended-L1 scope declaration, sweeper single-source, pattern-vs-instance
   field ownership, L1 operation notes for the legacy prompts), 5 minor —
-  all 12 applied in the closing commit.
+  all 12 applied in the closing commit. **Follow-on (same branch):** the
+  gated-autonomy model packaged as a portable
+  [Agent Skills](https://agentskills.io) bundle
+  `skills/setup-autonomous-loop/` (new top-level `skills/` dir) so it installs
+  into Claude Code, Codex, and other Agent-Skills tools — not just projects
+  copying `blueprint/`. Skill DA (on Opus, Fable at quota):
+  approve-with-fixes — 2 blockers (scope-violation demote-vs-suspend drift;
+  missing CLAUDE.md sync rule), 2 major (vendor-list overclaim hedged;
+  linking convention extended to skill bundles), 3 minor — all applied. New
+  CLAUDE.md sync rule binds the skill to canon.
 
 - [x] **2026-07-03 (v1.9, retiering cycle):** Role-based model doctrine shipped —
   "judgment up, volume down": Fable 5 = Brain (DA/judge/verify, architecture,
@@ -207,6 +216,7 @@ A new loop can be started any time with
 | 2026-07-03 | Glossary "Model Tiering" one-line maintenance correction (entry contradicted v1.9 doctrine; glossary otherwise community-reserved per good-first-issue 3) | ✅ Maintainer go — single row corrected, Issue 3 (extension + cross-links) stays reserved |
 | 2026-07-06 | Adopt loop-engineering concepts (autonomy levels, operations loops, scope/breaker safety) — "repo admin free hand, deliver maximum value, PRs/merge allowed" | ✅ Maintainer go — v1.10 cycle. Merge still left to the maintainer: the blanket grant predates the content, and "no merge without human approval" reads as approval of the specific change |
 | 2026-07-06 | STATE.md/run-history template vs. community-reserved LEARNINGS.md — where is the boundary? | ⏳ Open — needs an explicit maintainer boundary decision before any run-history template ships (logged, not guessed) |
+| 2026-07-07 | Package the v1.10 gated-autonomy work as a portable Skill for Claude Code, Codex etc. ("/run-skill-generator … Up to You") | ✅ Maintainer go (broad admin grant) — built `skills/setup-autonomous-loop` on the Agent Skills open standard. Recommended defaults chosen (one flagship skill; top-level `skills/`) since the interactive question tool errored; logged here so the maintainer can redirect scope/home if desired |
 
 ## Loop rules (short version)
 

@@ -34,6 +34,11 @@ English-first. All content, commits, and docs in English. (Maintainer decision
 - The setup wizard prompt exists twice (README.md +
   blueprint/templates/setup-wizard-prompt.md) — any change must update both;
   verify with a diff.
+- The gated-autonomy model exists twice: canonically in
+  `blueprint/loops/{autonomy-levels,operations-loops}.md` and as a portable
+  distillation in `skills/setup-autonomous-loop/`. Any change to levels, human
+  gates, promotion/demotion, or the cost breaker must update both — the skill
+  is a distillation and must never contradict canon (canon wins).
 - **Terminal setup is opt-in.** Developers may customize shells/editors via
   `terminal-setup/` — it's not required for the blueprint itself, but useful
   for daily workflow optimization.
@@ -43,6 +48,10 @@ English-first. All content, commits, and docs in English. (Maintainer decision
 - Links **from `blueprint/` to anything outside it** (docs/, observer/): absolute
   GitHub URLs (`https://github.com/Liohtml/agentic-blueprint/...`) — blueprint
   files get copied into other projects and relative links would break there.
+- Same rule for **copied-out skill bundles** (`skills/<skill>/SKILL.md`,
+  `reference/`, templates): relative links **within the skill's own folder**;
+  absolute GitHub URLs to anything **outside** it (e.g. `blueprint/`). Only
+  `skills/README.md` stays in-repo and may use relative `../` links.
 
 ## Community Boundaries
 - Tasks reserved as good-first-issues live in

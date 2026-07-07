@@ -1,0 +1,55 @@
+# Loop: <LOOP_NAME>
+
+> Declaration for one autonomous loop. Filled in with the human before the
+> loop's first run. The autonomy level and change scope below are what the
+> human is signing off on.
+
+## Purpose
+<One sentence: what this loop maintains or produces.>
+
+## Pattern
+<repo-health-audit | pr-guardian | dependency-patch-sweeper | custom>
+
+## Autonomy level
+- **Current:** L1        <!-- every new loop starts at L1 -->
+- **Target:** <L1 | L2 | L3>
+- **Promotion rule:** <default 5 consecutive clean runs, then a logged human decision>
+
+## Change scope
+- **Paths:** <allowlist, e.g. `docs/**`, `package-lock.json` — or "none (report-only)" at L1>
+- **Change types:** <e.g. "patch-version bumps only"; "no deletions">
+- **Granted outward actions:** <none | e.g. "open [prefix] issues, max N/run" — human-granted, logged>
+- Anything outside this scope is **escalated, never done.**
+
+## Rate limits
+<e.g. max 3 PRs per run, one change per PR>
+
+## Abort condition
+<Rate limit exhausted | circuit-breaker trip | scope violation | failed verification.
+ A scope violation always stops the run and escalates (runtime abort).
+ Governance consequence: at L2/L3 demote one level; an L1 or repeated
+ violation suspends the loop pending human review.>
+
+## Cost circuit breaker
+- **Ceiling:** <per-run spend ceiling, e.g. "$X" or "N tokens">
+- **Record:** every run writes its actual spend to the state file at run end.
+- **Read:** every re-entry reads that record first; over ceiling → stop + report.
+
+## Verification (L2+)
+<How an independent checker (separate context) validates each change before it
+ becomes a PR. "no self-review".>
+
+## Durable state file
+- **Path:** <e.g. `LOOP-STATE.md`>
+- Records: run history, attempts, blockers, and per-run spend.
+- A fresh session re-enters by reading this file first.
+
+## Schedule
+- **Cadence (proposed):** <e.g. weekly>
+- **Mechanism:** <cron | CI schedule | tool routine — installed by the human>
+- Note: installing/changing the schedule is a human decision.
+
+## Human gates (never automated)
+- Merging
+- Scope changes and deletions
+- Outward-facing actions beyond the granted scope above
